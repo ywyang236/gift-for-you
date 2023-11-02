@@ -7,9 +7,9 @@ const Home = () => {
         <div>
             <h1>禮品訂製所 Gift For You</h1>
             <nav>
-                <Link href="/design-gift"><a>設計禮品</a></Link>
-                <Link href="/order-info"><a>訂單資訊</a></Link>
-                <Link href="/member-info"><a>會員資料</a></Link>
+                <Link href="/design-gift">設計禮品</Link>
+                <Link href="/order-info">訂單資訊</Link>
+                <Link href="/member-info">會員資料</Link>
             </nav>
         </div>
     );
