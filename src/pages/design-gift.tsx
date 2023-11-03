@@ -1,12 +1,12 @@
 // pages/design-gift.tsx
 import React from 'react';
-// 引入相關的 Canvas 編輯器組件
+import Layout from '../app/layout';
 
 const DesignGift = () => (
-	<div>
+	<Layout>
 		<h1>禮品</h1>
 		{/* Canvas 編輯器組件 */}
-	</div>
+	</Layout>
 );
 
 export default DesignGift;

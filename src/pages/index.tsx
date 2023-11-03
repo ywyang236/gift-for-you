@@ -4,7 +4,7 @@ import Layout from '../app/layout';
 
 const Home = () => (
 	<Layout>
-		<h1>禮品訂製所 Gift For You</h1>
+		<a></a>
 	</Layout>
 );
 
