@@ -42,11 +42,14 @@
     font-weight: bold;
     transition: color 0.3s;
     cursor: pointer;
-    margin-left: 20px;
+    margin-left: 12px;
+    padding: 0px 10px;
 }
 
 .rightContainerText:hover {
-    color: #37B2D6;
+    background-color: #37B2D6;
+    border-radius: 5px;
+    padding: 5px 10px;
 }
 
 .login {
@@ -54,7 +57,7 @@
     color: black;
     background-color: white;
     border-radius: 5px;
-    margin-left: 20px;
+    margin-left: 12px;
     padding: 5px 10px;
     cursor: pointer;
 }
@@ -71,11 +74,11 @@
     border-radius: 5px;
     color: white;
     text-shadow: 0 0 3px rgb(0, 0, 0);
-    margin-left: 20px;
+    margin-left: 12px;
     padding: 5px 10px;
     cursor: pointer;
 }
 
 .register:hover {
-    background-color: #37B2D6;
+    background-color: #ff7878;
 }
