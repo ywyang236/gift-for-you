@@ -30,6 +30,12 @@
     flex-shrink: 0;
 }
 
+.leftContainerIcon {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
 .rightContainer {
     display: flex;
     align-items: center;

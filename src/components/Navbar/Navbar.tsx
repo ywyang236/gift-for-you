@@ -1,12 +1,20 @@
 // components/Navbar/Navbar.tsx
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import NavbarCSS from './Navbar.module.css';
 
 const Navbar: React.FC = () => (
     <nav className={NavbarCSS.main}>
         <div className={NavbarCSS.container}>
             <div className={NavbarCSS.leftContainer}>
+                <Image
+                    src="/favicon.ico"
+                    alt="Logo"
+                    width={25}
+                    height={25}
+                    className={NavbarCSS.leftContainerIcon}
+                />
                 <Link href='/' className={NavbarCSS.leftContainer}>禮品訂製所 Gift For You</Link>
             </div>
             <div className={NavbarCSS.rightContainer}>
