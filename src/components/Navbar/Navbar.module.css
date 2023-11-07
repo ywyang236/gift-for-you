@@ -1,10 +1,81 @@
-/* components/Navbar/Navbar.css */
+/* components/Navbar/Navbar.module.css */
+.main {
+    background: #1D445D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
+    max-width: 1200px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #ff7441;
-    color: rgb(199, 199, 199);
     padding: 0 20px;
+    height: 72px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+.leftContainer {
+    text-decoration: none;
+    color: white;
+    text-shadow: 0 0 3px rgb(0, 0, 0);
+    font-weight: bold;
+    transition: color 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.rightContainer {
+    display: flex;
+    align-items: center;
+}
+
+
+.rightContainerText {
+    text-decoration: none;
+    color: white;
+    text-shadow: 0 0 3px rgb(0, 0, 0);
+    font-weight: bold;
+    transition: color 0.3s;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.rightContainerText:hover {
+    color: #37B2D6;
+}
+
+.login {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    margin-left: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.login:hover {
+    background-color: #37B2D6;
+    color: white;
+    text-shadow: 0 0 3px rgb(0, 0, 0);
+}
+
+.register {
+    text-decoration: none;
+    background-color: #74838D;
+    border-radius: 5px;
+    color: white;
+    text-shadow: 0 0 3px rgb(0, 0, 0);
+    margin-left: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.register:hover {
+    background-color: #37B2D6;
 }
