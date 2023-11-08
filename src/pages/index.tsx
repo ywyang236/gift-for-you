@@ -60,6 +60,8 @@ const Home = () => (
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className={IndexCSS.itemsSection}>
                 <div className={IndexCSS.itemsContainer}>
                     <div className={IndexCSS.itemsTitle}>訂製項目</div>
                     <div className={IndexCSS.itemsContent}>
@@ -121,6 +123,7 @@ const Home = () => (
                 </div>
             </div>
         </div>
+
     </Layout >
 );
 
