@@ -61,69 +61,97 @@ const Home = () => (
                     </div>
                 </div>
             </div>
-            <div className={IndexCSS.itemsSection}>
-                <div className={IndexCSS.itemsContainer}>
-                    <div className={IndexCSS.itemsTitle}>訂製項目</div>
-                    <div className={IndexCSS.itemsContent}>
-                        <div className={IndexCSS.itemsCard1}>
-                            <div className={IndexCSS.itemsCard_1_Background}></div>
-                            <div className={IndexCSS.itemsCard_1_Picture}></div>
-                            <div className={IndexCSS.itemsCard_1_Title}>幾何造型夜燈</div>
-                            <div className={IndexCSS.itemsCard_1_Price}>$ 899</div>
+            <div className={IndexCSS.itemsContainer}>
+                <div className={IndexCSS.itemsTitle}>訂製項目</div>
+                <div className={IndexCSS.itemsContent}>
+                    <div className={IndexCSS.itemsCard}>
+                        <div className={IndexCSS.itemsCard_Background}>
+                            <div className={IndexCSS.itemsCard_1_Picture}>
+                            </div>
+                            <div className={IndexCSS.itemsText}>
+                                <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
+                                <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                            </div>
                         </div>
-                        <div className={IndexCSS.itemsCard_2}>
-                            <div className={IndexCSS.itemsCard_2_Background}></div>
-                            <div className={IndexCSS.itemsCard_2_Picture}></div>
-                            <div className={IndexCSS.itemsCard_2_Title}>幾何造型夜燈</div>
-                            <div className={IndexCSS.itemsCard_2_Price}>$ 899</div>
+                    </div>
+                    <div className={IndexCSS.itemsCard}>
+                        <div className={IndexCSS.itemsCard_Background}>
+                            <div className={IndexCSS.itemsCard_2_Picture}>
+                            </div>
+                            <div className={IndexCSS.itemsText}>
+                                <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
+                                <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                            </div>
                         </div>
-                        <div className={IndexCSS.itemsCard_3}>
-                            <div className={IndexCSS.itemsCard_3_Background}></div>
-                            <div className={IndexCSS.itemsCard_3_Picture}></div>
-                            <div className={IndexCSS.itemsCard_3_Title}>幾何造型夜燈</div>
-                            <div className={IndexCSS.itemsCard_3_Price}>$ 899</div>
+                    </div>
+                    <div className={IndexCSS.itemsCard}>
+                        <div className={IndexCSS.itemsCard_Background}>
+                            <div className={IndexCSS.itemsCard_3_Picture}>
+                            </div>
+                            <div className={IndexCSS.itemsText}>
+                                <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
+                                <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                            </div>
                         </div>
-                        <div className={IndexCSS.itemsCard_4}>
-                            <div className={IndexCSS.itemsCard_4_Background}></div>
+                    </div>
+                    <div className={IndexCSS.itemsCard}>
+                        <div className={IndexCSS.itemsCard_Background}>
                             <div className={IndexCSS.itemsCard_4_Picture}></div>
-                            <div className={IndexCSS.itemsCard_4_Title}>幾何造型夜燈</div>
-                            <div className={IndexCSS.itemsCard_4_Price}>$ 899</div>
+                            <div className={IndexCSS.itemsText}>
+                                <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
+                                <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                            </div>
                         </div>
-                        <div className={IndexCSS.itemsCard_5}>
-                            <div className={IndexCSS.itemsCard_5_Background}></div>
+                    </div>
+                    <div className={IndexCSS.itemsCard}>
+                        <div className={IndexCSS.itemsCard_Background}>
                             <div className={IndexCSS.itemsCard_5_Picture}></div>
-                            <div className={IndexCSS.itemsCard_5_Title}>幾何造型夜燈</div>
-                            <div className={IndexCSS.itemsCard_5_Price}>$ 899</div>
+                            <div className={IndexCSS.itemsText}>
+                                <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
+                                <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                            </div>
                         </div>
-                        <div className={IndexCSS.itemsCard_6}>
-                            <div className={IndexCSS.itemsCard_6_Background}></div>
+                    </div>
+                    <div className={IndexCSS.itemsCard}>
+                        <div className={IndexCSS.itemsCard_Background}>
                             <div className={IndexCSS.itemsCard_6_Picture}></div>
-                            <div className={IndexCSS.itemsCard_6_Title}>幾何造型夜燈</div>
-                            <div className={IndexCSS.itemsCard_6_Price}>$ 899</div>
+                            <div className={IndexCSS.itemsText}>
+                                <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
+                                <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                            </div>
                         </div>
-                        <div className={IndexCSS.itemsCard_7}>
-                            <div className={IndexCSS.itemsCard_7_Background}></div>
+                    </div>
+                    <div className={IndexCSS.itemsCard}>
+                        <div className={IndexCSS.itemsCard_Background}>
                             <div className={IndexCSS.itemsCard_7_Picture}></div>
-                            <div className={IndexCSS.itemsCard_7_Title}>幾何造型夜燈</div>
-                            <div className={IndexCSS.itemsCard_7_Price}>$ 899</div>
+                            <div className={IndexCSS.itemsText}>
+                                <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
+                                <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                            </div>
                         </div>
-                        <div className={IndexCSS.itemsCard_8}>
-                            <div className={IndexCSS.itemsCard_8_Background}></div>
+
+                    </div>
+                    <div className={IndexCSS.itemsCard}>
+                        <div className={IndexCSS.itemsCard_Background}>
                             <div className={IndexCSS.itemsCard_8_Picture}></div>
-                            <div className={IndexCSS.itemsCard_8_Title}>幾何造型夜燈</div>
-                            <div className={IndexCSS.itemsCard_8_Price}>$ 899</div>
+                            <div className={IndexCSS.itemsText}>
+                                <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
+                                <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                            </div>
                         </div>
-                        <div className={IndexCSS.itemsCard_9}>
-                            <div className={IndexCSS.itemsCard_9_Background}></div>
+                    </div>
+                    <div className={IndexCSS.itemsCard}>
+                        <div className={IndexCSS.itemsCard_Background}>
                             <div className={IndexCSS.itemsCard_9_Picture}></div>
-                            <div className={IndexCSS.itemsCard_9_Title}>幾何造型夜燈</div>
-                            <div className={IndexCSS.itemsCard_9_Price}>$ 899</div>
+                            <div className={IndexCSS.itemsText}>
+                                <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
+                                <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </Layout >
 );
 
