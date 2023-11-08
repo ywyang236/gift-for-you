@@ -64,3 +64,150 @@
     position: relative;
     top: -180px;
 }
+
+.rulesTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 42px;
+    color: white;
+    font-weight: 500;
+    text-shadow: 0 0 5px rgb(0, 0, 0);
+    padding: 20px;
+
+}
+
+.rulesTitle::before,
+.rulesTitle::after {
+    content: '';
+    width: 230px;
+    border-bottom: 3px solid #ffffff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0);
+    margin: 0 20px;
+}
+
+.rulesContent {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.rulesCard_1_Background,
+.rulesCard_2_Background,
+.rulesCard_3_Background,
+.rulesCard_4_Background {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 230px;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.rulesCard_1_PictureBackground,
+.rulesCard_2_PictureBackground,
+.rulesCard_3_PictureBackground,
+.rulesCard_4_PictureBackground {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    position: relative;
+    top: -460px;
+    left: 27px;
+    z-index: 1;
+}
+
+.rulesCard_1_Picture {
+    background-image: url('/images/select.png');
+    background-color: blue;
+    background-size: cover;
+    background-position: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    top: -298px;
+    left: 41px;
+    z-index: 2;
+}
+
+.rulesCard_2_Picture {
+    background-image: url('/images/design.png');
+    background-color: blue;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    top: -298px;
+    left: 41px;
+    z-index: 2;
+
+}
+
+.rulesCard_3_Picture {
+    background-image: url('/images/payment.png');
+    background-color: blue;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    top: -298px;
+    left: 41px;
+    z-index: 2;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    top: -298px;
+    left: 41px;
+    z-index: 2;
+}
+
+.rulesCard_4_Picture {
+    background-image: url('/images/delivery.png');
+    background-color: blue;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    top: -298px;
+    left: 41px;
+    z-index: 2;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    top: -298px;
+    left: 41px;
+    z-index: 2;
+}
+
+.rulesCard_1_Title,
+.rulesCard_2_Title,
+.rulesCard_3_Title,
+.rulesCard_4_Title {
+    color: #1A5665;
+    font-size: 36px;
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+    top: -450px;
+}
+
+.rulesCard_1_Description,
+.rulesCard_2_Description,
+.rulesCard_3_Description,
+.rulesCard_4_Description {
+    color: #1A5665;
+    font-size: 36px;
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+    top: -450px;
+}
