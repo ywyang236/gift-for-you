@@ -3,7 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
-import './globals.css';
+import './layout.css';
 
 export default function Layout({children}: {children: React.ReactNode}) {
     return (
