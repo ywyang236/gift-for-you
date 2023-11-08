@@ -19,24 +19,28 @@ const Home = () => (
                         <div className={IndexCSS.rulesCard_1}>
                             <div className={IndexCSS.rulesCard_1_Background}></div>
                             <div className={IndexCSS.rulesCard_1_Picture}></div>
+                            <div className={IndexCSS.rulesCard_1_PictureBackground}></div>
                             <div className={IndexCSS.rulesCard_1_Title}>Step 1</div>
                             <div className={IndexCSS.rulesCard_1_Description}>選擇禮品</div>
                         </div>
                         <div className={IndexCSS.rulesCard2}>
                             <div className={IndexCSS.rulesCard_2_Background}></div>
                             <div className={IndexCSS.rulesCard_2_Picture}></div>
+                            <div className={IndexCSS.rulesCard_2_PictureBackground}></div>
                             <div className={IndexCSS.rulesCard_2_Title}>Step 2</div>
                             <div className={IndexCSS.rulesCard_2_Description}>開始設計</div>
                         </div>
                         <div className={IndexCSS.rulesCard3}>
                             <div className={IndexCSS.rulesCard_3_Background}></div>
                             <div className={IndexCSS.rulesCard_3_Picture}></div>
+                            <div className={IndexCSS.rulesCard_3_PictureBackground}></div>
                             <div className={IndexCSS.rulesCard_3_Title}>Step 3</div>
                             <div className={IndexCSS.rulesCard_3_Description}>下單付款</div>
                         </div>
                         <div className={IndexCSS.rulesCard4}>
                             <div className={IndexCSS.rulesCard_4_Background}></div>
                             <div className={IndexCSS.rulesCard_4_Picture}></div>
+                            <div className={IndexCSS.rulesCard_4_PictureBackground}></div>
                             <div className={IndexCSS.rulesCard_4_Title}>Step 4</div>
                             <div className={IndexCSS.rulesCard_4_Description}>禮品送達</div>
                         </div>

@@ -53,3 +53,14 @@
             rgba(51, 123, 165, 1) 25%,
             rgba(140, 187, 216, 1) 100%);
 }
+
+.rulesContainer {
+    max-width: 1200px;
+    width: 1120px;
+    height: 475px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    position: relative;
+    top: -180px;
+}
