@@ -37,7 +37,7 @@
     color: white;
     width: 35px;
     height: 35px;
-    margin: 10px;
+    margin: 5px;
     padding: 5px;
     flex-shrink: 0;
 }
@@ -45,6 +45,38 @@
 .designButton:hover {
     background-color: rgb(82, 82, 82);
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.addCartButton {
+    color: white;
+    background-color: #1D445D;
+    text-shadow: 0 0 5px rgb(0, 0, 0);
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    margin: 10px;
+    padding: 5px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.quiteButton {
+    color: white;
+    background-color: #1D445D;
+    text-shadow: 0 0 5px rgb(0, 0, 0);
+    border-radius: 5px;
+    height: 35px;
+    width: 80px;
+    margin: 10px;
+    padding: 5px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.addCartButton:hover,
+.quiteButton:hover {
+    background-color: #37B2D6;
     cursor: pointer;
 }
 
