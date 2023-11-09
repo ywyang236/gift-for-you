@@ -4,6 +4,8 @@ import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
 import BottonCSS from '../styles/botton.module.css';
 import {IoArrowUndo, IoArrowRedo, IoBrush, IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoImage, IoLayers, IoOptions, IoText} from 'react-icons/io5';
+import Canvas from '../components/Canvas/Canvas';
+
 
 const DesignGift = () => (
     <Layout>
@@ -35,8 +37,15 @@ const DesignGift = () => (
                     </div>
                 </div>
                 <div className={DesignCSS.designDown}>
-                    <div className={DesignCSS.designCanvas}>
-                        <div className={DesignCSS.designItem}></div>
+                    <div className={DesignCSS.designCanvasContainer}>
+                        <div className={DesignCSS.designItem}>
+                            <div className={DesignCSS.designCanvas}>
+                                <div>
+                                    <Canvas width={460} height={420} />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div className={DesignCSS.designToolsContainer}>
                         <div className={DesignCSS.brushChangeConteiner}>
