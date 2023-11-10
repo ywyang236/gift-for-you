@@ -5,9 +5,10 @@ import CanvasCSS from "./Canvas.module.css";
 interface CanvasProps {
     width: number;
     height: number;
+    isBrushActive: boolean;  // 增加 prop 控制畫筆功能
 }
 
-const Canvas: React.FC<CanvasProps> = ({width, height}) => {
+const Canvas: React.FC<CanvasProps> = ({width, height, isBrushActive}) => {  // 增加 isBrushActive
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isPainting, setIsPainting] = useState(false);
 
@@ -23,6 +24,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const startPainting = (e: React.MouseEvent<HTMLCanvasElement>) => {
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
+        if (!isBrushActive) return; // 檢查是否啟用畫筆功能
         setIsPainting(true);
         draw(e);
     };
