@@ -4,8 +4,9 @@ import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
 import BottonCSS from '../styles/botton.module.css';
 import {IoArrowUndo, IoArrowRedo, IoBrush, IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoImage, IoLayers, IoOptions, IoText} from 'react-icons/io5';
+import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle} from "react-icons/io5";
+import {BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonFill, BsFillPentagonFill, BsFillStarFill} from "react-icons/bs";
 import Canvas from '../components/Canvas/Canvas';
-
 
 const DesignGift = () => (
     <Layout>
@@ -48,24 +49,93 @@ const DesignGift = () => (
 
                     </div>
                     <div className={DesignCSS.designToolsContainer}>
-                        <div className={DesignCSS.brushChangeConteiner}>
+                        <div className={DesignCSS.brushContainer}>
                             <div className={DesignCSS.brushChangeTitle}>筆刷大小</div>
-                            <div className={DesignCSS.brushChangeButton}>按鈕</div>
+                            <div className={DesignCSS.brushChangeContainer}>
+                                <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChange6px}></div>
+                                </div>
+                                <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChange8px}></div>
+                                </div>
+                                <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChange10px}></div>
+                                </div>
+                                <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChange12px}></div>
+                                </div>
+                                <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChange14px}></div>
+                                </div>
+                                <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChange16px}></div>
+                                </div>
+                                <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChange18px}></div>
+                                </div>
+                            </div>
                         </div>
-                        <div className={DesignCSS.colorChangeConteiner}>
+                        <div className={DesignCSS.colorConteiner}>
                             <div className={DesignCSS.colorChangeTitle}>顏色選擇器</div>
-                            <div className={DesignCSS.colorChangeButton}>按鈕</div>
+                            <div className={DesignCSS.colorChangePicker}></div>
                         </div>
                         <div className={DesignCSS.textChangeConteiner}>
                             <div className={DesignCSS.textChangeTitle}>文字外觀</div>
-                            <div className={DesignCSS.textChangeButton}>字體</div>
-                            <div className={DesignCSS.textChangeButton}>大小</div>
-                            <div className={DesignCSS.textChangeButton}>顏色</div>
-                            <div className={DesignCSS.textChangeButton}>粗細</div>
+                            <div className={DesignCSS.textChangeFontBackground}>
+                                <div className={DesignCSS.textChangeFrontButton}>字體下拉式選單</div>
+                            </div>
+                            <div className={DesignCSS.sizeColorBoldContainer}>
+                                <div className={DesignCSS.textChangeSizeBackground}>
+                                    <div className={DesignCSS.textChangeSizeButton}>大小</div>
+                                </div>
+                                <div className={DesignCSS.textChangeColorBackground}>
+                                    <div className={DesignCSS.textChangeButton}>顏色</div>
+                                </div>
+                                <div className={DesignCSS.textChangeBoldBackground}>
+                                    <div className={DesignCSS.textChangeButton}>粗細</div>
+                                </div>
+                            </div>
                         </div>
                         <div className={DesignCSS.patternChangeContainer}>
                             <div className={DesignCSS.patternChangeTitle}>幾何圖形</div>
-                            <div className={DesignCSS.patternChangeButton}>按鈕</div>
+                            <div className={DesignCSS.patternChangeBackground}>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <IoSquareSharp className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <IoSquare className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <IoEllipseSharp className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <IoTriangle className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <BsFillDiamondFill className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <BsFillPentagonFill className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <BsFillHexagonFill className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <BsFillHeptagonFill className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <BsFillOctagonFill className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <IoMoon className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <IoHeart className={DesignCSS.patternButton} />
+                                </div>
+                                <div className={DesignCSS.patternButtonBackground}>
+                                    <BsFillStarFill className={DesignCSS.patternButton} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
