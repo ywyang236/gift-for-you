@@ -1,5 +1,5 @@
 // components/Canvas/Canvas.tsx
-import React, {useRef, useEffect, useState, MouseEvent} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import CanvasCSS from "./Canvas.module.css";
 
 interface CanvasProps {
