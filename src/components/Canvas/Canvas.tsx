@@ -21,12 +21,12 @@ const Canvas: React.FC<CanvasProps> = ({width, height, isBrushActive}) => {  // 
         }
     }, []);
 
-    const startPainting = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const startPainting = (event: React.MouseEvent<HTMLCanvasElement>) => {
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
         if (!isBrushActive) return; // 檢查是否啟用畫筆功能
         setIsPainting(true);
-        draw(e);
+        draw(event);
     };
 
     const endPainting = () => {
@@ -36,7 +36,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, isBrushActive}) => {  // 
         context.beginPath();
     };
 
-    const draw = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const draw = (event: React.MouseEvent<HTMLCanvasElement>) => {
         if (!isPainting) return;
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -44,7 +44,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, isBrushActive}) => {  // 
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
 
-        const nativeEvent = e.nativeEvent;
+        const nativeEvent = event.nativeEvent;
         const rect = canvas.getBoundingClientRect();
         context.lineTo(nativeEvent.clientX - rect.left, nativeEvent.clientY - rect.top);
         context.stroke();
