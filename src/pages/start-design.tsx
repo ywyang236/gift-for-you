@@ -1,7 +1,7 @@
 // pages/design-gift.tsx
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {toggleBrush, setBrushSize} from '../store/actions/brushActions';
+import {toggleBrush, setBrushSize, setBrushColor} from '../store/actions/brushActions';
 import {RootState} from '../store/types/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
@@ -66,6 +66,7 @@ const DesignGift = () => {
                                             height={420}
                                             isBrushActive={brushActive}
                                             setBrushSize={handleBrushSizeChange}
+                                            setBrushColor={() => { }}
                                         />
                                     </div>
                                 </div>

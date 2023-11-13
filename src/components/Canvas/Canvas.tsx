@@ -9,6 +9,7 @@ interface CanvasProps {
     height: number;
     isBrushActive: boolean;
     setBrushSize: (newBrushSize: number) => void;
+    setBrushColor: (newBrushColor: string) => void;
 }
 
 const Canvas: React.FC<CanvasProps> = ({width, height}) => {
@@ -17,17 +18,18 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const dispatch = useDispatch();
     const isBrushActive = useSelector((state: RootState) => state.brush.isBrushActive);
     const brushSize = useSelector((state: RootState) => state.brush.brushSize);
+    const brushColor = useSelector((state: RootState) => state.brush.brushColor);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas?.getContext('2d');
         if (context) {
-            context.strokeStyle = '#000000';
+            context.strokeStyle = brushColor;
             context.lineJoin = 'round';
             context.lineCap = 'round';
             context.lineWidth = brushSize;
         }
-    }, [brushSize]);
+    }, [brushSize, brushColor]);
 
     const startPainting = (event: React.MouseEvent<HTMLCanvasElement>) => {
         const context = canvasRef.current?.getContext('2d');

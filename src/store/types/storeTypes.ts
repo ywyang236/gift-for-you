@@ -3,5 +3,6 @@ export interface RootState {
     brush: {
         isBrushActive: boolean;
         brushSize: number;
+        brushColor: string;
     };
 }
