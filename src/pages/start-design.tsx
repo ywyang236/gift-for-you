@@ -1,5 +1,8 @@
 // pages/design-gift.tsx
-import React, {useState} from 'react';
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {toggleBrush} from '../store/actions/brushActions';
+import {RootState} from '../store/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
 import BottonCSS from '../styles/botton.module.css';
@@ -9,11 +12,13 @@ import {BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonF
 import Canvas from '../components/Canvas/Canvas';
 
 const DesignGift = () => {
-    const [brushActive, setBrushActive] = useState(false);
+    const dispatch = useDispatch();
+    const brushActive = useSelector((state: RootState) => state.brush.isBrushActive);
 
-    const toggleBrush = () => {
-        setBrushActive(!brushActive);
+    const handleToggleBrush = () => {
+        dispatch(toggleBrush());
     };
+
 
     return (
         <Layout>
@@ -26,7 +31,7 @@ const DesignGift = () => {
                             <IoArrowRedo className={DesignCSS.designButton} />
                             <IoBrush
                                 className={DesignCSS.designButton}
-                                onClick={toggleBrush}
+                                onClick={handleToggleBrush}
                             />
                             <IoClipboard className={DesignCSS.designButton} />
                             <IoColorFill className={DesignCSS.designButton} />
@@ -55,7 +60,7 @@ const DesignGift = () => {
                                         <Canvas
                                             width={460}
                                             height={420}
-                                            isBrushActive={brushActive} // 傳入 prop
+                                            isBrushActive={brushActive}
                                         />
                                     </div>
                                 </div>

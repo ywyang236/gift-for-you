@@ -1,16 +1,22 @@
 // components/Canvas/Canvas.tsx
 import React, {useRef, useEffect, useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {toggleBrush} from '../../store/actions/brushActions';
+import {RootState} from '../../store/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 
 interface CanvasProps {
     width: number;
     height: number;
-    isBrushActive: boolean;  // 增加 prop 控制畫筆功能
+    isBrushActive: boolean;
 }
 
-const Canvas: React.FC<CanvasProps> = ({width, height, isBrushActive}) => {  // 增加 isBrushActive
+const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isPainting, setIsPainting] = useState(false);
+    const dispatch = useDispatch();
+    const isBrushActive = useSelector((state: RootState) => state.brush.isBrushActive);
+
 
     useEffect(() => {
         const canvas = canvasRef.current;
