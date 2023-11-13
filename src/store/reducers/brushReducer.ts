@@ -3,7 +3,7 @@ import {TOGGLE_BRUSH, SET_LINE_WIDTH} from '../actions/brushActions';
 
 const initialState = {
     isBrushActive: false,
-    brushSize: 2,
+    lineWidth: 6,
 };
 
 const brushReducer = (state = initialState, action: {type: any; payload?: any;}) => {
