@@ -1,9 +1,9 @@
 // src/store/reducers/brushReducer.ts
-import {TOGGLE_BRUSH, SET_LINE_WIDTH} from '../actions/brushActions';
+import {TOGGLE_BRUSH, SET_BRUSH_SIZE} from '../actions/brushActions';
 
 const initialState = {
     isBrushActive: false,
-    lineWidth: 6,
+    brushSize: 6,
 };
 
 const brushReducer = (state = initialState, action: {type: any; payload?: any;}) => {
@@ -13,10 +13,10 @@ const brushReducer = (state = initialState, action: {type: any; payload?: any;})
                 ...state,
                 isBrushActive: !state.isBrushActive,
             };
-        case SET_LINE_WIDTH:
+        case SET_BRUSH_SIZE:
             return {
                 ...state,
-                lineWidth: action.payload,
+                brushSize: action.payload,
             };
         default:
             return state;

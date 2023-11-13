@@ -5,9 +5,9 @@ export const toggleBrush = () => ({
     type: TOGGLE_BRUSH,
 });
 
-export const SET_LINE_WIDTH = 'SET_LINE_WIDTH';
+export const SET_BRUSH_SIZE = 'SET_BRUSH_SIZE';
 
-export const setLineWidth = (width: number) => ({
-    type: SET_LINE_WIDTH,
+export const setBrushSize = (width: number) => ({
+    type: SET_BRUSH_SIZE,
     payload: width,
 });

@@ -1,7 +1,7 @@
 // pages/design-gift.tsx
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {toggleBrush, setLineWidth} from '../store/actions/brushActions';
+import {toggleBrush, setBrushSize} from '../store/actions/brushActions';
 import {RootState} from '../store/types/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
@@ -19,8 +19,8 @@ const DesignGift = () => {
         dispatch(toggleBrush());
     };
 
-    const handleLineWidthChange = (newLineWidth: number) => {
-        dispatch(setLineWidth(newLineWidth));
+    const handleBrushSizeChange = (newBrushSize: number) => {
+        dispatch(setBrushSize(newBrushSize));
     };
 
     return (
@@ -65,7 +65,7 @@ const DesignGift = () => {
                                             width={460}
                                             height={420}
                                             isBrushActive={brushActive}
-                                            setLineWidth={handleLineWidthChange}
+                                            setBrushSize={handleBrushSizeChange}
                                         />
                                     </div>
                                 </div>
@@ -76,25 +76,25 @@ const DesignGift = () => {
                             <div className={DesignCSS.brushContainer}>
                                 <div className={DesignCSS.brushChangeTitle}>筆刷大小</div>
                                 <div className={DesignCSS.brushChangeContainer}>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(6)}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(6)}>
                                         <div className={DesignCSS.brushChange6px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(8)}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(8)}>
                                         <div className={DesignCSS.brushChange8px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(10)}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(10)}>
                                         <div className={DesignCSS.brushChange10px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(12)}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(12)}>
                                         <div className={DesignCSS.brushChange12px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(14)}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(14)}>
                                         <div className={DesignCSS.brushChange14px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(16)}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(16)}>
                                         <div className={DesignCSS.brushChange16px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(18)}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(18)}>
                                         <div className={DesignCSS.brushChange18px}></div>
                                     </div>
                                 </div>
