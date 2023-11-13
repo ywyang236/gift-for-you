@@ -2,5 +2,6 @@
 export interface RootState {
     brush: {
         isBrushActive: boolean;
+        lineWidth: number;
     };
 }

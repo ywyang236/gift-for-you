@@ -1,11 +1,11 @@
 // pages/design-gift.tsx
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {toggleBrush} from '../store/actions/brushActions';
-import {RootState} from '../store/storeTypes';
+import {toggleBrush, setLineWidth} from '../store/actions/brushActions';
+import {RootState} from '../store/types/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
-import BottonCSS from '../styles/botton.module.css';
+import ButtonCSS from '../styles/button.module.css';
 import {IoArrowUndo, IoArrowRedo, IoBrush, IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoImage, IoLayers, IoOptions, IoText} from 'react-icons/io5';
 import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle} from "react-icons/io5";
 import {BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonFill, BsFillPentagonFill, BsFillStarFill} from "react-icons/bs";
@@ -19,6 +19,9 @@ const DesignGift = () => {
         dispatch(toggleBrush());
     };
 
+    const handleLineWidthChange = (newLineWidth: number) => {
+        dispatch(setLineWidth(newLineWidth));
+    };
 
     return (
         <Layout>
@@ -61,6 +64,7 @@ const DesignGift = () => {
                                             width={460}
                                             height={420}
                                             isBrushActive={brushActive}
+                                            setLineWidth={handleLineWidthChange}
                                         />
                                     </div>
                                 </div>
@@ -71,25 +75,25 @@ const DesignGift = () => {
                             <div className={DesignCSS.brushContainer}>
                                 <div className={DesignCSS.brushChangeTitle}>筆刷大小</div>
                                 <div className={DesignCSS.brushChangeContainer}>
-                                    <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(6)}>
                                         <div className={DesignCSS.brushChange6px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(8)}>
                                         <div className={DesignCSS.brushChange8px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(10)}>
                                         <div className={DesignCSS.brushChange10px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(12)}>
                                         <div className={DesignCSS.brushChange12px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(14)}>
                                         <div className={DesignCSS.brushChange14px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(16)}>
                                         <div className={DesignCSS.brushChange16px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground}>
+                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleLineWidthChange(18)}>
                                         <div className={DesignCSS.brushChange18px}></div>
                                     </div>
                                 </div>

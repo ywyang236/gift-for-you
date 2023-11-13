@@ -173,13 +173,6 @@
     padding: 20px
 }
 
-.brushChange4px {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background-color: black;
-}
-
 .brushChange6px {
     width: 6px;
     height: 6px;
