@@ -23,6 +23,8 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const context = canvas?.getContext('2d');
         if (context) {
             context.strokeStyle = '#000000';
+            context.lineJoin = 'round';
+            context.lineCap = 'round';
             context.lineWidth = lineWidth;
         }
     }, [lineWidth]);
@@ -31,15 +33,23 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
         if (!isBrushActive) return;
+
+        const rect = canvasRef.current!.getBoundingClientRect();
+        if (!rect) return;
+
+        const x = event.nativeEvent.clientX - rect.left;
+        const y = event.nativeEvent.clientY - rect.top;
+
+        context.moveTo(x, y);
+        context.beginPath();
         setIsPainting(true);
-        draw(event);
     };
 
     const endPainting = () => {
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
+        context.closePath();
         setIsPainting(false);
-        context.beginPath();
     };
 
     const draw = (event: React.MouseEvent<HTMLCanvasElement>) => {
@@ -50,8 +60,13 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
 
-        const nativeEvent = event.nativeEvent;
         const rect = canvas.getBoundingClientRect();
+        if (!rect) return;
+
+        const x = event.nativeEvent.clientX - rect.left;
+        const y = event.nativeEvent.clientY - rect.top;
+
+        const nativeEvent = event.nativeEvent;
         context.lineTo(nativeEvent.clientX - rect.left, nativeEvent.clientY - rect.top);
         context.stroke();
         context.beginPath();
