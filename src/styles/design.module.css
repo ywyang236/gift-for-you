@@ -170,7 +170,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px
+    padding: 20px;
 }
 
 .brushChange6px {
@@ -224,9 +224,95 @@
 
 .colorChangePicker {
     background-color: #BBBBBB;
+    /* 陰影 */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    height: 250px;
+    height: 150px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
 }
+
+.colorChangePickerButton {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#Black {
+    background-color: black;
+}
+
+#White {
+    background-color: white;
+}
+
+#Red {
+    background-color: red;
+}
+
+#Orange {
+    background-color: #ffa500;
+}
+
+#Yellow {
+    background-color: #ffff00;
+}
+
+#Green {
+    background-color: #008000;
+}
+
+#Blue {
+    background-color: #0000ff;
+}
+
+#Purple {
+    background-color: #800080;
+}
+
+#Brown {
+    background-color: #a52a2a;
+}
+
+#Gray {
+    background-color: #808080;
+}
+
+#Pink {
+    background-color: #ffc0cb;
+}
+
+#LightBlue {
+    background-color: #add8e6;
+}
+
+#LightGreen {
+    background-color: #90ee90;
+}
+
+#LightYellow {
+    background-color: #ffffe0;
+}
+
+#LightPink {
+    background-color: #ffb6c1;
+}
+
+#LightGray {
+    background-color: #d3d3d3;
+}
+
+#GreenBlue {
+    background-color: #14adff;
+}
+
+#WarmYellow {
+    background-color: #ffcc00;
+}
+
+
 
 .textChangeConteiner {
     display: flex;

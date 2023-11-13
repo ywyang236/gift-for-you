@@ -23,6 +23,10 @@ const DesignGift = () => {
         dispatch(setBrushSize(newBrushSize));
     };
 
+    const handleBrushColorChange = (newBrushColor: string) => {
+        dispatch(setBrushColor(newBrushColor));
+    };
+
     return (
         <Layout>
             <div className={DesignCSS.main}>
@@ -101,8 +105,29 @@ const DesignGift = () => {
                                 </div>
                             </div>
                             <div className={DesignCSS.colorConteiner}>
-                                <div className={DesignCSS.colorChangeTitle}>顏色選擇器</div>
-                                <div className={DesignCSS.colorChangePicker}></div>
+                                <div className={DesignCSS.colorChangeTitle}>筆刷顏色</div>
+                                <div className={DesignCSS.colorChangePicker}>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Black} onClick={() => handleBrushColorChange('#000000')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.White} onClick={() => handleBrushColorChange('#FFFFFF')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Red} onClick={() => handleBrushColorChange('#ff0000')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Orange} onClick={() => handleBrushColorChange('#ffa500')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Yellow} onClick={() => handleBrushColorChange('#ffff00')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Green} onClick={() => handleBrushColorChange('#008000')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Blue} onClick={() => handleBrushColorChange('#0000ff')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Purple} onClick={() => handleBrushColorChange('#800080')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Brown} onClick={() => handleBrushColorChange('#a52a2a')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Gray} onClick={() => handleBrushColorChange('#808080')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Pink} onClick={() => handleBrushColorChange('#ffc0cb')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightBlue} onClick={() => handleBrushColorChange('#add8e6')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightGreen} onClick={() => handleBrushColorChange('#90ee90')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightYellow} onClick={() => handleBrushColorChange('#ffffe0')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightPink} onClick={() => handleBrushColorChange('#ffb6c1')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightGray} onClick={() => handleBrushColorChange('#d3d3d3')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.GreenBlue} onClick={() => handleBrushColorChange('#14adff')}></div>
+                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.WarmYellow} onClick={() => handleBrushColorChange('#ffcc00')}></div>
+
+
+                                </div>
                             </div>
                             <div className={DesignCSS.textChangeConteiner}>
                                 <div className={DesignCSS.textChangeTitle}>文字外觀</div>
@@ -166,7 +191,7 @@ const DesignGift = () => {
                     </div>
                 </div>
             </div>
-        </Layout>
+        </Layout >
     );
 };
 
