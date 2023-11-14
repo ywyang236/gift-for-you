@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 import {set} from 'firebase/database';
+import BrushPreview from '../BrushPreview/BrushPreview';
 
 interface CanvasProps {
     width: number;
@@ -34,25 +35,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         }
     }, [brushSize, brushColor]);
 
-    useEffect(() => {
-        const previewContext = previewCanvasRef.current?.getContext('2d');
-        if (previewContext && mousePosition && isBrushActive && !isPainting) {
-            clearCanvas(previewContext, width, height);
-            drawPreview(previewContext, mousePosition.x, mousePosition.y, brushSize, brushColor); // Draw on the preview canvas
-        }
-    }, [mousePosition, isBrushActive, brushSize, brushColor, isPainting, width, height]);
-
-    const drawPreview = (context: CanvasRenderingContext2D, x: number, y: number, size: number, color: string) => {
-        context.beginPath();
-        context.arc(x, y, size / 2, 0, Math.PI * 2);
-        context.fillStyle = color + '40';
-        context.fill();
-    };
-
-    const clearCanvas = (context: CanvasRenderingContext2D, width: number, height: number) => {
-        context.clearRect(0, 0, width, height);
-    };
-
     const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
         const rect = canvasRef.current?.getBoundingClientRect();
         if (!rect) return;
@@ -82,13 +64,8 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     };
 
     const handleMouseLeave = () => {
-        const previewContext = previewCanvasRef.current?.getContext('2d');
-        if (previewContext) {
-            clearCanvas(previewContext, width, height);
-        }
         setMousePosition(undefined);
     };
-
 
     const startPainting = (event: React.MouseEvent<HTMLCanvasElement>) => {
         const context = canvasRef.current?.getContext('2d');
@@ -128,17 +105,15 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             />
-            <canvas
-                ref={previewCanvasRef}
-                width={width}
-                height={height}
-                style={{
-                    position: 'relative',
-                    top: -426,
-                    left: 0,
-                    pointerEvents: 'none',
-                }}
-            />
+            {isBrushActive && mousePosition && (
+                <BrushPreview
+                    width={width}
+                    height={height}
+                    brushSize={brushSize}
+                    brushColor={brushColor}
+                    mousePosition={mousePosition}
+                />
+            )}
         </>
     );
 };
