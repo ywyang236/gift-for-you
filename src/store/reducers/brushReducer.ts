@@ -4,6 +4,7 @@ import {TOGGLE_BRUSH, SET_BRUSH_SIZE, SET_BRUSH_COLOR} from '../actions/brushAct
 const initialState = {
     isBrushActive: false,
     brushSize: 6,
+    brushColor: '#000000',
 };
 
 const brushReducer = (state = initialState, action: {type: any; payload?: any;}) => {
