@@ -56,7 +56,10 @@ const DesignGift = () => {
                             <IoLayers className={DesignCSS.designButton} />
                             <IoOptions className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
-                            <BsEraserFill className={DesignCSS.designButton} />
+                            <BsEraserFill
+                                className={DesignCSS.designButton}
+
+                            />
                             <span className={DesignCSS.addCartButton}>加入購物車</span>
                             <span className={DesignCSS.quiteButton}>放棄設計</span>
                         </div>
@@ -72,6 +75,7 @@ const DesignGift = () => {
                                             isBrushActive={brushActive}
                                             setBrushSize={handleBrushSizeChange}
                                             setBrushColor={() => { }}
+
                                         />
                                     </div>
                                 </div>

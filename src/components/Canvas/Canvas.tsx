@@ -5,6 +5,7 @@ import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 import {set} from 'firebase/database';
 import BrushPreview from '../BrushPreview/BrushPreview';
+import Eraser from '../Eraser/Eraser';
 
 interface CanvasProps {
     width: number;
@@ -23,6 +24,17 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const isBrushActive = useSelector((state: RootState) => state.brush.isBrushActive);
     const brushSize = useSelector((state: RootState) => state.brush.brushSize);
     const brushColor = useSelector((state: RootState) => state.brush.brushColor);
+    const [isErasing, setIsErasing] = useState(false);
+    const eraserSize = useSelector((state: RootState) => state.eraserSize);
+    const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
+
+    useEffect(() => {
+        if (canvasRef.current) {
+            const newContext = canvasRef.current.getContext('2d');
+            setContext(newContext);
+        }
+    }, []);
+
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -112,6 +124,12 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                     brushSize={brushSize}
                     brushColor={brushColor}
                     mousePosition={mousePosition}
+                />
+            )}
+            {isErasing && mousePosition && (
+                <Eraser
+                    context={context}
+                    eraserSize={eraserSize}
                 />
             )}
         </>
