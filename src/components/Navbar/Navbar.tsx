@@ -1,32 +1,56 @@
 // components/Navbar/Navbar.tsx
-import React from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import NavbarCSS from './Navbar.module.css';
+import {IoMenu} from "react-icons/io5";
 
-const Navbar: React.FC = () => (
-    <nav className={NavbarCSS.main}>
-        <div className={NavbarCSS.container}>
-            <div className={NavbarCSS.leftContainer}>
-                <Image
-                    src="/favicon.ico"
-                    alt="Logo"
-                    width={25}
-                    height={25}
-                    className={NavbarCSS.leftContainerIcon}
-                />
-                <Link href='/' className={NavbarCSS.leftContainer}>禮品訂製所 Gift For You</Link>
+const Navbar: React.FC = () => {
+    const [menuVisible, setMenuVisible] = useState(false);
+
+    const toggleMenu = (event: React.MouseEvent) => {
+        event.stopPropagation();
+        setMenuVisible(prev => !prev);
+    };
+
+    const closeMenu = useCallback((event: MouseEvent) => {
+        const target = event.target as HTMLElement;
+        const menuButton = document.querySelector(`.${NavbarCSS.menuButton}`) as HTMLElement;
+        if (menuVisible && target && !menuButton.contains(target) && !target.closest(`.${NavbarCSS.rightContainer}`)) {
+            setMenuVisible(false);
+        }
+    }, [menuVisible]);
+
+    useEffect(() => {
+        window.addEventListener('click', closeMenu);
+        return () => window.removeEventListener('click', closeMenu);
+    }, [menuVisible, closeMenu]);
+
+    return (
+        <nav className={NavbarCSS.main}>
+            <div className={NavbarCSS.container}>
+                <div className={NavbarCSS.leftContainer}>
+                    <Image
+                        src="/favicon.ico"
+                        alt="Logo"
+                        width={25}
+                        height={25}
+                        className={NavbarCSS.leftContainerIcon}
+                    />
+                    <Link href='/' className={NavbarCSS.leftContainer}>禮品訂製所 Gift For You</Link>
+                </div>
+                <IoMenu className={NavbarCSS.menuButton} onClick={toggleMenu} />
+                <div className={`${NavbarCSS.rightContainer} ${menuVisible ? NavbarCSS.activeMenu : ''}`}>
+                    <Link href='/start-design' className={NavbarCSS.rightContainerText}>開始設計</Link>
+                    <Link href='/order-information' className={NavbarCSS.rightContainerText}>歷史訂單</Link>
+                    <Link href='/cart' className={NavbarCSS.rightContainerText}>購物車</Link>
+                    <Link href='/member-information' className={NavbarCSS.rightContainerText}>會員資料</Link>
+                    <span className={NavbarCSS.login}>登入</span>
+                    <span className={NavbarCSS.register}>註冊</span>
+                </div>
             </div>
-            <div className={NavbarCSS.rightContainer}>
-                <Link href='/start-design' className={NavbarCSS.rightContainerText}>開始設計</Link>
-                <Link href='/order-information' className={NavbarCSS.rightContainerText}>歷史訂單</Link>
-                <Link href='/cart' className={NavbarCSS.rightContainerText}>購物車</Link>
-                <Link href='/member-information' className={NavbarCSS.rightContainerText}>會員資料</Link>
-                <span className={NavbarCSS.login}>登入</span>
-                <span className={NavbarCSS.register}>註冊</span>
-            </div>
-        </div>
-    </nav>
-);
+        </nav>
+    );
+};
 
 export default Navbar;

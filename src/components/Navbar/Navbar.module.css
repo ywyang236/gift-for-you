@@ -89,3 +89,55 @@
 .register:hover {
     background-color: #ff7878;
 }
+
+
+.menuButton {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .rightContainer {
+        display: none;
+    }
+
+    .menuButton {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        cursor: pointer;
+        color: white;
+        width: 30px;
+        height: 30px;
+    }
+
+    .activeMenu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #1D445D;
+        width: 180px;
+        height: 100vh;
+        transition: right 0.3s;
+        z-index: 5;
+        padding-top: 20px;
+    }
+
+    .rightContainerText {
+        height: 30px;
+    }
+
+    .rightContainerText:hover {
+        background-color: #37B2D6;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+
+    .rightContainerText,
+    .login,
+    .register {
+        margin: 10px;
+    }
+}
