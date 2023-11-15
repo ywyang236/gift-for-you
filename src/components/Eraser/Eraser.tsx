@@ -1,0 +1,1 @@
+// components/Eraser/Eraser.tsx
