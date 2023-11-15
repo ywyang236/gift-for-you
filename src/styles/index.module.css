@@ -80,6 +80,12 @@
     top: -150px;
 }
 
+@media (max-width: 430px) {
+    .rulesContainer {
+        padding: 20px;
+    }
+}
+
 .rulesTitle {
     display: flex;
     align-items: center;
