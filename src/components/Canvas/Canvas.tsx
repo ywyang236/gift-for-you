@@ -5,7 +5,6 @@ import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 import {set} from 'firebase/database';
 import BrushPreview from '../BrushPreview/BrushPreview';
-import Eraser from '../Eraser/Eraser';
 
 interface CanvasProps {
     width: number;
@@ -13,7 +12,6 @@ interface CanvasProps {
     isBrushActive: boolean;
     setBrushSize: (newBrushSize: number) => void;
     setBrushColor: (newBrushColor: string) => void;
-    isEraserActive: boolean;
 }
 
 const Canvas: React.FC<CanvasProps> = ({width, height}) => {
@@ -25,10 +23,8 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const isBrushActive = useSelector((state: RootState) => state.brush.isBrushActive);
     const brushSize = useSelector((state: RootState) => state.brush.brushSize);
     const brushColor = useSelector((state: RootState) => state.brush.brushColor);
-    const [isErasing, setIsErasing] = useState(false);
-    const eraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
+    // const [isErasing, setIsErasing] = useState(false);
     const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-    const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
 
     useEffect(() => {
         if (canvasRef.current) {
@@ -42,12 +38,15 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const canvas = canvasRef.current;
         const context = canvas?.getContext('2d');
         if (context) {
-            context.strokeStyle = brushColor;
-            context.lineJoin = 'round';
-            context.lineCap = 'round';
-            context.lineWidth = brushSize;
+            if (isBrushActive) {
+                context.globalCompositeOperation = 'source-over';
+                context.strokeStyle = brushColor;
+                context.lineJoin = 'round';
+                context.lineCap = 'round';
+                context.lineWidth = brushSize;
+            }
         }
-    }, [brushSize, brushColor]);
+    }, [isBrushActive, brushColor, brushSize]);
 
     const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
         const canvas = canvasRef.current;
@@ -59,20 +58,12 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        if (isPainting && !isEraserActive) {
-            context.globalCompositeOperation = 'source-over';
+        if (!isPainting) return;
+
+        if (isBrushActive) {
             context.lineTo(x, y);
             context.stroke();
-        }
-
-        if (isPainting && isEraserActive) {
-            context.globalCompositeOperation = 'destination-out';
-            context.beginPath();
-            context.arc(x, y, brushSize / 2, 0, Math.PI * 2);
-            context.fill();
-        }
-
-        if (!isPainting && isBrushActive) {
+        } else if (isBrushActive) {
             setMousePosition({x, y});
         }
     };
@@ -85,6 +76,9 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                 y: event.clientY - (rect?.top ?? 0)
             });
         }
+        if (context) {
+            context.globalCompositeOperation = 'destination-out';
+        }
     };
 
     const handleMouseLeave = () => {
@@ -94,7 +88,10 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const startPainting = (event: React.MouseEvent<HTMLCanvasElement>) => {
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
-        if (!isBrushActive) return;
+
+        if (isBrushActive) {
+            setIsPainting(true);
+        }
 
         const rect = canvasRef.current!.getBoundingClientRect();
         if (!rect) return;
@@ -102,15 +99,13 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const x = event.nativeEvent.clientX - rect.left;
         const y = event.nativeEvent.clientY - rect.top;
 
-        context.moveTo(x, y);
-        context.beginPath();
-        setIsPainting(true);
+        if (isBrushActive) {
+            context.moveTo(x, y);
+            context.beginPath();
+        }
     };
 
     const endPainting = () => {
-        const context = canvasRef.current?.getContext('2d');
-        if (!context) return;
-        context.closePath();
         setIsPainting(false);
     };
 
@@ -136,12 +131,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                     brushSize={brushSize}
                     brushColor={brushColor}
                     mousePosition={mousePosition}
-                />
-            )}
-            {isErasing && mousePosition && (
-                <Eraser
-                    context={context}
-                    eraserSize={eraserSize}
                 />
             )}
         </>

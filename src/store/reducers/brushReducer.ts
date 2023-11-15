@@ -1,18 +1,23 @@
 // src/store/reducers/brushReducer.ts
-import {TOGGLE_BRUSH, SET_BRUSH_SIZE, SET_BRUSH_COLOR} from '../actions/brushActions';
+import {ACTIVATE_BRUSH, DEACTIVATE_BRUSH, SET_BRUSH_SIZE, SET_BRUSH_COLOR} from '../actions/brushActions';
 
 const initialState = {
-    isBrushActive: false,
+    isBrushActive: true,
     brushSize: 6,
     brushColor: '#000000',
 };
 
 const brushReducer = (state = initialState, action: {type: any; payload?: any;}) => {
     switch (action.type) {
-        case TOGGLE_BRUSH:
+        case ACTIVATE_BRUSH:
             return {
                 ...state,
-                isBrushActive: !state.isBrushActive,
+                isBrushActive: true,
+            };
+        case DEACTIVATE_BRUSH:
+            return {
+                ...state,
+                isBrushActive: false,
             };
         case SET_BRUSH_SIZE:
             return {

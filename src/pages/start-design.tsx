@@ -1,8 +1,7 @@
 // pages/design-gift.tsx
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {toggleBrush, setBrushSize, setBrushColor} from '../store/actions/brushActions';
-import {activateEraser, setEraserSize} from '../store/actions/eraserActions';
+import {toggleBrush, setBrushSize, setBrushColor, deactivateBrush} from '../store/actions/brushActions';
 import {RootState} from '../store/types/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
@@ -37,14 +36,6 @@ const DesignGift = () => {
         dispatch(setBrushColor(newBrushColor));
     };
 
-    const handleEraserActivate = () => {
-        dispatch(activateEraser());
-    };
-
-    const handleEraserSizeChange = (newEraserSize: number) => {
-        dispatch(setEraserSize(newEraserSize));
-    };
-
     return (
         <Layout>
             <div className={DesignCSS.main}>
@@ -60,7 +51,6 @@ const DesignGift = () => {
                             />
                             <BsEraserFill
                                 className={DesignCSS.designButton}
-                                onClick={handleEraserActivate}
                             />
                             <IoColorPalette
                                 className={DesignCSS.designButton}
@@ -95,7 +85,6 @@ const DesignGift = () => {
                                             isBrushActive={brushActive}
                                             setBrushSize={handleBrushSizeChange}
                                             setBrushColor={() => { }}
-                                            isEraserActive={false}
                                         />
                                     </div>
                                 </div>
@@ -158,25 +147,25 @@ const DesignGift = () => {
                             <div className={DesignCSS.eraserContainer}>
                                 <div className={DesignCSS.eraserChangeTitle}>橡皮擦大小</div>
                                 <div className={DesignCSS.eraserChangeContainer}>
-                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(6)}>
+                                    <div className={DesignCSS.eraserChangeBackground}>
                                         <div className={DesignCSS.eraserChange6px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(8)}>
+                                    <div className={DesignCSS.eraserChangeBackground}>
                                         <div className={DesignCSS.eraserChange8px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(10)}>
+                                    <div className={DesignCSS.eraserChangeBackground}>
                                         <div className={DesignCSS.eraserChange10px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(12)}>
+                                    <div className={DesignCSS.eraserChangeBackground}>
                                         <div className={DesignCSS.eraserChange12px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(14)}>
+                                    <div className={DesignCSS.eraserChangeBackground}>
                                         <div className={DesignCSS.eraserChange14px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(16)}>
+                                    <div className={DesignCSS.eraserChangeBackground}>
                                         <div className={DesignCSS.eraserChange16px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(18)}>
+                                    <div className={DesignCSS.eraserChangeBackground}>
                                         <div className={DesignCSS.eraserChange18px}></div>
                                     </div>
                                 </div>

@@ -6,9 +6,4 @@ export interface RootState {
         brushSize: number;
         brushColor: string;
     };
-    eraser: {
-        context: any;
-        eraserSize: number;
-        isEraserActive: boolean;
-    };
 }

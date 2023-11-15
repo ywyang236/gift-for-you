@@ -18,3 +18,14 @@ export const setBrushColor = (color: string) => ({
     type: SET_BRUSH_COLOR,
     payload: color,
 });
+
+export const ACTIVATE_BRUSH = 'ACTIVATE_BRUSH';
+export const DEACTIVATE_BRUSH = 'DEACTIVATE_BRUSH';
+
+export const activateBrush = () => ({
+    type: ACTIVATE_BRUSH,
+});
+
+export const deactivateBrush = () => ({
+    type: DEACTIVATE_BRUSH,
+});
