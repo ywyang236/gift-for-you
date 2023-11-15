@@ -1,12 +1,13 @@
 // component/Eraser/Eraser.tsx
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 interface EraserProps {
     context: CanvasRenderingContext2D | null;
     eraserSize: number;
+    mousePosition?: {x: number; y: number};
 }
 
-const Eraser: React.FC<EraserProps> = ({context, eraserSize}) => {
+const Eraser: React.FC<EraserProps> = ({context, eraserSize, mousePosition}) => {
     const erase = (x: number, y: number) => {
         if (context) {
             context.globalCompositeOperation = 'destination-out';

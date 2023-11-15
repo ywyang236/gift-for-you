@@ -2,7 +2,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {toggleBrush, setBrushSize, setBrushColor} from '../store/actions/brushActions';
-import {activateEraser} from '../store/actions/eraserActions';
+import {activateEraser, setEraserSize} from '../store/actions/eraserActions';
 import {RootState} from '../store/types/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
@@ -16,6 +16,14 @@ import Canvas from '../components/Canvas/Canvas';
 const DesignGift = () => {
     const dispatch = useDispatch();
     const brushActive = useSelector((state: RootState) => state.brush.isBrushActive);
+
+    const handleScrollToBrushColor = () => {
+        const brushColorElement = document.querySelector('#colorChangeTitle');
+
+        if (brushColorElement) {
+            brushColorElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+    };
 
     const handleToggleBrush = () => {
         dispatch(toggleBrush());
@@ -33,6 +41,10 @@ const DesignGift = () => {
         dispatch(activateEraser());
     };
 
+    const handleEraserSizeChange = (newEraserSize: number) => {
+        dispatch(setEraserSize(newEraserSize));
+    };
+
     return (
         <Layout>
             <div className={DesignCSS.main}>
@@ -46,9 +58,16 @@ const DesignGift = () => {
                                 className={DesignCSS.designButton}
                                 onClick={handleToggleBrush}
                             />
+                            <BsEraserFill
+                                className={DesignCSS.designButton}
+                                onClick={handleEraserActivate}
+                            />
+                            <IoColorPalette
+                                className={DesignCSS.designButton}
+                                onClick={handleScrollToBrushColor}
+                            />
                             <IoClipboard className={DesignCSS.designButton} />
                             <IoColorFill className={DesignCSS.designButton} />
-                            <IoColorPalette className={DesignCSS.designButton} />
                             <IoColorWand className={DesignCSS.designButton} />
                             <IoCopy className={DesignCSS.designButton} />
                             <IoCrop className={DesignCSS.designButton} />
@@ -61,10 +80,6 @@ const DesignGift = () => {
                             <IoLayers className={DesignCSS.designButton} />
                             <IoOptions className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
-                            <BsEraserFill
-                                className={DesignCSS.designButton}
-                                onClick={handleEraserActivate}
-                            />
                             <span className={DesignCSS.addCartButton}>加入購物車</span>
                             <span className={DesignCSS.quiteButton}>放棄設計</span>
                         </div>
@@ -115,7 +130,10 @@ const DesignGift = () => {
                                 </div>
                             </div>
                             <div className={DesignCSS.colorConteiner}>
-                                <div className={DesignCSS.colorChangeTitle}>筆刷顏色</div>
+                                <div
+                                    className={DesignCSS.colorChangeTitle}
+                                    id='colorChangeTitle'
+                                >筆刷顏色</div>
                                 <div className={DesignCSS.colorChangePicker}>
                                     <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Black} onClick={() => handleBrushColorChange('#000000')}></div>
                                     <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.White} onClick={() => handleBrushColorChange('#FFFFFF')}></div>
@@ -135,8 +153,32 @@ const DesignGift = () => {
                                     <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightGray} onClick={() => handleBrushColorChange('#d3d3d3')}></div>
                                     <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.GreenBlue} onClick={() => handleBrushColorChange('#14adff')}></div>
                                     <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.WarmYellow} onClick={() => handleBrushColorChange('#ffcc00')}></div>
-
-
+                                </div>
+                            </div>
+                            <div className={DesignCSS.eraserContainer}>
+                                <div className={DesignCSS.eraserChangeTitle}>橡皮擦大小</div>
+                                <div className={DesignCSS.eraserChangeContainer}>
+                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(6)}>
+                                        <div className={DesignCSS.eraserChange6px}></div>
+                                    </div>
+                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(8)}>
+                                        <div className={DesignCSS.eraserChange8px}></div>
+                                    </div>
+                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(10)}>
+                                        <div className={DesignCSS.eraserChange10px}></div>
+                                    </div>
+                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(12)}>
+                                        <div className={DesignCSS.eraserChange12px}></div>
+                                    </div>
+                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(14)}>
+                                        <div className={DesignCSS.eraserChange14px}></div>
+                                    </div>
+                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(16)}>
+                                        <div className={DesignCSS.eraserChange16px}></div>
+                                    </div>
+                                    <div className={DesignCSS.eraserChangeBackground} onClick={() => handleEraserSizeChange(18)}>
+                                        <div className={DesignCSS.eraserChange18px}></div>
+                                    </div>
                                 </div>
                             </div>
                             <div className={DesignCSS.textChangeConteiner}>

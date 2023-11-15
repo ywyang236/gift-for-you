@@ -1,5 +1,5 @@
 // src/store/reducers/eraserReducer.ts
-import {ACTIVATE_ERASER} from '../actions/eraserActions';
+import {ACTIVATE_ERASER, SET_ERASER_SIZE} from '../actions/eraserActions';
 
 const initialState = {
     isEraserActive: false,
@@ -12,6 +12,11 @@ const eraserReducer = (state = initialState, action: {type: any; payload?: any;}
             return {
                 ...state,
                 isEraserActive: true,
+            };
+        case SET_ERASER_SIZE:
+            return {
+                ...state,
+                eraserSize: action.payload,
             };
         default:
             return state;
