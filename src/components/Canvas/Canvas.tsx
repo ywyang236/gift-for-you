@@ -13,6 +13,7 @@ interface CanvasProps {
     isBrushActive: boolean;
     setBrushSize: (newBrushSize: number) => void;
     setBrushColor: (newBrushColor: string) => void;
+    isEraserActive: boolean;
 }
 
 const Canvas: React.FC<CanvasProps> = ({width, height}) => {
@@ -25,8 +26,9 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const brushSize = useSelector((state: RootState) => state.brush.brushSize);
     const brushColor = useSelector((state: RootState) => state.brush.brushColor);
     const [isErasing, setIsErasing] = useState(false);
-    const eraserSize = useSelector((state: RootState) => state.eraserSize);
+    const eraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
     const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
+    const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
 
     useEffect(() => {
         if (canvasRef.current) {
@@ -48,19 +50,29 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     }, [brushSize, brushColor]);
 
     const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
+        const canvas = canvasRef.current;
+        const context = canvas?.getContext('2d');
+        if (!canvas || !context) return;
+
         const rect = canvasRef.current?.getBoundingClientRect();
         if (!rect) return;
-
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        if (isPainting) {
-            const context = canvasRef.current?.getContext('2d');
-            if (!context) return;
-
+        if (isPainting && !isEraserActive) {
+            context.globalCompositeOperation = 'source-over';
             context.lineTo(x, y);
             context.stroke();
-        } else if (isBrushActive) {
+        }
+
+        if (isPainting && isEraserActive) {
+            context.globalCompositeOperation = 'destination-out';
+            context.beginPath();
+            context.arc(x, y, brushSize / 2, 0, Math.PI * 2);
+            context.fill();
+        }
+
+        if (!isPainting && isBrushActive) {
             setMousePosition({x, y});
         }
     };

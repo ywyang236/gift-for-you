@@ -2,6 +2,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {toggleBrush, setBrushSize, setBrushColor} from '../store/actions/brushActions';
+import {activateEraser} from '../store/actions/eraserActions';
 import {RootState} from '../store/types/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
@@ -26,6 +27,10 @@ const DesignGift = () => {
 
     const handleBrushColorChange = (newBrushColor: string) => {
         dispatch(setBrushColor(newBrushColor));
+    };
+
+    const handleEraserActivate = () => {
+        dispatch(activateEraser());
     };
 
     return (
@@ -58,7 +63,7 @@ const DesignGift = () => {
                             <IoText className={DesignCSS.designButton} />
                             <BsEraserFill
                                 className={DesignCSS.designButton}
-
+                                onClick={handleEraserActivate}
                             />
                             <span className={DesignCSS.addCartButton}>加入購物車</span>
                             <span className={DesignCSS.quiteButton}>放棄設計</span>
@@ -75,7 +80,7 @@ const DesignGift = () => {
                                             isBrushActive={brushActive}
                                             setBrushSize={handleBrushSizeChange}
                                             setBrushColor={() => { }}
-
+                                            isEraserActive={false}
                                         />
                                     </div>
                                 </div>
