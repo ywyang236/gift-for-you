@@ -4,7 +4,6 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 import {set} from 'firebase/database';
-import BrushPreview from '../BrushPreview/BrushPreview';
 
 interface CanvasProps {
     width: number;
@@ -23,44 +22,48 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const isBrushActive = useSelector((state: RootState) => state.brush.isBrushActive);
     const brushSize = useSelector((state: RootState) => state.brush.brushSize);
     const brushColor = useSelector((state: RootState) => state.brush.brushColor);
-    // const [isErasing, setIsErasing] = useState(false);
-    const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-
-    useEffect(() => {
-        if (canvasRef.current) {
-            const newContext = canvasRef.current.getContext('2d');
-            setContext(newContext);
-        }
-    }, []);
-
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas?.getContext('2d');
         if (context) {
-            if (isBrushActive) {
-                context.globalCompositeOperation = 'source-over';
-                context.strokeStyle = brushColor;
-                context.lineJoin = 'round';
-                context.lineCap = 'round';
-                context.lineWidth = brushSize;
-            }
+            context.strokeStyle = brushColor;
+            context.lineJoin = 'round';
+            context.lineCap = 'round';
+            context.lineWidth = brushSize;
         }
-    }, [isBrushActive, brushColor, brushSize]);
+    }, [brushSize, brushColor]);
+
+    useEffect(() => {
+        const previewContext = previewCanvasRef.current?.getContext('2d');
+        if (previewContext && mousePosition && isBrushActive && !isPainting) {
+            clearCanvas(previewContext, width, height);
+            drawPreview(previewContext, mousePosition.x, mousePosition.y, brushSize, brushColor); // Draw on the preview canvas
+        }
+    }, [mousePosition, isBrushActive, brushSize, brushColor, isPainting, width, height]);
+
+    const drawPreview = (context: CanvasRenderingContext2D, x: number, y: number, size: number, color: string) => {
+        context.beginPath();
+        context.arc(x, y, size / 2, 0, Math.PI * 2);
+        context.fillStyle = color + '40';
+        context.fill();
+    };
+
+    const clearCanvas = (context: CanvasRenderingContext2D, width: number, height: number) => {
+        context.clearRect(0, 0, width, height);
+    };
 
     const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
-        const canvas = canvasRef.current;
-        const context = canvas?.getContext('2d');
-        if (!canvas || !context) return;
-
         const rect = canvasRef.current?.getBoundingClientRect();
         if (!rect) return;
+
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        if (!isPainting) return;
+        if (isPainting) {
+            const context = canvasRef.current?.getContext('2d');
+            if (!context) return;
 
-        if (isBrushActive) {
             context.lineTo(x, y);
             context.stroke();
         } else if (isBrushActive) {
@@ -76,22 +79,21 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                 y: event.clientY - (rect?.top ?? 0)
             });
         }
-        if (context) {
-            context.globalCompositeOperation = 'destination-out';
-        }
     };
 
     const handleMouseLeave = () => {
+        const previewContext = previewCanvasRef.current?.getContext('2d');
+        if (previewContext) {
+            clearCanvas(previewContext, width, height);
+        }
         setMousePosition(undefined);
     };
+
 
     const startPainting = (event: React.MouseEvent<HTMLCanvasElement>) => {
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
-
-        if (isBrushActive) {
-            setIsPainting(true);
-        }
+        if (!isBrushActive) return;
 
         const rect = canvasRef.current!.getBoundingClientRect();
         if (!rect) return;
@@ -99,13 +101,15 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const x = event.nativeEvent.clientX - rect.left;
         const y = event.nativeEvent.clientY - rect.top;
 
-        if (isBrushActive) {
-            context.moveTo(x, y);
-            context.beginPath();
-        }
+        context.moveTo(x, y);
+        context.beginPath();
+        setIsPainting(true);
     };
 
     const endPainting = () => {
+        const context = canvasRef.current?.getContext('2d');
+        if (!context) return;
+        context.closePath();
         setIsPainting(false);
     };
 
@@ -124,15 +128,17 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             />
-            {isBrushActive && mousePosition && (
-                <BrushPreview
-                    width={width}
-                    height={height}
-                    brushSize={brushSize}
-                    brushColor={brushColor}
-                    mousePosition={mousePosition}
-                />
-            )}
+            <canvas
+                ref={previewCanvasRef}
+                width={width}
+                height={height}
+                style={{
+                    position: 'relative',
+                    top: -426,
+                    left: 0,
+                    pointerEvents: 'none',
+                }}
+            />
         </>
     );
 };

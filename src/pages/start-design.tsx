@@ -1,7 +1,7 @@
 // pages/design-gift.tsx
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {toggleBrush, setBrushSize, setBrushColor, deactivateBrush} from '../store/actions/brushActions';
+import {toggleBrush, setBrushSize, setBrushColor} from '../store/actions/brushActions';
 import {RootState} from '../store/types/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
