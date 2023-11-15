@@ -22,6 +22,13 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const isBrushActive = useSelector((state: RootState) => state.brush.isBrushActive);
     const brushSize = useSelector((state: RootState) => state.brush.brushSize);
     const brushColor = useSelector((state: RootState) => state.brush.brushColor);
+    const [backgroundColor, setBackgroundColor] = useState('transparent');
+
+    const toggleBackgroundColor = () => {
+        setBackgroundColor(prevColor =>
+            prevColor === 'transparent' ? 'rgba(255, 139, 0, 0.3)' : 'transparent'
+        );
+    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -103,6 +110,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
 
         context.moveTo(x, y);
         context.beginPath();
+        toggleBackgroundColor();
         setIsPainting(true);
     };
 
@@ -111,6 +119,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         if (!context) return;
         context.closePath();
         setIsPainting(false);
+        toggleBackgroundColor();
     };
 
     return (
@@ -119,7 +128,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                 ref={canvasRef}
                 width={width}
                 height={height}
-                style={{backgroundColor: 'rgba(255, 139, 0, 0.3)'}}
+                style={{backgroundColor: backgroundColor}}
                 className={CanvasCSS.canvas}
                 onMouseDown={startPainting}
                 onMouseUp={endPainting}
