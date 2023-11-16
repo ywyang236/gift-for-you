@@ -1,13 +1,13 @@
 // pages/design-gift.tsx
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {toggleBrush, setBrushSize, setBrushColor} from '../store/actions/brushActions';
+import {toggleBrush, setBrushSize, setBrushColor, activateBrush, deactivateBrush} from '../store/actions/brushActions';
 import {RootState} from '../store/types/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
 import ButtonCSS from '../styles/button.module.css';
 import {IoArrowUndo, IoArrowRedo, IoBrush, IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoImage, IoLayers, IoOptions, IoText} from 'react-icons/io5';
-import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle, IoCloudDownloadSharp} from "react-icons/io5";
+import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle} from "react-icons/io5";
 import {BsEraserFill, BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonFill, BsFillPentagonFill, BsFillStarFill} from "react-icons/bs";
 import Canvas from '../components/Canvas/Canvas';
 
@@ -24,7 +24,11 @@ const DesignGift = () => {
     };
 
     const handleToggleBrush = () => {
-        dispatch(toggleBrush());
+        if (brushActive) {
+            dispatch(deactivateBrush());
+        } else {
+            dispatch(activateBrush());
+        }
     };
 
     const handleBrushSizeChange = (newBrushSize: number) => {
@@ -45,7 +49,7 @@ const DesignGift = () => {
                             <IoArrowUndo className={DesignCSS.designButton} />
                             <IoArrowRedo className={DesignCSS.designButton} />
                             <IoBrush
-                                className={DesignCSS.designButton}
+                                className={`${DesignCSS.designButton} ${brushActive ? DesignCSS.designButtonActive : ''}`}
                                 onClick={handleToggleBrush}
                             />
                             <BsEraserFill
@@ -55,7 +59,6 @@ const DesignGift = () => {
                                 className={DesignCSS.designButton}
                                 onClick={handleScrollToBrushColor}
                             />
-                            <IoCloudDownloadSharp className={DesignCSS.designButton} />
                             <IoClipboard className={DesignCSS.designButton} />
                             <IoColorFill className={DesignCSS.designButton} />
                             <IoColorWand className={DesignCSS.designButton} />
@@ -83,7 +86,7 @@ const DesignGift = () => {
                                             width={460}
                                             height={420}
                                             isBrushActive={brushActive}
-                                            setBrushSize={handleBrushSizeChange}
+                                            setBrushSize={() => { }}
                                             setBrushColor={() => { }}
                                         />
                                     </div>

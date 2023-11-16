@@ -29,3 +29,4 @@ export const activateBrush = () => ({
 export const deactivateBrush = () => ({
     type: DEACTIVATE_BRUSH,
 });
+

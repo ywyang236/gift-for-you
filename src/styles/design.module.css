@@ -50,6 +50,12 @@
     flex-shrink: 0;
 }
 
+.designButtonActive {
+    background-color: rgb(82, 82, 82);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .designButton:hover {
     background-color: rgb(82, 82, 82);
     border-radius: 5px;
