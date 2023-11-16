@@ -4,7 +4,7 @@ import {ACTIVATE_BRUSH, DEACTIVATE_BRUSH, SET_BRUSH_SIZE, SET_BRUSH_COLOR} from 
 const initialState = {
     isBrushActive: false,
     brushSize: 6,
-    brushColor: '#000000',
+    brushColor: null,
 };
 
 const brushReducer = (state = initialState, action: {type: any; payload?: any;}) => {

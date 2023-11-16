@@ -30,6 +30,9 @@ const DesignGift = () => {
             dispatch(deactivateBrush());
         } else {
             dispatch(activateBrush());
+            if (currentBrushColor === null) { // Check if the brushColor is not set
+                dispatch(setBrushColor('#000000')); // Set the initial brush color to black
+            }
         }
     };
 
@@ -37,14 +40,15 @@ const DesignGift = () => {
         dispatch(setBrushSize(newBrushSize));
         if (!brushActive) {
             dispatch(activateBrush());
+            dispatch(setBrushColor('#000000'));
         }
+        dispatch(setBrushSize(newBrushSize));
     };
 
     const handleBrushColorChange = (newBrushColor: string) => {
-        if (!brushActive) {
+        if (brushActive) {
             dispatch(setBrushColor(newBrushColor));
         }
-        dispatch(setBrushColor(newBrushColor));
     };
 
     return (
