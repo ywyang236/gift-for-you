@@ -14,6 +14,7 @@ import Canvas from '../components/Canvas/Canvas';
 const DesignGift = () => {
     const dispatch = useDispatch();
     const brushActive = useSelector((state: RootState) => state.brush.isBrushActive);
+    const currentBrushSize = useSelector((state: RootState) => state.brush.brushSize);
 
     const handleScrollToBrushColor = () => {
         const brushColorElement = document.querySelector('#colorChangeTitle');
@@ -33,6 +34,9 @@ const DesignGift = () => {
 
     const handleBrushSizeChange = (newBrushSize: number) => {
         dispatch(setBrushSize(newBrushSize));
+        if (!brushActive) {
+            dispatch(activateBrush());
+        }
     };
 
     const handleBrushColorChange = (newBrushColor: string) => {
@@ -98,25 +102,39 @@ const DesignGift = () => {
                             <div className={DesignCSS.brushContainer}>
                                 <div className={DesignCSS.brushChangeTitle}>筆刷大小</div>
                                 <div className={DesignCSS.brushChangeContainer}>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(6)}>
+                                    <div
+                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 6) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                        onClick={() => handleBrushSizeChange(6)}>
                                         <div className={DesignCSS.brushChange6px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(8)}>
+                                    <div
+                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 8) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                        onClick={() => handleBrushSizeChange(8)}>
                                         <div className={DesignCSS.brushChange8px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(10)}>
+                                    <div
+                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 10) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                        onClick={() => handleBrushSizeChange(10)}>
                                         <div className={DesignCSS.brushChange10px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(12)}>
+                                    <div
+                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 12) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                        onClick={() => handleBrushSizeChange(12)}>
                                         <div className={DesignCSS.brushChange12px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(14)}>
+                                    <div
+                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 14) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                        onClick={() => handleBrushSizeChange(14)}>
                                         <div className={DesignCSS.brushChange14px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(16)}>
+                                    <div
+                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 16) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                        onClick={() => handleBrushSizeChange(16)}>
                                         <div className={DesignCSS.brushChange16px}></div>
                                     </div>
-                                    <div className={DesignCSS.brushChangeBackground} onClick={() => handleBrushSizeChange(18)}>
+                                    <div
+                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 18) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                        onClick={() => handleBrushSizeChange(18)}>
                                         <div className={DesignCSS.brushChange18px}></div>
                                     </div>
                                 </div>

@@ -157,6 +157,12 @@
     align-items: center;
 }
 
+.brushChangeBackgroundActive {
+    background-color: #8A8A8A;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .brushChangeBackground:hover {
     background-color: #8A8A8A;
     border-radius: 5px;
