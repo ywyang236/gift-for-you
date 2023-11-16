@@ -3,8 +3,6 @@ import React, {useRef, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
-import {set} from 'firebase/database';
-
 interface CanvasProps {
     width: number;
     height: number;
@@ -52,7 +50,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const drawPreview = (context: CanvasRenderingContext2D, x: number, y: number, size: number, color: string) => {
         context.beginPath();
         context.arc(x, y, size / 2, 0, Math.PI * 2);
-        context.fillStyle = color + '40';
+        context.fillStyle = color;
         context.fill();
     };
 
@@ -110,7 +108,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
 
         context.moveTo(x, y);
         context.beginPath();
-        toggleBackgroundColor();
+        setBackgroundColor('rgba(255, 139, 0, 0.3)');
         setIsPainting(true);
     };
 
@@ -119,7 +117,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         if (!context) return;
         context.closePath();
         setIsPainting(false);
-        toggleBackgroundColor();
+        setBackgroundColor('transparent');
     };
 
     return (
@@ -136,6 +134,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+
             />
             <canvas
                 ref={previewCanvasRef}

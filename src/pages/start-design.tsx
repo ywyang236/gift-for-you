@@ -7,7 +7,7 @@ import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
 import ButtonCSS from '../styles/button.module.css';
 import {IoArrowUndo, IoArrowRedo, IoBrush, IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoImage, IoLayers, IoOptions, IoText} from 'react-icons/io5';
-import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle} from "react-icons/io5";
+import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle, IoCloudDownloadSharp} from "react-icons/io5";
 import {BsEraserFill, BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonFill, BsFillPentagonFill, BsFillStarFill} from "react-icons/bs";
 import Canvas from '../components/Canvas/Canvas';
 
@@ -55,6 +55,7 @@ const DesignGift = () => {
                                 className={DesignCSS.designButton}
                                 onClick={handleScrollToBrushColor}
                             />
+                            <IoCloudDownloadSharp className={DesignCSS.designButton} />
                             <IoClipboard className={DesignCSS.designButton} />
                             <IoColorFill className={DesignCSS.designButton} />
                             <IoColorWand className={DesignCSS.designButton} />
