@@ -15,6 +15,7 @@ const DesignGift = () => {
     const dispatch = useDispatch();
     const brushActive = useSelector((state: RootState) => state.brush.isBrushActive);
     const currentBrushSize = useSelector((state: RootState) => state.brush.brushSize);
+    const currentBrushColor = useSelector((state: RootState) => state.brush.brushColor);
 
     const handleScrollToBrushColor = () => {
         const brushColorElement = document.querySelector('#colorChangeTitle');
@@ -40,6 +41,9 @@ const DesignGift = () => {
     };
 
     const handleBrushColorChange = (newBrushColor: string) => {
+        if (!brushActive) {
+            dispatch(setBrushColor(newBrushColor));
+        }
         dispatch(setBrushColor(newBrushColor));
     };
 
@@ -145,24 +149,78 @@ const DesignGift = () => {
                                     id='colorChangeTitle'
                                 >筆刷顏色</div>
                                 <div className={DesignCSS.colorChangePicker}>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Black} onClick={() => handleBrushColorChange('#000000')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.White} onClick={() => handleBrushColorChange('#FFFFFF')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Red} onClick={() => handleBrushColorChange('#ff0000')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Orange} onClick={() => handleBrushColorChange('#ffa500')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Yellow} onClick={() => handleBrushColorChange('#ffff00')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Green} onClick={() => handleBrushColorChange('#008000')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Blue} onClick={() => handleBrushColorChange('#0000ff')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Purple} onClick={() => handleBrushColorChange('#800080')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Brown} onClick={() => handleBrushColorChange('#a52a2a')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Gray} onClick={() => handleBrushColorChange('#808080')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.Pink} onClick={() => handleBrushColorChange('#ffc0cb')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightBlue} onClick={() => handleBrushColorChange('#add8e6')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightGreen} onClick={() => handleBrushColorChange('#90ee90')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightYellow} onClick={() => handleBrushColorChange('#ffffe0')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightPink} onClick={() => handleBrushColorChange('#ffb6c1')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.LightGray} onClick={() => handleBrushColorChange('#d3d3d3')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.GreenBlue} onClick={() => handleBrushColorChange('#14adff')}></div>
-                                    <div className={DesignCSS.colorChangePickerButton} id={DesignCSS.WarmYellow} onClick={() => handleBrushColorChange('#ffcc00')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#000000' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.Black}
+                                        onClick={() => handleBrushColorChange('#000000')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#FFFFFF' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.White}
+                                        onClick={() => handleBrushColorChange('#FFFFFF')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#ff0000' ? DesignCSS.colorChangePickerButtonActive : ''} `}
+                                        id={DesignCSS.Red}
+                                        onClick={() => handleBrushColorChange('#ff0000')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#ffa500' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.Orange
+                                        } onClick={() => handleBrushColorChange('#ffa500')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#ffff00' ? DesignCSS.colorChangePickerButtonActive : ''} `}
+                                        id={DesignCSS.Yellow}
+                                        onClick={() => handleBrushColorChange('#ffff00')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#008000' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.Green}
+                                        onClick={() => handleBrushColorChange('#008000')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#0000ff' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.Blue}
+                                        onClick={() => handleBrushColorChange('#0000ff')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#4b0082' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.Purple
+                                        } onClick={() => handleBrushColorChange('#800080')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#a52a2a' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.Brown}
+                                        onClick={() => handleBrushColorChange('#a52a2a')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#808080' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.Gray}
+                                        onClick={() => handleBrushColorChange('#808080')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#ff00ff' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.Pink}
+                                        onClick={() => handleBrushColorChange('#ffc0cb')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#add8e6' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.LightBlue}
+                                        onClick={() => handleBrushColorChange('#add8e6')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#90ee90' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.LightGreen}
+                                        onClick={() => handleBrushColorChange('#90ee90')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#ffffe0' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.LightYellow}
+                                        onClick={() => handleBrushColorChange('#ffffe0')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#ffb6c1' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.LightPink}
+                                        onClick={() => handleBrushColorChange('#ffb6c1')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#d3d3d3' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.LightGray}
+                                        onClick={() => handleBrushColorChange('#d3d3d3')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#f0f8ff' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.GreenBlue}
+                                        onClick={() => handleBrushColorChange('#14adff')}></div>
+                                    <div
+                                        className={`${DesignCSS.colorChangePickerButton} ${currentBrushColor === '#ffcc00' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                        id={DesignCSS.WarmYellow}
+                                        onClick={() => handleBrushColorChange('#ffcc00')}></div>
                                 </div>
                             </div>
                             <div className={DesignCSS.eraserContainer}>

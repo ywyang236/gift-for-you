@@ -259,6 +259,16 @@
     border-radius: 5px;
 }
 
+.colorChangePickerButton:hover {
+    cursor: pointer;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.5);
+}
+
+.colorChangePickerButtonActive {
+    cursor: pointer;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.5);
+}
+
 #Black {
     background-color: black;
 }

@@ -5,7 +5,6 @@ const initialState = {
     isBrushActive: false,
     brushSize: 6,
     brushColor: '#000000',
-    hoverActive: false,
 };
 
 const brushReducer = (state = initialState, action: {type: any; payload?: any;}) => {
