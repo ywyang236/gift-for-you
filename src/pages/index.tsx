@@ -2,6 +2,7 @@
 import React from 'react';
 import Layout from '../app/layout';
 import IndexCSS from '../styles/index.module.css';
+import Link from 'next/link';
 
 const Home = () => (
     <Layout>
@@ -67,6 +68,7 @@ const Home = () => (
                     <div className={IndexCSS.itemsCard}>
                         <div className={IndexCSS.itemsCard_Background}>
                             <div className={IndexCSS.itemsCard_1_Picture}>
+                                <Link href='/start-design' className={IndexCSS.itemsCard_1_button}>開始製作</Link>
                             </div>
                             <div className={IndexCSS.itemsText}>
                                 <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
@@ -77,6 +79,7 @@ const Home = () => (
                     <div className={IndexCSS.itemsCard}>
                         <div className={IndexCSS.itemsCard_Background}>
                             <div className={IndexCSS.itemsCard_2_Picture}>
+                                <div className={IndexCSS.itemsCard_2_button}>尚未開放</div>
                             </div>
                             <div className={IndexCSS.itemsText}>
                                 <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
@@ -87,6 +90,7 @@ const Home = () => (
                     <div className={IndexCSS.itemsCard}>
                         <div className={IndexCSS.itemsCard_Background}>
                             <div className={IndexCSS.itemsCard_3_Picture}>
+                                <div className={IndexCSS.itemsCard_3_button}>尚未開放</div>
                             </div>
                             <div className={IndexCSS.itemsText}>
                                 <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
@@ -96,7 +100,9 @@ const Home = () => (
                     </div>
                     <div className={IndexCSS.itemsCard}>
                         <div className={IndexCSS.itemsCard_Background}>
-                            <div className={IndexCSS.itemsCard_4_Picture}></div>
+                            <div className={IndexCSS.itemsCard_4_Picture}>
+                                <div className={IndexCSS.itemsCard_4_button}>尚未開放</div>
+                            </div>
                             <div className={IndexCSS.itemsText}>
                                 <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
                                 <div className={IndexCSS.itemsCard_Price}>$ 899</div>
@@ -105,7 +111,9 @@ const Home = () => (
                     </div>
                     <div className={IndexCSS.itemsCard}>
                         <div className={IndexCSS.itemsCard_Background}>
-                            <div className={IndexCSS.itemsCard_5_Picture}></div>
+                            <div className={IndexCSS.itemsCard_5_Picture}>
+                                <div className={IndexCSS.itemsCard_5_button}>尚未開放</div>
+                            </div>
                             <div className={IndexCSS.itemsText}>
                                 <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
                                 <div className={IndexCSS.itemsCard_Price}>$ 899</div>
@@ -114,7 +122,9 @@ const Home = () => (
                     </div>
                     <div className={IndexCSS.itemsCard}>
                         <div className={IndexCSS.itemsCard_Background}>
-                            <div className={IndexCSS.itemsCard_6_Picture}></div>
+                            <div className={IndexCSS.itemsCard_6_Picture}>
+                                <div className={IndexCSS.itemsCard_6_button}>尚未開放</div>
+                            </div>
                             <div className={IndexCSS.itemsText}>
                                 <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
                                 <div className={IndexCSS.itemsCard_Price}>$ 899</div>
@@ -123,7 +133,9 @@ const Home = () => (
                     </div>
                     <div className={IndexCSS.itemsCard}>
                         <div className={IndexCSS.itemsCard_Background}>
-                            <div className={IndexCSS.itemsCard_7_Picture}></div>
+                            <div className={IndexCSS.itemsCard_7_Picture}>
+                                <div className={IndexCSS.itemsCard_7_button}>尚未開放</div>
+                            </div>
                             <div className={IndexCSS.itemsText}>
                                 <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
                                 <div className={IndexCSS.itemsCard_Price}>$ 899</div>
@@ -133,7 +145,9 @@ const Home = () => (
                     </div>
                     <div className={IndexCSS.itemsCard}>
                         <div className={IndexCSS.itemsCard_Background}>
-                            <div className={IndexCSS.itemsCard_8_Picture}></div>
+                            <div className={IndexCSS.itemsCard_8_Picture}>
+                                <div className={IndexCSS.itemsCard_8_button}>尚未開放</div>
+                            </div>
                             <div className={IndexCSS.itemsText}>
                                 <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
                                 <div className={IndexCSS.itemsCard_Price}>$ 899</div>
@@ -142,7 +156,9 @@ const Home = () => (
                     </div>
                     <div className={IndexCSS.itemsCard}>
                         <div className={IndexCSS.itemsCard_Background}>
-                            <div className={IndexCSS.itemsCard_9_Picture}></div>
+                            <div className={IndexCSS.itemsCard_9_Picture}>
+                                <div className={IndexCSS.itemsCard_9_button}>尚未開放</div>
+                            </div>
                             <div className={IndexCSS.itemsText}>
                                 <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
                                 <div className={IndexCSS.itemsCard_Price}>$ 899</div>

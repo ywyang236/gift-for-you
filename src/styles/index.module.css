@@ -427,6 +427,41 @@
     }
 }
 
+.itemsCard:hover {
+
+    .itemsCard_1_Picture {
+        filter: grayscale(30%);
+    }
+
+    .itemsCard_2_Picture,
+    .itemsCard_3_Picture,
+    .itemsCard_4_Picture,
+    .itemsCard_5_Picture,
+    .itemsCard_6_Picture,
+    .itemsCard_7_Picture,
+    .itemsCard_8_Picture,
+    .itemsCard_9_Picture {
+        filter: grayscale(90%);
+    }
+
+    .itemsCard_1_button {
+        display: block;
+        cursor: pointer;
+    }
+
+    .itemsCard_2_button,
+    .itemsCard_3_button,
+    .itemsCard_4_button,
+    .itemsCard_5_button,
+    .itemsCard_6_button,
+    .itemsCard_7_button,
+    .itemsCard_8_button,
+    .itemsCard_9_button {
+        display: block;
+    }
+}
+
+
 .itemsCard_Background {
     background-color: rgba(255, 255, 255, 1);
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
@@ -486,6 +521,29 @@
         width: 100%;
         height: 200px;
     }
+}
+
+.itemsCard_1_button,
+.itemsCard_2_button,
+.itemsCard_3_button,
+.itemsCard_4_button,
+.itemsCard_5_button,
+.itemsCard_6_button,
+.itemsCard_7_button,
+.itemsCard_8_button,
+.itemsCard_9_button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    background-color: #37B2D6;
+    color: white;
+    text-shadow: 0 0 3px rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    text-decoration: none;
 }
 
 
