@@ -1,9 +1,6 @@
 // store/storeTypes.ts
+import {BrushState} from '../slices/brushSlice';
+
 export interface RootState {
-    tool: any;
-    brush: {
-        isBrushActive: boolean;
-        brushSize: number;
-        brushColor: string;
-    };
+    brush: BrushState;
 }

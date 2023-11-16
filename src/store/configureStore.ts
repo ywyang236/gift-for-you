@@ -1,9 +1,11 @@
 // src/store/configureStore.ts
 import {configureStore} from '@reduxjs/toolkit';
-import rootReducer from '../store/reducers/index';
+import brushReducer from './slices/brushSlice';
 
 const store = configureStore({
-    reducer: rootReducer,
+    reducer: {
+        brush: brushReducer,
+    },
 });
 
 export default store;

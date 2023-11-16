@@ -1,15 +1,14 @@
 // pages/design-gift.tsx
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {toggleBrush, setBrushSize, setBrushColor, activateBrush, deactivateBrush} from '../store/actions/brushActions';
-import {RootState} from '../store/types/storeTypes';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
-import ButtonCSS from '../styles/button.module.css';
 import {IoArrowUndo, IoArrowRedo, IoBrush, IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoImage, IoLayers, IoOptions, IoText} from 'react-icons/io5';
 import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle} from "react-icons/io5";
 import {BsEraserFill, BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonFill, BsFillPentagonFill, BsFillStarFill} from "react-icons/bs";
 import Canvas from '../components/Canvas/Canvas';
+import {activateBrush, deactivateBrush, setBrushSize, setBrushColor} from '../store/slices/brushSlice';
+import {RootState} from '../store/types/storeTypes';
 
 const DesignGift = () => {
     const dispatch = useDispatch();
@@ -30,8 +29,8 @@ const DesignGift = () => {
             dispatch(deactivateBrush());
         } else {
             dispatch(activateBrush());
-            if (currentBrushColor === null) { // Check if the brushColor is not set
-                dispatch(setBrushColor('#000000')); // Set the initial brush color to black
+            if (currentBrushColor === null) {
+                dispatch(setBrushColor('#000000'));
             }
         }
     };
