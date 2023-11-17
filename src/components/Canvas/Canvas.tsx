@@ -13,7 +13,8 @@ interface CanvasProps {
 
 const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+    const previewBrushCanvasRef = useRef<HTMLCanvasElement>(null);
+    const previewEraserCanvasRef = useRef<HTMLCanvasElement>(null);
     const [isPainting, setIsPainting] = useState(false);
     const [mousePosition, setMousePosition] = useState<{x: number; y: number} | undefined>(undefined);
     const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     }, [brushSize, brushColor]);
 
     useEffect(() => {
-        const previewContext = previewCanvasRef.current?.getContext('2d');
+        const previewContext = previewBrushCanvasRef.current?.getContext('2d');
         if (previewContext && mousePosition && isBrushActive && !isPainting) {
             clearCanvas(previewContext, width, height);
             drawPreview(previewContext, mousePosition.x, mousePosition.y, brushSize, brushColor || 'black');
@@ -87,7 +88,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     };
 
     const handleMouseLeave = () => {
-        const previewContext = previewCanvasRef.current?.getContext('2d');
+        const previewContext = previewBrushCanvasRef.current?.getContext('2d');
         if (previewContext) {
             clearCanvas(previewContext, width, height);
         }
@@ -137,7 +138,18 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
 
             />
             <canvas
-                ref={previewCanvasRef}
+                ref={previewBrushCanvasRef}
+                width={width}
+                height={height}
+                style={{
+                    position: 'relative',
+                    top: -426,
+                    left: 0,
+                    pointerEvents: 'none',
+                }}
+            />
+            <canvas
+                ref={previewEraserCanvasRef}
                 width={width}
                 height={height}
                 style={{

@@ -1,45 +1,43 @@
-// components/BrushPreview/BrushPreview.tsx
+// component/EraserPreview/EraserPreview.tsx
 import React, {useRef, useEffect} from 'react';
 
-interface BrushPreviewProps {
+interface EraserPreviewProps {
     width: number;
     height: number;
-    brushSize: number;
-    brushColor: string;
+    eraserSize: number;
     mousePosition: {x: number; y: number} | undefined;
 }
 
-const BrushPreview: React.FC<BrushPreviewProps> = ({
+const EraserPreview: React.FC<EraserPreviewProps> = ({
     width,
     height,
-    brushSize,
-    brushColor,
+    eraserSize,
     mousePosition,
 }) => {
-    const previewBrushCanvasRef = useRef<HTMLCanvasElement>(null);
+    const previewEraserCanvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-        const previewContext = previewBrushCanvasRef.current?.getContext('2d');
+        const previewContext = previewEraserCanvasRef.current?.getContext('2d');
         if (previewContext && mousePosition) {
             clearCanvas(previewContext, width, height);
-            drawPreview(previewContext, mousePosition.x, mousePosition.y, brushSize, brushColor);
+            eraserPreview(previewContext, mousePosition.x, mousePosition.y, eraserSize);
         }
-    }, [mousePosition, brushSize, brushColor, width, height]);
+    }, [mousePosition, eraserSize, width, height]);
 
-    const drawPreview = (context: CanvasRenderingContext2D, x: number, y: number, size: number, color: string) => {
+    const eraserPreview = (context: CanvasRenderingContext2D, x: number, y: number, size: number) => {
         context.beginPath();
         context.arc(x, y, size / 2, 0, Math.PI * 2);
-        context.fillStyle = color;
+        context.fillStyle = '#f5a19d';
+        context.strokeStyle = '#000000';
         context.fill();
-    };
-
+    }
     const clearCanvas = (context: CanvasRenderingContext2D, width: number, height: number) => {
         context.clearRect(0, 0, width, height);
     };
 
     return (
         <canvas
-            ref={previewBrushCanvasRef}
+            ref={previewEraserCanvasRef}
             width={width}
             height={height}
             style={{
@@ -47,10 +45,9 @@ const BrushPreview: React.FC<BrushPreviewProps> = ({
                 top: -426,
                 left: 0,
                 pointerEvents: 'none',
-                // backgroundColor: 'rgba(255, 139, 0, 0.3)',
             }}
         />
     );
 };
 
-export default BrushPreview;
+export default EraserPreview;
