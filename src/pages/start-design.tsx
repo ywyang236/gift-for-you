@@ -255,17 +255,17 @@ const DesignGift = () => {
                             <div className={DesignCSS.textChangeConteiner}>
                                 <div className={DesignCSS.textChangeTitle}>文字外觀</div>
                                 <div className={DesignCSS.textChangeFontBackground}>
-                                    <div className={DesignCSS.textChangeFrontButton}>字體下拉式選單</div>
+                                    <div className={DesignCSS.textChangeFrontButton}>Helvetica</div>
                                 </div>
                                 <div className={DesignCSS.sizeColorBoldContainer}>
                                     <div className={DesignCSS.textChangeSizeBackground}>
-                                        <div className={DesignCSS.textChangeSizeButton}>大小</div>
+                                        <div className={DesignCSS.textChangeSizeButton}>16</div>
                                     </div>
                                     <div className={DesignCSS.textChangeColorBackground}>
-                                        <div className={DesignCSS.textChangeButton}>顏色</div>
+                                        <div className={DesignCSS.textChangeColorButton}>顏色</div>
                                     </div>
                                     <div className={DesignCSS.textChangeBoldBackground}>
-                                        <div className={DesignCSS.textChangeButton}>粗細</div>
+                                        <div className={DesignCSS.textChangeBoldButton}>粗體</div>
                                     </div>
                                 </div>
                             </div>

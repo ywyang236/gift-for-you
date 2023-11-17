@@ -438,6 +438,12 @@
     cursor: pointer;
 }
 
+.textChangeFrontButton {
+    font-size: 16px;
+    font-weight: 800;
+    font-family: "Calibri", Helvetica, Arial, sans-serif;
+}
+
 .sizeColorBoldContainer {
     display: flex;
     justify-content: space-between;
@@ -456,6 +462,11 @@
     cursor: pointer;
 }
 
+.textChangeSizeButton {
+    font-size: 16px;
+    font-weight: 700;
+}
+
 .textChangeColorBackground {
     background-color: #BBBBBB;
     border-radius: 5px;
@@ -468,6 +479,12 @@
     cursor: pointer;
 }
 
+.textChangeColorButton {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
 .textChangeBoldBackground {
     background-color: #BBBBBB;
     border-radius: 5px;
@@ -478,6 +495,11 @@
     align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
+}
+
+.textChangeBoldButton {
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .patternChangeBackground {
