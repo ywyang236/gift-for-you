@@ -32,7 +32,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const canvas = canvasRef.current;
         const context = canvas?.getContext('2d');
         if (context) {
-            context.strokeStyle = brushColor;
+            context.strokeStyle = brushColor || 'black';
             context.lineJoin = 'round';
             context.lineCap = 'round';
             context.lineWidth = brushSize;
@@ -43,7 +43,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const previewContext = previewCanvasRef.current?.getContext('2d');
         if (previewContext && mousePosition && isBrushActive && !isPainting) {
             clearCanvas(previewContext, width, height);
-            drawPreview(previewContext, mousePosition.x, mousePosition.y, brushSize, brushColor); // Draw on the preview canvas
+            drawPreview(previewContext, mousePosition.x, mousePosition.y, brushSize, brushColor || 'black');
         }
     }, [mousePosition, isBrushActive, brushSize, brushColor, isPainting, width, height]);
 

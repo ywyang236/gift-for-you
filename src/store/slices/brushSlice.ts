@@ -4,13 +4,13 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 export interface BrushState {
     isBrushActive: boolean;
     brushSize: number;
-    brushColor: string | null;
+    brushColor: string;
 }
 
 const initialState: BrushState = {
     isBrushActive: false,
     brushSize: 6,
-    brushColor: null,
+    brushColor: '#000000',
 };
 
 const brushSlice = createSlice({
@@ -19,6 +19,8 @@ const brushSlice = createSlice({
     reducers: {
         activateBrush(state) {
             state.isBrushActive = true;
+            state.brushSize = 6;
+            state.brushColor = '#000000';
         },
         deactivateBrush(state) {
             state.isBrushActive = false;
