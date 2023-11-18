@@ -26,6 +26,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const [backgroundColor, setBackgroundColor] = useState('transparent');
     const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
     const eraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
+    const [isErasing, setIsErasing] = useState(false);
 
     const toggleBackgroundColor = () => {
         setBackgroundColor(prevColor =>
@@ -59,6 +60,23 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         context.fill();
     };
 
+    useEffect(() => {
+        const previewEraserContext = previewEraserCanvasRef.current?.getContext('2d');
+        if (previewEraserContext && mousePosition && isEraserActive && !isErasing) {
+            clearCanvas(previewEraserContext, width, height);
+            drawEraserPreview(previewEraserContext, mousePosition.x, mousePosition.y, eraserSize);
+        }
+    }, [mousePosition, isEraserActive, eraserSize, isErasing, width, height]);
+
+    const drawEraserPreview = (context: CanvasRenderingContext2D, x: number, y: number, size: number) => {
+        context.beginPath();
+        context.arc(x, y, size / 2, 0, Math.PI * 2);
+        context.strokeStyle = 'rgba(0,0,0, 0.5)';
+        context.stroke();
+        context.fillStyle = '#f5a19d';
+        context.fill();
+    };
+
     const clearCanvas = (context: CanvasRenderingContext2D, width: number, height: number) => {
         context.clearRect(0, 0, width, height);
     };
@@ -69,6 +87,10 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
 
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
+
+        if (isEraserActive) {
+            setMousePosition({x, y});
+        }
 
         if (isPainting && !isEraserActive) {
             const context = canvasRef.current?.getContext('2d');
@@ -95,6 +117,11 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const previewContext = previewBrushCanvasRef.current?.getContext('2d');
         if (previewContext) {
             clearCanvas(previewContext, width, height);
+        }
+
+        const previewEraserContext = previewEraserCanvasRef.current?.getContext('2d');
+        if (previewEraserContext) {
+            clearCanvas(previewEraserContext, width, height);
         }
         setMousePosition(undefined);
     };
@@ -154,6 +181,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                     top: -426,
                     left: 0,
                     pointerEvents: 'none',
+                    // backgroundColor: 'rgba(255, 255, 0, 0.3)',
                 }}
             />
             <canvas
@@ -162,9 +190,10 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                 height={height}
                 style={{
                     position: 'relative',
-                    top: -426,
+                    top: -851,
                     left: 0,
                     pointerEvents: 'none',
+                    // backgroundColor: 'rgba(255, 139, 0, 0.3)',
                 }}
             />
             {isEraserActive && (
