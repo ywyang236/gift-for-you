@@ -8,13 +8,20 @@ interface EraserProps {
     width: number;
     height: number;
     isEraserActive: boolean;
+    setBackgroundColor: (color: string) => void;
 }
 
-const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
+const Eraser: React.FC<EraserProps> = ({canvasRef, width, height, setBackgroundColor}) => {
     const eraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
     const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
     const [isErasing, setIsErasing] = useState(false);
     const [lastPosition, setLastPosition] = useState<{x: number; y: number} | undefined>(undefined);
+
+    const toggleBackgroundColor = (currentColor: string) => {
+        setBackgroundColor(
+            currentColor === 'transparent' ? 'rgba(255, 139, 0, 0.3)' : 'transparent'
+        );
+    };
 
     const handleMouseMove = useCallback((event: MouseEvent) => {
         if (!isEraserActive || !isErasing) return;
@@ -42,17 +49,19 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
         if (!isEraserActive) return;
 
         setIsErasing(true);
+        setBackgroundColor('rgba(255, 139, 0, 0.3)');
         const rect = canvasRef.current?.getBoundingClientRect();
         const x = event.clientX - (rect?.left ?? 0);
         const y = event.clientY - (rect?.top ?? 0);
         setLastPosition({x, y});
-    }, [isEraserActive, canvasRef]);
+    }, [isEraserActive, canvasRef, setBackgroundColor]);
 
 
     const stopErasing = useCallback(() => {
         setIsErasing(false);
+        setBackgroundColor('transparent');
         setLastPosition(undefined);
-    }, []);
+    }, [setBackgroundColor]);
 
 
     useEffect(() => {

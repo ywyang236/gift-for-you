@@ -202,6 +202,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                     width={width}
                     height={height}
                     isEraserActive={isEraserActive}
+                    setBackgroundColor={setBackgroundColor}
                 />
             )}
         </>
