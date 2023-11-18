@@ -14,17 +14,7 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
     const eraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
     const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
     const [isErasing, setIsErasing] = useState(false);
-
-    const erase = (x: number, y: number) => {
-        const context = canvasRef.current?.getContext('2d');
-        if (context && isErasing) {
-            context.globalCompositeOperation = 'destination-out';
-            context.beginPath();
-            context.arc(x, y, eraserSize / 2, 0, Math.PI * 2);
-            context.fill();
-            context.closePath();
-        }
-    };
+    const [lastPosition, setLastPosition] = useState<{x: number; y: number} | undefined>(undefined);
 
     const handleMouseMove = (event: MouseEvent) => {
         if (!isEraserActive || !isErasing) return;
@@ -32,20 +22,34 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
         const rect = canvasRef.current?.getBoundingClientRect();
         if (!rect) return;
 
-        const x = event.clientX - (rect?.left ?? 0);
-        const y = event.clientY - (rect?.top ?? 0);
-        erase(x, y);
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const context = canvasRef.current?.getContext('2d');
+        if (context && lastPosition) {
+            context.globalCompositeOperation = 'destination-out';
+            context.beginPath();
+            context.moveTo(lastPosition.x, lastPosition.y);
+            context.lineTo(x, y);
+            context.strokeStyle = 'rgba(0,0,0,1)';
+            context.lineWidth = eraserSize;
+            context.stroke();
+        }
+        setLastPosition({x, y});
     };
 
     const startErasing = (event: React.MouseEvent<HTMLCanvasElement>) => {
-        if (isEraserActive) {
-            setIsErasing(true);
-            handleMouseMove(event.nativeEvent as MouseEvent);
-        }
+        if (!isEraserActive) return;
+
+        setIsErasing(true);
+        const rect = canvasRef.current?.getBoundingClientRect();
+        const x = event.clientX - (rect?.left ?? 0);
+        const y = event.clientY - (rect?.top ?? 0);
+        setLastPosition({x, y});
     };
 
     const stopErasing = () => {
         setIsErasing(false);
+        setLastPosition(undefined);
     };
 
 
@@ -64,7 +68,7 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
             canvasElement?.removeEventListener('mouseleave', stopErasing);
             canvasElement?.removeEventListener('mousemove', handleMouseMove);
         };
-    }, [isEraserActive, eraserSize, isErasing]);
+    }, [isEraserActive, eraserSize, isErasing, lastPosition]);
 
     return null;
 };

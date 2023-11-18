@@ -101,7 +101,9 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
 
     const startPainting = (event: React.MouseEvent<HTMLCanvasElement>) => {
         const context = canvasRef.current?.getContext('2d');
-        if (!context) return;
+        if (!context || isEraserActive) return;
+
+        context.globalCompositeOperation = 'source-over';
 
         const rect = canvasRef.current!.getBoundingClientRect();
         if (!rect) return;
