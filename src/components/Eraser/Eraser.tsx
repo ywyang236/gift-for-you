@@ -1,5 +1,5 @@
 // components/Eraser/Eraser.tsx
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
 
@@ -16,7 +16,7 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
     const [isErasing, setIsErasing] = useState(false);
     const [lastPosition, setLastPosition] = useState<{x: number; y: number} | undefined>(undefined);
 
-    const handleMouseMove = (event: MouseEvent) => {
+    const handleMouseMove = useCallback((event: MouseEvent) => {
         if (!isEraserActive || !isErasing) return;
 
         const rect = canvasRef.current?.getBoundingClientRect();
@@ -35,9 +35,10 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
             context.stroke();
         }
         setLastPosition({x, y});
-    };
+    }, [isEraserActive, isErasing, lastPosition, eraserSize, canvasRef]);
 
-    const startErasing = (event: React.MouseEvent<HTMLCanvasElement>) => {
+
+    const startErasing = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
         if (!isEraserActive) return;
 
         setIsErasing(true);
@@ -45,12 +46,13 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
         const x = event.clientX - (rect?.left ?? 0);
         const y = event.clientY - (rect?.top ?? 0);
         setLastPosition({x, y});
-    };
+    }, [isEraserActive, canvasRef]);
 
-    const stopErasing = () => {
+
+    const stopErasing = useCallback(() => {
         setIsErasing(false);
         setLastPosition(undefined);
-    };
+    }, []);
 
 
     useEffect(() => {
@@ -68,7 +70,7 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
             canvasElement?.removeEventListener('mouseleave', stopErasing);
             canvasElement?.removeEventListener('mousemove', handleMouseMove);
         };
-    }, [isEraserActive, eraserSize, isErasing, lastPosition]);
+    }, [isEraserActive, eraserSize, isErasing, lastPosition, handleMouseMove, startErasing, stopErasing, canvasRef]);
 
     return null;
 };
