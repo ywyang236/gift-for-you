@@ -154,11 +154,23 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                     pointerEvents: 'none',
                 }}
             />
+            <canvas
+                ref={previewEraserCanvasRef}
+                width={width}
+                height={height}
+                style={{
+                    position: 'relative',
+                    top: -426,
+                    left: 0,
+                    pointerEvents: 'none',
+                }}
+            />
             {isEraserActive && (
                 <Eraser
                     canvasRef={canvasRef}
                     width={width}
                     height={height}
+                    isEraserActive={isEraserActive}
                 />
             )}
         </>
