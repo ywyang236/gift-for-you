@@ -18,7 +18,11 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
     const erase = (x: number, y: number) => {
         const context = canvasRef.current?.getContext('2d');
         if (context) {
-            context.clearRect(x - eraserSize / 2, y - eraserSize / 2, eraserSize, eraserSize);
+            context.globalCompositeOperation = 'destination-out'; // This sets the eraser mode
+            context.beginPath();
+            context.arc(x, y, eraserSize / 2, 0, Math.PI * 2);
+            context.fill();
+            context.closePath();
         }
     };
 
