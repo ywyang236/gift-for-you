@@ -17,8 +17,8 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
 
     const erase = (x: number, y: number) => {
         const context = canvasRef.current?.getContext('2d');
-        if (context) {
-            context.globalCompositeOperation = 'destination-out'; // This sets the eraser mode
+        if (context && isErasing) {
+            context.globalCompositeOperation = 'destination-out';
             context.beginPath();
             context.arc(x, y, eraserSize / 2, 0, Math.PI * 2);
             context.fill();
@@ -27,7 +27,7 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-        if (!isEraserActive || !event) return;
+        if (!isEraserActive || !isErasing) return;
 
         const rect = canvasRef.current?.getBoundingClientRect();
         if (!rect) return;
@@ -38,8 +38,10 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
     };
 
     const startErasing = (event: React.MouseEvent<HTMLCanvasElement>) => {
-        setIsErasing(true);
-        handleMouseMove(event.nativeEvent as MouseEvent);
+        if (isEraserActive) {
+            setIsErasing(true);
+            handleMouseMove(event.nativeEvent as MouseEvent);
+        }
     };
 
     const stopErasing = () => {
@@ -47,20 +49,20 @@ const Eraser: React.FC<EraserProps> = ({canvasRef, width, height}) => {
     };
 
 
-    React.useEffect(() => {
-        const canvasElem = canvasRef.current;
-        if (canvasElem) {
-            canvasElem.addEventListener('mousedown', startErasing as any);
-            canvasElem.addEventListener('mouseup', stopErasing);
-            canvasElem.addEventListener('mouseleave', stopErasing);
-            canvasElem.addEventListener('mousemove', handleMouseMove);
+    useEffect(() => {
+        const canvasElement = canvasRef.current;
+        if (canvasElement) {
+            canvasElement.addEventListener('mousedown', startErasing as any);
+            canvasElement.addEventListener('mouseup', stopErasing);
+            canvasElement.addEventListener('mouseleave', stopErasing);
+            canvasElement.addEventListener('mousemove', handleMouseMove);
         }
 
         return () => {
-            canvasElem?.removeEventListener('mousedown', startErasing as any);
-            canvasElem?.removeEventListener('mouseup', stopErasing);
-            canvasElem?.removeEventListener('mouseleave', stopErasing);
-            canvasElem?.removeEventListener('mousemove', handleMouseMove);
+            canvasElement?.removeEventListener('mousedown', startErasing as any);
+            canvasElement?.removeEventListener('mouseup', stopErasing);
+            canvasElement?.removeEventListener('mouseleave', stopErasing);
+            canvasElement?.removeEventListener('mousemove', handleMouseMove);
         };
     }, [isEraserActive, eraserSize, isErasing]);
 
