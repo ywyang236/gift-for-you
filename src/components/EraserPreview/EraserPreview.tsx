@@ -45,6 +45,7 @@ const EraserPreview: React.FC<EraserPreviewProps> = ({
                 top: -426,
                 left: 0,
                 pointerEvents: 'none',
+                zIndex: 1,
             }}
         />
     );

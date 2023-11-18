@@ -356,9 +356,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .eraserChangeBackground:hover {
+    background-color: #8A8A8A;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.eraserChangeBackgroundActive {
     background-color: #8A8A8A;
     border-radius: 5px;
     cursor: pointer;
@@ -369,7 +376,6 @@
     height: 6px;
     border-radius: 50%;
     background-color: rgb(245, 161, 157);
-    border: 1px solid rgb(0, 0, 0, 0.3);
 }
 
 .eraserChange8px {
@@ -377,7 +383,6 @@
     height: 8px;
     border-radius: 50%;
     background-color: rgb(245, 161, 157);
-    border: 1px solid rgb(0, 0, 0, 0.3);
 }
 
 .eraserChange10px {
@@ -385,7 +390,6 @@
     height: 10px;
     border-radius: 50%;
     background-color: rgb(245, 161, 157);
-    border: 1px solid rgb(0, 0, 0, 0.3);
 }
 
 .eraserChange12px {
@@ -393,7 +397,6 @@
     height: 12px;
     border-radius: 50%;
     background-color: rgb(245, 161, 157);
-    border: 1px solid rgb(0, 0, 0, 0.3);
 }
 
 .eraserChange14px {
@@ -401,7 +404,6 @@
     height: 14px;
     border-radius: 50%;
     background-color: rgb(245, 161, 157);
-    border: 1px solid rgb(0, 0, 0, 0.3);
 }
 
 .eraserChange16px {
@@ -409,7 +411,6 @@
     height: 16px;
     border-radius: 50%;
     background-color: rgb(245, 161, 157);
-    border: 1px solid rgb(0, 0, 0, 0.3);
 }
 
 .eraserChange18px {
@@ -417,7 +418,6 @@
     height: 18px;
     border-radius: 50%;
     background-color: rgb(245, 161, 157);
-    border: 1px solid rgb(0, 0, 0, 0.3);
 }
 
 .textChangeConteiner {

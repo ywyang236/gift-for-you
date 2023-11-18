@@ -1,5 +1,6 @@
 // src/store/slices/brushSlice.ts
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {activateBrush, deactivateBrush, activateEraser} from '../sharedActions';
 
 export interface BrushState {
     isBrushActive: boolean;
@@ -19,21 +20,38 @@ const brushSlice = createSlice({
     reducers: {
         activateBrush(state) {
             state.isBrushActive = true;
-            state.brushSize = 6;
-            state.brushColor = '#000000';
         },
         deactivateBrush(state) {
             state.isBrushActive = false;
         },
         setBrushSize(state, action: PayloadAction<number>) {
+            if (state.isBrushActive) {
+                state.brushSize = action.payload;
+            }
+            state.isBrushActive = true;
             state.brushSize = action.payload;
         },
         setBrushColor(state, action: PayloadAction<string>) {
-            state.brushColor = action.payload;
+            if (state.isBrushActive) {
+                state.brushColor = action.payload;
+            }
+            state.isBrushActive = true;
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(activateBrush, (state) => {
+                state.isBrushActive = true;
+            })
+            .addCase(deactivateBrush, (state) => {
+                state.isBrushActive = false;
+            })
+            .addCase(activateEraser, (state) => {
+                state.isBrushActive = false;
+            });
     },
 });
 
-export const {activateBrush, deactivateBrush, setBrushSize, setBrushColor} = brushSlice.actions;
+export const {setBrushSize, setBrushColor} = brushSlice.actions;
 
 export default brushSlice.reducer;

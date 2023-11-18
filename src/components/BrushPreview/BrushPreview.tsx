@@ -7,6 +7,7 @@ interface BrushPreviewProps {
     brushSize: number;
     brushColor: string;
     mousePosition: {x: number; y: number} | undefined;
+    isBrushActive: boolean;
 }
 
 const BrushPreview: React.FC<BrushPreviewProps> = ({
@@ -15,16 +16,17 @@ const BrushPreview: React.FC<BrushPreviewProps> = ({
     brushSize,
     brushColor,
     mousePosition,
+    isBrushActive,
 }) => {
     const previewBrushCanvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
         const previewContext = previewBrushCanvasRef.current?.getContext('2d');
-        if (previewContext && mousePosition) {
+        if (previewContext && mousePosition && isBrushActive) {
             clearCanvas(previewContext, width, height);
             drawPreview(previewContext, mousePosition.x, mousePosition.y, brushSize, brushColor);
         }
-    }, [mousePosition, brushSize, brushColor, width, height]);
+    }, [mousePosition, brushSize, brushColor, width, height, isBrushActive]);
 
     const drawPreview = (context: CanvasRenderingContext2D, x: number, y: number, size: number, color: string) => {
         context.beginPath();

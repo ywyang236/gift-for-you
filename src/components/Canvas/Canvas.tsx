@@ -3,6 +3,8 @@ import React, {useRef, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
+import Eraser from '../Eraser/Eraser';
+
 interface CanvasProps {
     width: number;
     height: number;
@@ -22,6 +24,8 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const brushSize = useSelector((state: RootState) => state.brush.brushSize);
     const brushColor = useSelector((state: RootState) => state.brush.brushColor);
     const [backgroundColor, setBackgroundColor] = useState('transparent');
+    const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
+    const eraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
 
     const toggleBackgroundColor = () => {
         setBackgroundColor(prevColor =>
@@ -66,7 +70,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        if (isPainting) {
+        if (isPainting && !isEraserActive) {
             const context = canvasRef.current?.getContext('2d');
             if (!context) return;
 
@@ -95,11 +99,9 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         setMousePosition(undefined);
     };
 
-
     const startPainting = (event: React.MouseEvent<HTMLCanvasElement>) => {
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
-        if (!isBrushActive) return;
 
         const rect = canvasRef.current!.getBoundingClientRect();
         if (!rect) return;
@@ -107,18 +109,23 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const x = event.nativeEvent.clientX - rect.left;
         const y = event.nativeEvent.clientY - rect.top;
 
-        context.moveTo(x, y);
-        context.beginPath();
-        setBackgroundColor('rgba(255, 139, 0, 0.3)');
-        setIsPainting(true);
+        if (isBrushActive && !isEraserActive) {
+            context.moveTo(x, y);
+            context.beginPath();
+            setBackgroundColor('rgba(255, 139, 0, 0.3)');
+            setIsPainting(true);
+        }
     };
 
     const endPainting = () => {
         const context = canvasRef.current?.getContext('2d');
         if (!context) return;
-        context.closePath();
-        setIsPainting(false);
-        setBackgroundColor('transparent');
+
+        if (!isEraserActive) {
+            context.closePath();
+            setIsPainting(false);
+            setBackgroundColor('transparent');
+        }
     };
 
     return (
@@ -135,7 +142,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-
             />
             <canvas
                 ref={previewBrushCanvasRef}
@@ -148,17 +154,13 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                     pointerEvents: 'none',
                 }}
             />
-            <canvas
-                ref={previewEraserCanvasRef}
-                width={width}
-                height={height}
-                style={{
-                    position: 'relative',
-                    top: -426,
-                    left: 0,
-                    pointerEvents: 'none',
-                }}
-            />
+            {isEraserActive && (
+                <Eraser
+                    canvasRef={canvasRef}
+                    width={width}
+                    height={height}
+                />
+            )}
         </>
     );
 };

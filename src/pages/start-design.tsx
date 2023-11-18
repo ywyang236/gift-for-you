@@ -1,5 +1,5 @@
 // pages/design-gift.tsx
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
@@ -7,47 +7,49 @@ import {IoArrowUndo, IoArrowRedo, IoBrush, IoClipboard, IoColorFill, IoColorPale
 import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle} from "react-icons/io5";
 import {BsEraserFill, BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonFill, BsFillPentagonFill, BsFillStarFill} from "react-icons/bs";
 import Canvas from '../components/Canvas/Canvas';
-import {activateBrush, deactivateBrush, setBrushSize, setBrushColor} from '../store/slices/brushSlice';
+import {setBrushSize, setBrushColor} from '../store/slices/brushSlice';
 import {RootState} from '../store/types/storeTypes';
+import {setEraserSize} from '../store/slices/eraserSlice';
+import {activateBrush, activateEraser, deactivateBrush, deactivateEraser} from '../store/sharedActions';
 
 const DesignGift = () => {
     const dispatch = useDispatch();
     const brushActive = useSelector((state: RootState) => state.brush.isBrushActive);
+    const eraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
+
     const currentBrushSize = useSelector((state: RootState) => state.brush.brushSize);
+    const currentEraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
+
     const currentBrushColor = useSelector((state: RootState) => state.brush.brushColor);
 
-    const handleScrollToBrushColor = () => {
-        const brushColorElement = document.querySelector('#colorChangeTitle');
-
-        if (brushColorElement) {
-            brushColorElement.scrollIntoView({behavior: 'smooth', block: 'start'});
-        }
-    };
-
     const handleToggleBrush = () => {
-        if (brushActive) {
-            dispatch(deactivateBrush());
-        } else {
-            dispatch(activateBrush());
-            if (currentBrushColor === null) {
-                dispatch(setBrushColor('#000000'));
-            }
-        }
+        console.log("Toggle Brush button clicked");
+        dispatch(deactivateEraser());
+        dispatch(activateBrush());
     };
+
+    const handleToggleEraser = () => {
+        console.log("Toggle Eraser button clicked");
+        dispatch(deactivateBrush());
+        dispatch(activateEraser());
+    }
+
+    const handleEraserSizeChange = (newEraserSize: number) => {
+        console.log(`Eraser size changed to ${newEraserSize}`);
+        dispatch(deactivateBrush());
+        dispatch(setEraserSize(newEraserSize));
+    }
 
     const handleBrushSizeChange = (newBrushSize: number) => {
-        dispatch(setBrushSize(newBrushSize));
-        if (!brushActive) {
-            dispatch(activateBrush());
-            dispatch(setBrushColor('#000000'));
-        }
+        console.log(`Brush size changed to ${newBrushSize}`);
+        dispatch(deactivateEraser());
         dispatch(setBrushSize(newBrushSize));
     };
 
     const handleBrushColorChange = (newBrushColor: string) => {
-        if (brushActive) {
-            dispatch(setBrushColor(newBrushColor));
-        }
+        console.log(`Brush color changed to ${newBrushColor}`);
+        dispatch(deactivateEraser());
+        dispatch(setBrushColor(newBrushColor));
     };
 
     return (
@@ -64,12 +66,10 @@ const DesignGift = () => {
                                 onClick={handleToggleBrush}
                             />
                             <BsEraserFill
-                                className={DesignCSS.designButton}
+                                className={`${DesignCSS.designButton} ${eraserActive ? DesignCSS.designButtonActive : ''}`}
+                                onClick={handleToggleEraser}
                             />
-                            <IoColorPalette
-                                className={DesignCSS.designButton}
-                                onClick={handleScrollToBrushColor}
-                            />
+                            <IoColorPalette className={DesignCSS.designButton} />
                             <IoClipboard className={DesignCSS.designButton} />
                             <IoColorFill className={DesignCSS.designButton} />
                             <IoColorWand className={DesignCSS.designButton} />
@@ -97,8 +97,8 @@ const DesignGift = () => {
                                             width={460}
                                             height={420}
                                             isBrushActive={brushActive}
-                                            setBrushSize={() => { }}
-                                            setBrushColor={() => { }}
+                                            setBrushSize={handleBrushSizeChange}
+                                            setBrushColor={handleBrushColorChange}
                                         />
                                     </div>
                                 </div>
@@ -147,10 +147,7 @@ const DesignGift = () => {
                                 </div>
                             </div>
                             <div className={DesignCSS.colorConteiner}>
-                                <div
-                                    className={DesignCSS.colorChangeTitle}
-                                    id='colorChangeTitle'
-                                >筆刷顏色</div>
+                                <div className={DesignCSS.colorChangeTitle}>筆刷顏色</div>
                                 <div className={DesignCSS.colorChangePicker}>
                                     <div
                                         className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#000000' ? DesignCSS.colorChangePickerButtonActive : ''}`}
@@ -229,25 +226,40 @@ const DesignGift = () => {
                             <div className={DesignCSS.eraserContainer}>
                                 <div className={DesignCSS.eraserChangeTitle}>橡皮擦大小</div>
                                 <div className={DesignCSS.eraserChangeContainer}>
-                                    <div className={DesignCSS.eraserChangeBackground}>
+
+                                    <div
+                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 6) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                        onClick={() => handleEraserSizeChange(6)}>
                                         <div className={DesignCSS.eraserChange6px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground}>
+                                    <div
+                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 8) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                        onClick={() => handleEraserSizeChange(8)}>
                                         <div className={DesignCSS.eraserChange8px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground}>
+                                    <div
+                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 10) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                        onClick={() => handleEraserSizeChange(10)}>
                                         <div className={DesignCSS.eraserChange10px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground}>
+                                    <div
+                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 12) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                        onClick={() => handleEraserSizeChange(12)}>
                                         <div className={DesignCSS.eraserChange12px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground}>
+                                    <div
+                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 14) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                        onClick={() => handleEraserSizeChange(14)}>
                                         <div className={DesignCSS.eraserChange14px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground}>
+                                    <div
+                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 16) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                        onClick={() => handleEraserSizeChange(16)}>
                                         <div className={DesignCSS.eraserChange16px}></div>
                                     </div>
-                                    <div className={DesignCSS.eraserChangeBackground}>
+                                    <div
+                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 18) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                        onClick={() => handleEraserSizeChange(18)}>
                                         <div className={DesignCSS.eraserChange18px}></div>
                                     </div>
                                 </div>
