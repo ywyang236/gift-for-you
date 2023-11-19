@@ -4,8 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 import Eraser from '../Eraser/Eraser';
-import BackgroundHighlighter from '../BackgroundHighlighter/BackgroundHighlighter';
-import BrushPreview from '../BrushPreview/BrushPreview';
+import BackgroundHighlighter from './BackgroundHighlighter';
+import BrushPreview from '../Brush/BrushPreview';
 
 interface CanvasProps {
     width: number;
@@ -122,7 +122,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         if (isBrushActive && !isEraserActive) {
             context.moveTo(x, y);
             context.beginPath();
-            setBackgroundColor('rgba(255, 139, 0, 0.3)');
             setIsPainting(true);
         }
     };
@@ -134,7 +133,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         if (!isEraserActive) {
             context.closePath();
             setIsPainting(false);
-            setBackgroundColor('transparent');
         }
     };
 

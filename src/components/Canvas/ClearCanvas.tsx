@@ -1,0 +1,1 @@
+// components/Canvas/ClearCanvas.tsx

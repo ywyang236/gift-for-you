@@ -1,4 +1,4 @@
-// component/EraserPreview/EraserPreview.tsx
+// component/Eraser/EraserPreview.tsx
 import React, {useRef, useEffect} from 'react';
 
 interface EraserPreviewProps {

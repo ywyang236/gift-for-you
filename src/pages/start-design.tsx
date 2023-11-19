@@ -23,19 +23,16 @@ const DesignGift = () => {
     const currentBrushColor = useSelector((state: RootState) => state.brush.brushColor);
 
     const handleToggleBrush = () => {
-        console.log("Toggle Brush button clicked");
         dispatch(deactivateEraser());
         dispatch(activateBrush());
     };
 
     const handleToggleEraser = () => {
-        console.log("Toggle Eraser button clicked");
         dispatch(deactivateBrush());
         dispatch(activateEraser());
     }
 
     const handleEraserSizeChange = (newEraserSize: number) => {
-        console.log(`Eraser size changed to ${newEraserSize}`);
         dispatch(deactivateBrush());
         dispatch(setEraserSize(newEraserSize));
     }
@@ -85,7 +82,10 @@ const DesignGift = () => {
                             <IoOptions className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
                             <span className={DesignCSS.addCartButton}>加入購物車</span>
-                            <span className={DesignCSS.quiteButton}>放棄設計</span>
+                            <span
+                                className={DesignCSS.quiteButton}
+                            // onClick={handleToggleClear}
+                            >清空繪圖</span>
                         </div>
                     </div>
                     <div className={DesignCSS.designDown}>
