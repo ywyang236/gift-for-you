@@ -16,18 +16,27 @@ const DesignGift = () => {
     const dispatch = useDispatch();
     const brushActive = useSelector((state: RootState) => state.brush.isBrushActive);
     const eraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
-
     const currentBrushSize = useSelector((state: RootState) => state.brush.brushSize);
     const currentEraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
-
     const currentBrushColor = useSelector((state: RootState) => state.brush.brushColor);
+    const [lastBrushSize, setLastBrushSize] = useState<number>(currentBrushSize);
+    const [lastBrushColor, setLastBrushColor] = useState<string>(currentBrushColor);
+
 
     const handleToggleBrush = () => {
+        if (eraserActive) {
+            dispatch(setBrushSize(lastBrushSize));
+            dispatch(setBrushColor(lastBrushColor));
+        }
         dispatch(deactivateEraser());
         dispatch(activateBrush());
     };
 
     const handleToggleEraser = () => {
+        if (brushActive) {
+            setLastBrushSize(currentBrushSize);
+            setLastBrushColor(currentBrushColor);
+        }
         dispatch(deactivateBrush());
         dispatch(activateEraser());
     }
@@ -38,13 +47,11 @@ const DesignGift = () => {
     }
 
     const handleBrushSizeChange = (newBrushSize: number) => {
-        console.log(`Brush size changed to ${newBrushSize}`);
         dispatch(deactivateEraser());
         dispatch(setBrushSize(newBrushSize));
     };
 
     const handleBrushColorChange = (newBrushColor: string) => {
-        console.log(`Brush color changed to ${newBrushColor}`);
         dispatch(deactivateEraser());
         dispatch(setBrushColor(newBrushColor));
     };
