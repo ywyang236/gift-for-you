@@ -22,11 +22,9 @@ const DesignGift = () => {
     const [lastBrushSize, setLastBrushSize] = useState<number>(currentBrushSize);
     const [lastBrushColor, setLastBrushColor] = useState<string>(currentBrushColor);
 
-
     const handleToggleBrush = () => {
         if (eraserActive) {
             dispatch(setBrushSize(lastBrushSize));
-            dispatch(setBrushColor(lastBrushColor));
         }
         dispatch(deactivateEraser());
         dispatch(activateBrush());
@@ -52,9 +50,32 @@ const DesignGift = () => {
     };
 
     const handleBrushColorChange = (newBrushColor: string) => {
-        dispatch(deactivateEraser());
+        if (eraserActive) {
+            dispatch(setBrushColor(newBrushColor));
+            dispatch(deactivateEraser());
+            dispatch(activateBrush());
+        } else {
+            dispatch(setBrushColor(newBrushColor));
+        }
         dispatch(setBrushColor(newBrushColor));
     };
+
+    const clearCanvasContent = () => {
+        const canvas = document.querySelector('canvas');
+        const context = canvas?.getContext('2d');
+        if (context) {
+            context.clearRect(0, 0, canvas!.width, canvas!.height);
+        }
+    };
+
+    const downloadCanvas = () => {
+        const canvas = document.querySelector('canvas');
+        const image = canvas?.toDataURL('image/png', 1.0);
+        const link = document.createElement('a');
+        link.download = `Gift-For-You-${new Date().toLocaleDateString()}.png`;
+        link.href = image!;
+        link.click();
+    }
 
     return (
         <Layout>
@@ -63,8 +84,6 @@ const DesignGift = () => {
                     <div className={DesignCSS.designNavbar}>
                         <div className={DesignCSS.designTitle}>幾何造型夜燈</div>
                         <div className={DesignCSS.designButtonContainer}>
-                            <IoArrowUndo className={DesignCSS.designButton} />
-                            <IoArrowRedo className={DesignCSS.designButton} />
                             <IoBrush
                                 className={`${DesignCSS.designButton} ${brushActive ? DesignCSS.designButtonActive : ''}`}
                                 onClick={handleToggleBrush}
@@ -73,6 +92,8 @@ const DesignGift = () => {
                                 className={`${DesignCSS.designButton} ${eraserActive ? DesignCSS.designButtonActive : ''}`}
                                 onClick={handleToggleEraser}
                             />
+                            <IoArrowUndo className={DesignCSS.designButton} />
+                            <IoArrowRedo className={DesignCSS.designButton} />
                             <IoColorPalette className={DesignCSS.designButton} />
                             <IoClipboard className={DesignCSS.designButton} />
                             <IoColorFill className={DesignCSS.designButton} />
@@ -91,8 +112,12 @@ const DesignGift = () => {
                             <span className={DesignCSS.addCartButton}>加入購物車</span>
                             <span
                                 className={DesignCSS.quiteButton}
-                            // onClick={handleToggleClear}
-                            >清空繪圖</span>
+                                onClick={clearCanvasContent}
+                            >清除畫布</span>
+                            <span
+                                className={DesignCSS.quiteButton}
+                                onClick={downloadCanvas}
+                            >下載畫布</span>
                         </div>
                     </div>
                     <div className={DesignCSS.designDown}>
@@ -110,7 +135,6 @@ const DesignGift = () => {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div className={DesignCSS.designToolsContainer}>
                             <div className={DesignCSS.brushContainer}>
