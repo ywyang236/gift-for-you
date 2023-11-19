@@ -22,9 +22,14 @@ const BrushPreview: React.FC<BrushPreviewProps> = ({
 
     useEffect(() => {
         const previewContext = previewBrushCanvasRef.current?.getContext('2d');
-        if (previewContext && mousePosition && isBrushActive) {
+        if (!previewContext) return;
+
+
+        if (mousePosition && isBrushActive) {
             clearCanvas(previewContext, width, height);
             drawPreview(previewContext, mousePosition.x, mousePosition.y, brushSize, brushColor);
+        } else {
+            clearCanvas(previewContext, width, height);
         }
     }, [mousePosition, brushSize, brushColor, width, height, isBrushActive]);
 

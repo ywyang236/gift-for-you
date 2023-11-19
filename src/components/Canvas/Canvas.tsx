@@ -5,6 +5,7 @@ import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 import Eraser from '../Eraser/Eraser';
 import BackgroundHighlighter from '../BackgroundHighlighter/BackgroundHighlighter';
+import BrushPreview from '../BrushPreview/BrushPreview';
 
 interface CanvasProps {
     width: number;
@@ -41,21 +42,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     }, [brushSize, brushColor]);
 
     useEffect(() => {
-        const previewContext = previewBrushCanvasRef.current?.getContext('2d');
-        if (previewContext && mousePosition && isBrushActive && !isPainting) {
-            clearCanvas(previewContext, width, height);
-            drawPreview(previewContext, mousePosition.x, mousePosition.y, brushSize, brushColor || 'black');
-        }
-    }, [mousePosition, isBrushActive, brushSize, brushColor, isPainting, width, height]);
-
-    const drawPreview = (context: CanvasRenderingContext2D, x: number, y: number, size: number, color: string) => {
-        context.beginPath();
-        context.arc(x, y, size / 2, 0, Math.PI * 2);
-        context.fillStyle = color;
-        context.fill();
-    };
-
-    useEffect(() => {
         const previewEraserContext = previewEraserCanvasRef.current?.getContext('2d');
         if (previewEraserContext && mousePosition && isEraserActive && !isErasing) {
             clearCanvas(previewEraserContext, width, height);
@@ -83,7 +69,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        if (isEraserActive) {
+        if (isBrushActive || isEraserActive) {
             setMousePosition({x, y});
         }
 
@@ -168,17 +154,13 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 />
-                <canvas
-                    ref={previewBrushCanvasRef}
+                <BrushPreview
                     width={width}
                     height={height}
-                    style={{
-                        position: 'relative',
-                        top: -426,
-                        left: 0,
-                        pointerEvents: 'none',
-                        // backgroundColor: 'rgba(255, 255, 0, 0.3)',
-                    }}
+                    brushSize={brushSize}
+                    brushColor={brushColor}
+                    mousePosition={mousePosition}
+                    isBrushActive={isBrushActive && !isPainting}
                 />
                 <canvas
                     ref={previewEraserCanvasRef}
