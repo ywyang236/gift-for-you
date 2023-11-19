@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 import Eraser from '../Eraser/Eraser';
+import BackgroundHighlighter from '../BackgroundHighlighter/BackgroundHighlighter';
 
 interface CanvasProps {
     width: number;
@@ -27,12 +28,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
     const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
     const eraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
     const [isErasing, setIsErasing] = useState(false);
-
-    const toggleBackgroundColor = () => {
-        setBackgroundColor(prevColor =>
-            prevColor === 'transparent' ? 'rgba(255, 139, 0, 0.3)' : 'transparent'
-        );
-    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -159,52 +154,54 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
 
     return (
         <>
-            <canvas
-                ref={canvasRef}
-                width={width}
-                height={height}
-                style={{backgroundColor: backgroundColor}}
-                className={CanvasCSS.canvas}
-                onMouseDown={startPainting}
-                onMouseUp={endPainting}
-                onMouseOut={endPainting}
-                onMouseMove={handleMouseMove}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-            />
-            <canvas
-                ref={previewBrushCanvasRef}
-                width={width}
-                height={height}
-                style={{
-                    position: 'relative',
-                    top: -426,
-                    left: 0,
-                    pointerEvents: 'none',
-                    // backgroundColor: 'rgba(255, 255, 0, 0.3)',
-                }}
-            />
-            <canvas
-                ref={previewEraserCanvasRef}
-                width={width}
-                height={height}
-                style={{
-                    position: 'relative',
-                    top: -851,
-                    left: 0,
-                    pointerEvents: 'none',
-                    // backgroundColor: 'rgba(255, 139, 0, 0.3)',
-                }}
-            />
-            {isEraserActive && (
-                <Eraser
-                    canvasRef={canvasRef}
+            <BackgroundHighlighter width={width} height={height} active={isPainting || isErasing}>
+                <canvas
+                    ref={canvasRef}
                     width={width}
                     height={height}
-                    isEraserActive={isEraserActive}
-                    setBackgroundColor={setBackgroundColor}
+                    style={{backgroundColor: backgroundColor}}
+                    className={CanvasCSS.canvas}
+                    onMouseDown={startPainting}
+                    onMouseUp={endPainting}
+                    onMouseOut={endPainting}
+                    onMouseMove={handleMouseMove}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                 />
-            )}
+                <canvas
+                    ref={previewBrushCanvasRef}
+                    width={width}
+                    height={height}
+                    style={{
+                        position: 'relative',
+                        top: -426,
+                        left: 0,
+                        pointerEvents: 'none',
+                        // backgroundColor: 'rgba(255, 255, 0, 0.3)',
+                    }}
+                />
+                <canvas
+                    ref={previewEraserCanvasRef}
+                    width={width}
+                    height={height}
+                    style={{
+                        position: 'relative',
+                        top: -851,
+                        left: 0,
+                        pointerEvents: 'none',
+                        // backgroundColor: 'rgba(255, 139, 0, 0.3)',
+                    }}
+                />
+                {isEraserActive && (
+                    <Eraser
+                        canvasRef={canvasRef}
+                        width={width}
+                        height={height}
+                        isEraserActive={isEraserActive}
+                        setBackgroundColor={setBackgroundColor}
+                    />
+                )}
+            </BackgroundHighlighter>
         </>
     );
 };
