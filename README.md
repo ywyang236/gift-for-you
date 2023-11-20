@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 禮品訂製所 Gift For You
 
-## Getting Started
+禮品訂製所是一個禮贈品客製化的設計網站，提供畫布讓使用者線上設計產品圖案，並且能夠即時預覽設計成果在產品上。
 
-First, run the development server:
+網站連結：https://gift-for-you-mocha.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<!-- 待補：畫布使用時的 gif -->
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 技術關鍵字
+- React
+- Redux
+    -  Redux Toolkit
+- TypeScript
+- Self-Built WYSIWYG Canvas Editor
+- Firebase
+- Next.js
+    -  ESLint
+- Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 核心功能：畫布設計
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![Canvas Structure Diagram](public/images/Canvas%20Structure%20Diagram.gif)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+<!-- ### 組件結構 -->
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- 待補：組件結構  -->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<!-- ### 狀態管理 -->
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<!-- 待補：狀態管理動畫圖-->
