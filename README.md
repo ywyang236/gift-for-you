@@ -7,15 +7,18 @@
 <!-- 待補：畫布使用時的 gif -->
 
 ### 技術關鍵字
-- React
-- Redux
-    -  Redux Toolkit
-- TypeScript
-- Self-Built WYSIWYG Canvas Editor
-- Firebase
-- Next.js
+- **React**
+    - useRef, useEffect, useState, useCallback
+- **Redux**
+    - useSelector, useDispatch
+-  **Redux Toolkit**
+    - createSlice, createAction
+- **TypeScrip**
+- **Self-Built WYSIWYG Canvas Editor**
+- **Firebase**
+- **Next.js**
     -  ESLint
-- Vercel
+- **Vercel**
 
 ### 畫布結構設計
 
