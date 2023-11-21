@@ -1,4 +1,4 @@
-## 禮品訂製所 Gift For You
+### 禮品訂製所 Gift For You
 
 禮品訂製所是一個禮贈品客製化的設計網站，提供畫布讓使用者線上設計產品圖案，並且能夠即時預覽設計成果在產品上。
 
@@ -17,15 +17,15 @@
     -  ESLint
 - Vercel
 
-### 核心功能：畫布設計
+### 畫布結構設計
 
 ![Canvas Structure Diagram](public/images/Canvas%20Structure%20Diagram.gif)
 
 
-<!-- ### 組件結構 -->
+<!-- ### 組件結構 React component -->
 
 <!-- 待補：組件結構  -->
 
 <!-- ### 狀態管理 -->
-
+  
 <!-- 待補：狀態管理動畫圖-->
