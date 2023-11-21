@@ -19,7 +19,7 @@
 
 ### 畫布結構設計
 
-![Canvas Structure Diagram](public/images/canvas-structure-diagram.gif)
+![Canvas Structure Diagram](public/images/Canvas-Structure-Diagram.gif)
 
 
 <!-- ### 組件結構 React component -->
