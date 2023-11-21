@@ -2,7 +2,7 @@
 
 禮品訂製所是一個禮贈品客製化的設計網站，提供畫布讓使用者線上設計產品圖案，並且能夠即時預覽設計成果在產品上。
 
-網站連結：https://gift-for-you-mocha.vercel.app/
+網站連結：https://gift-for-you-2023.vercel.app/
 
 <!-- 待補：畫布使用時的 gif -->
 
