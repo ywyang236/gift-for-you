@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import NavbarCSS from './Navbar.module.css';
 import {IoMenu} from "react-icons/io5";
+import LoginModal from '../LoginModal/LoginModal';
 
 const Navbar: React.FC = () => {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -27,6 +28,12 @@ const Navbar: React.FC = () => {
         return () => window.removeEventListener('click', closeMenu);
     }, [menuVisible, closeMenu]);
 
+    const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+
+    const handleLoginModal = () => {
+        setIsLoginModalVisible(true);
+    }
+
     return (
         <nav className={NavbarCSS.main}>
             <div className={NavbarCSS.container}>
@@ -46,7 +53,8 @@ const Navbar: React.FC = () => {
                     <Link href='/order-information' className={NavbarCSS.rightContainerText}>歷史訂單</Link>
                     <Link href='/cart' className={NavbarCSS.rightContainerText}>購物車</Link>
                     <Link href='/member-information' className={NavbarCSS.rightContainerText}>會員資料</Link>
-                    <span className={NavbarCSS.login}>登入</span>
+                    <span className={NavbarCSS.login} onClick={handleLoginModal}>登入</span>
+                    {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} />}
                     <span className={NavbarCSS.register}>註冊</span>
                 </div>
             </div>
