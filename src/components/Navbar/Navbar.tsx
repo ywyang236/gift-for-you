@@ -6,6 +6,7 @@ import Image from 'next/image';
 import NavbarCSS from './Navbar.module.css';
 import {IoMenu} from "react-icons/io5";
 import LoginModal from '../LoginModal/LoginModal';
+import RegisterModal from '../RegisterModal/RegisterModal';
 
 const Navbar: React.FC = () => {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -34,6 +35,12 @@ const Navbar: React.FC = () => {
         setIsLoginModalVisible(true);
     }
 
+    const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
+
+    const handleRegisterModal = () => {
+        setIsRegisterModalVisible(true);
+    }
+
     return (
         <nav className={NavbarCSS.main}>
             <div className={NavbarCSS.container}>
@@ -55,7 +62,8 @@ const Navbar: React.FC = () => {
                     <Link href='/member-information' className={NavbarCSS.rightContainerText}>會員資料</Link>
                     <span className={NavbarCSS.login} onClick={handleLoginModal}>登入</span>
                     {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} />}
-                    <span className={NavbarCSS.register}>註冊</span>
+                    <span className={NavbarCSS.register} onClick={handleRegisterModal}>註冊</span>
+                    {isRegisterModalVisible && <RegisterModal onClose={() => setIsRegisterModalVisible(false)} />}
                 </div>
             </div>
         </nav>
