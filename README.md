@@ -22,7 +22,7 @@
 
 ### 畫布結構設計
 
-![Canvas Structure Diagram](public/images/canvas_structure_diagram.gif)
+![Canvas Structure Diagram](public/images/brush_structure_diagram.gif)
 
 
 <!-- ### 組件結構 React component -->
