@@ -34,6 +34,41 @@
     width: 50%;
 }
 
+.rightContainer {
+    padding: 30px;
+    border-radius: 0 10px 10px 0;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    position: relative;
+}
+
+@media (max-width: 720px) {
+    .leftContainer {
+        display: none;
+    }
+
+    .rightContainer {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+}
+
+@media (max-width: 360px) {
+
+    .nameTitle,
+    .emailTitle,
+    .passwordTitle {
+        font-size: 0;
+    }
+
+}
+
 .logoImage {
     background-image: url('/images/logo.png');
     width: 200px;
@@ -49,19 +84,6 @@
     color: white;
     padding-top: 10px;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-}
-
-.rightContainer {
-    padding: 30px;
-    border-radius: 0 10px 10px 0;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(5px);
-    flex-shrink: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    position: relative;
 }
 
 .closeButton {
@@ -83,6 +105,12 @@
     font-weight: bold;
     color: #1A5665;
     margin-bottom: 30px;
+}
+
+@media (max-width: 330px) {
+    .registerTitle {
+        font-size: 32px;
+    }
 }
 
 .emailContainer {
