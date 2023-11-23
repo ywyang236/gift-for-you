@@ -51,7 +51,7 @@ const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
                             onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className={LoginModalCSS.rememberContainer}>
-                        <input type="checkbox" id="remember" className={LoginModalCSS.rememberInput} />
+                        <input type="checkbox" id="remember" className={LoginModalCSS.rememberInput} checked={true} />
                         <label htmlFor="remember" className={LoginModalCSS.rememberTitle}>記住帳號密碼</label>
                     </div>
                     <button type="submit" className={LoginModalCSS.loginButton} onClick={handleRegularSignIn}>登入帳戶</button>

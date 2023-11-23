@@ -65,6 +65,7 @@ const Navbar: React.FC = () => {
                     {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} onShowRegister={setIsRegisterModalVisible} />}
                     <span className={NavbarCSS.register} onClick={handleRegisterModal}>註冊</span>
                     {isRegisterModalVisible && <RegisterModal onClose={() => setIsRegisterModalVisible(false)} onShowLogin={setIsLoginModalVisible} />}
+                    <span className={NavbarCSS.login}>登出</span>
                 </div>
             </div>
         </nav>
