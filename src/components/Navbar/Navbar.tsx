@@ -51,6 +51,7 @@ const Navbar: React.FC = () => {
                         width={25}
                         height={25}
                         className={NavbarCSS.leftContainerIcon}
+
                     />
                     <Link href='/' className={NavbarCSS.leftContainer}>禮品訂製所 Gift For You</Link>
                 </div>
