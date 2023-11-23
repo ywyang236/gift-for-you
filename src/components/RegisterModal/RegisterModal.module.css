@@ -1,5 +1,4 @@
 /* components/RegisterModal/RegisterModal.module.css */
-/* components/LoginModal/LoginModal.module.css */
 .darkBackground {
     position: fixed;
     top: 0;
@@ -16,8 +15,6 @@
 .mainContainer {
     max-width: 926px;
     width: 92%;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(5px);
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     height: 465px;
@@ -25,7 +22,8 @@
 }
 
 .leftContainer {
-    background: rgb(54, 179, 217, 0.5);
+    background: rgb(54, 179, 217, 0.7);
+    backdrop-filter: blur(5px);
     padding: 30px;
     border-radius: 10px 0 0 10px;
     flex-shrink: 1;
@@ -56,6 +54,8 @@
 .rightContainer {
     padding: 30px;
     border-radius: 0 10px 10px 0;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
     flex-shrink: 1;
     display: flex;
     flex-direction: column;
@@ -165,7 +165,7 @@
     flex-direction: row;
     justify-content: center;
     flex-shrink: 0;
-
+    margin-bottom: 10px;
 }
 
 .loginLink:hover {
@@ -174,4 +174,13 @@
 
 .loginLink:hover {
     color: #29879e;
+}
+
+.registerMessageContainer {
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-shrink: 0;
 }

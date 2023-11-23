@@ -68,7 +68,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({onClose, onShowLogin}) => 
                             onShowLogin(true);
                         }}>點此登入</span>
                     </div>
-                    {message && <div>{message}</div>}
+                    {message && <div className={RegisterModalCSS.registerMessageContainer}>{message}</div>}
                 </div>
             </div>
         </div>,

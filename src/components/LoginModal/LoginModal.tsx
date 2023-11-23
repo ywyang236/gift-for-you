@@ -59,7 +59,7 @@ const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
                             onShowRegister(true);
                         }}>點此註冊</span>
                     </div>
-                    {message && <div className={LoginModalCSS.loginMessageContainer} >{message}</div>}
+                    {message && <div className={LoginModalCSS.loginMessageContainer}>{message}</div>}
                 </div>
             </div>
         </div>,
