@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LoginModalCSS from './LoginModal.module.css';
 import {IoClose} from "react-icons/io5";
+import {auth, signInWithEmailAndPassword} from "../../lib/firebase/firebase";
 
 interface LoginModalProps {
     onClose: () => void;
@@ -10,6 +11,20 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
+
+    const handleLogin = async (event: any) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            // 顯示「登入成功」訊息
+            onClose();
+        } catch (error) {
+            console.error("Error signing in", error);
+        }
+    };
 
     return ReactDOM.createPortal(
 
@@ -35,7 +50,7 @@ const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
                         <input type="checkbox" id="remember" className={LoginModalCSS.rememberInput} />
                         <label htmlFor="remember" className={LoginModalCSS.rememberTitle}>記住帳號密碼</label>
                     </div>
-                    <button type="submit" className={LoginModalCSS.loginButton}>登入帳戶</button>
+                    <button type="submit" className={LoginModalCSS.loginButton} onClick={handleLogin}>登入帳戶</button>
                     <div className={LoginModalCSS.registerContainer}>
                         <span className={LoginModalCSS.registerTitle}>還沒有帳戶？</span>
                         <span className={LoginModalCSS.registerLink} onClick={() => {
