@@ -1,0 +1,13 @@
+/* ../styles/cart.module.css */
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(180deg, #36B2D8 0%, #FCEFBE 100%);
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+}
