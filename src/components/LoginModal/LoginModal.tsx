@@ -12,8 +12,11 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const defaultEmail = 'test@example.com';
+    const defaultPassword = 'password123';
+
+    const [email, setEmail] = useState(defaultEmail);
+    const [password, setPassword] = useState(defaultPassword);
     const [message, setMessage] = useState<string | null>(null);
 
     const handleRegularSignIn = async () => {
