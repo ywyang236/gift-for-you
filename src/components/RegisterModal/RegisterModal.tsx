@@ -1,5 +1,6 @@
 // src/components/RegisterModal/RegisterModal.tsx
-import React from 'react';
+"use client";
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import RegisterModalCSS from './RegisterModal.module.css';
 import {IoClose} from "react-icons/io5";
@@ -11,18 +12,28 @@ interface RegisterModalProps {
 }
 
 const RegisterModal: React.FC<RegisterModalProps> = ({onClose, onShowLogin}) => {
+    const [message, setMessage] = useState<string | null>(null);
 
-    const handleRegister = async (event: any) => {
-        event.preventDefault();
-        const email = event.target.email.value;
-        const password = event.target.password.value;
-
+    const handleSignUp = async (email: string, password: string) => {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
-            // 顯示「註冊成功」訊息
-            onClose();
+            setMessage('註冊成功');
         } catch (error) {
-            console.error("Error registering new user", error);
+            console.error('Error signing up:', error);
+            setMessage(`註冊失敗: ${(error as Error).message}`);
+        }
+    };
+
+    const handleSignUpClick = () => {
+        const emailInput = document.getElementById('signupEmail') as HTMLInputElement;
+        const passwordInput = document.getElementById('signupPassword') as HTMLInputElement;
+
+        if (emailInput && passwordInput) {
+            if (emailInput.value && passwordInput.value) {
+                handleSignUp(emailInput.value, passwordInput.value);
+            } else {
+                setMessage('請填寫完整訊息');
+            }
         }
     };
 
@@ -39,17 +50,17 @@ const RegisterModal: React.FC<RegisterModalProps> = ({onClose, onShowLogin}) => 
                     <div className={RegisterModalCSS.registerTitle}>註冊會員帳號</div>
                     <div className={RegisterModalCSS.emailContainer}>
                         <label htmlFor="text" className={RegisterModalCSS.nameTitle}>會員姓名：</label>
-                        <input type="text" id="name" className={RegisterModalCSS.nameInput} />
+                        <input type="text" placeholder="Name" id="signupname" className={RegisterModalCSS.nameInput} />
                     </div>
                     <div className={RegisterModalCSS.emailContainer}>
-                        <label htmlFor="email" className={RegisterModalCSS.emailTitle}>會員信箱：</label>
-                        <input type="email" id="email" className={RegisterModalCSS.emailInput} />
+                        <label htmlFor="email" className={RegisterModalCSS.emailTitle}>會員帳號：</label>
+                        <input type="email" placeholder="Email" id="signupEmail" className={RegisterModalCSS.emailInput} />
                     </div>
                     <div className={RegisterModalCSS.passwordContainer}>
                         <label htmlFor="password" className={RegisterModalCSS.passwordTitle}>會員密碼：</label>
-                        <input type="password" id="password" className={RegisterModalCSS.passwordInput} />
+                        <input type="password" placeholder="Password" id="signupPassword" className={RegisterModalCSS.passwordInput} />
                     </div>
-                    <button type="submit" className={RegisterModalCSS.registerButton} onClick={handleRegister}>註冊新帳戶</button>
+                    <button type="submit" className={RegisterModalCSS.registerButton} onClick={handleSignUpClick}>註冊新帳戶</button>
                     <div className={RegisterModalCSS.loginContainer}>
                         <span className={RegisterModalCSS.loginTitle}>已有帳戶了？</span>
                         <span className={RegisterModalCSS.loginLink} onClick={() => {
@@ -57,6 +68,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({onClose, onShowLogin}) => 
                             onShowLogin(true);
                         }}>點此登入</span>
                     </div>
+                    {message && <div>{message}</div>}
                 </div>
             </div>
         </div>,
