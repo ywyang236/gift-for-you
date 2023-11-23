@@ -6,9 +6,10 @@ import {IoClose} from "react-icons/io5";
 
 interface RegisterModalProps {
     onClose: () => void;
+    onShowLogin: (visible: boolean) => void;
 }
 
-const RegisterModal: React.FC<RegisterModalProps> = ({onClose}) => {
+const RegisterModal: React.FC<RegisterModalProps> = ({onClose, onShowLogin}) => {
 
     return ReactDOM.createPortal(
         <div className={RegisterModalCSS.darkBackground} onClick={onClose}>
@@ -36,7 +37,10 @@ const RegisterModal: React.FC<RegisterModalProps> = ({onClose}) => {
                     <button type="submit" className={RegisterModalCSS.registerButton}>註冊新帳戶</button>
                     <div className={RegisterModalCSS.loginContainer}>
                         <span className={RegisterModalCSS.loginTitle}>已有帳戶了？</span>
-                        <span className={RegisterModalCSS.loginLink}>點此登入</span>
+                        <span className={RegisterModalCSS.loginLink} onClick={() => {
+                            onClose();
+                            onShowLogin(true);
+                        }}>點此登入</span>
                     </div>
                 </div>
             </div>

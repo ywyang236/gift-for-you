@@ -61,9 +61,9 @@ const Navbar: React.FC = () => {
                     <Link href='/cart' className={NavbarCSS.rightContainerText}>購物車</Link>
                     <Link href='/member-information' className={NavbarCSS.rightContainerText}>會員資料</Link>
                     <span className={NavbarCSS.login} onClick={handleLoginModal}>登入</span>
-                    {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} />}
+                    {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} onShowRegister={setIsRegisterModalVisible} />}
                     <span className={NavbarCSS.register} onClick={handleRegisterModal}>註冊</span>
-                    {isRegisterModalVisible && <RegisterModal onClose={() => setIsRegisterModalVisible(false)} />}
+                    {isRegisterModalVisible && <RegisterModal onClose={() => setIsRegisterModalVisible(false)} onShowLogin={setIsLoginModalVisible} />}
                 </div>
             </div>
         </nav>

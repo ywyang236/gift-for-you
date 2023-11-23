@@ -6,7 +6,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,15 +17,15 @@
     max-width: 926px;
     width: 92%;
     background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
     border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     height: 465px;
     display: flex;
 }
 
 .leftContainer {
-    background: rgb(54, 179, 217, 0.3);
+    background: rgb(54, 179, 217, 0.5);
     padding: 30px;
     border-radius: 10px 0 0 10px;
     flex-shrink: 1;
@@ -75,14 +75,14 @@
 }
 
 .closeButton:hover {
-    color: rgb(244, 108, 108);
+    color: #c95b5b;
 }
 
 .registerTitle {
     font-size: 36px;
     font-weight: bold;
     color: #1A5665;
-    margin-bottom: 27px;
+    margin-bottom: 30px;
 }
 
 .emailContainer {
@@ -92,7 +92,7 @@
     flex-direction: row;
     flex-shrink: 0;
     align-items: center;
-    margin-bottom: 27px;
+    margin-bottom: 30px;
 }
 
 .passwordContainer {
@@ -102,7 +102,7 @@
     flex-direction: row;
     flex-shrink: 0;
     align-items: center;
-    margin-bottom: 27px;
+    margin-bottom: 30px;
 }
 
 .nameTitle,
@@ -142,7 +142,7 @@
     height: 50px;
     border-radius: 5px;
     font-size: 24px;
-    margin-bottom: 27px;
+    margin-bottom: 30px;
     cursor: pointer;
     border: none;
 }
@@ -165,4 +165,13 @@
     flex-direction: row;
     justify-content: center;
     flex-shrink: 0;
+
+}
+
+.loginLink:hover {
+    cursor: pointer;
+}
+
+.loginLink:hover {
+    color: #29879e;
 }
