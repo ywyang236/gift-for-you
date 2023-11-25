@@ -7,9 +7,20 @@ import NavbarCSS from './Navbar.module.css';
 import {IoMenu} from "react-icons/io5";
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
+import {auth, signOut} from '../../lib/firebase/firebase';
 
 const Navbar: React.FC = () => {
     const [menuVisible, setMenuVisible] = useState(false);
+
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth);
+            alert('您已經成功登出');
+            window.location.href = '/';
+        } catch (error) {
+            alert('發生錯誤，請稍後再試');
+        }
+    };
 
     const toggleMenu = (event: React.MouseEvent) => {
         event.stopPropagation();
@@ -65,7 +76,7 @@ const Navbar: React.FC = () => {
                     {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} onShowRegister={setIsRegisterModalVisible} />}
                     <span className={NavbarCSS.register} onClick={handleRegisterModal}>註冊</span>
                     {isRegisterModalVisible && <RegisterModal onClose={() => setIsRegisterModalVisible(false)} onShowLogin={setIsLoginModalVisible} />}
-                    <span className={NavbarCSS.login}>登出</span>
+                    <span className={NavbarCSS.login} onClick={handleSignOut}>登出</span>
                 </div>
             </div>
         </nav>

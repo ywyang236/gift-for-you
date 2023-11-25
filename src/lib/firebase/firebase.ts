@@ -4,6 +4,7 @@ import {getFirestore, collection, getDocs} from 'firebase/firestore';
 import {getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import {signInWithEmailAndPassword} from "firebase/auth";
+import {signOut} from "firebase/auth";
 import {getStorage} from 'firebase/storage';
 
 const firebaseConfig = {
@@ -26,6 +27,7 @@ export {
     db,
     storage,
     auth,
+    signOut,
     collection,
     getDocs,
     signInWithPopup,
