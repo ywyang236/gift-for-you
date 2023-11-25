@@ -11,7 +11,9 @@ const Cart = () => (
                 <div className={CartCSS.leftContainer}>
                     <div className={CartCSS.itemContainer}>
                         <IoClose className={CartCSS.itemRemove}>商品刪除</IoClose>
-                        <div className={CartCSS.itemImageContainer}></div>
+                        <div className={CartCSS.itemImageContainer}>
+                            <div className={CartCSS.itemImage}></div>
+                        </div>
                         <div className={CartCSS.itemLeftContainer}>
                             <div className={CartCSS.itemTitleContainer}>
                                 <span className={CartCSS.itemTitle}>產品名稱：</span>
@@ -35,9 +37,7 @@ const Cart = () => (
                                 <span className={CartCSS.itemQuantityUnit}> 組</span>
                             </div>
                         </div>
-                        <div className={CartCSS.itemRightContainer}>
-                            <div className={CartCSS.itemSubtotalContainer}>$4495</div>
-                        </div>
+                        <div className={CartCSS.itemSubtotalContainer}>$4495</div>
                     </div>
                     <div className={CartCSS.itemLine}></div>
                 </div>
