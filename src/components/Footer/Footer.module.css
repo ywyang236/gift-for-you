@@ -1,3 +1,4 @@
+/* src/components/Footer/Footer.module.css */
 .footer {
     background: #1D445D;
     display: flex;
@@ -6,5 +7,155 @@
     color: white;
     font-size: 16px;
     padding: 50px 0px;
-    height: 130px;
+}
+
+.footerContainer {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.footerLogoContainer {
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.footerLogo {
+    background-image: url('/images/logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.footerLogoContent {
+    text-decoration: none;
+    color: white;
+    text-shadow: 0 0 3px rgb(0, 0, 0);
+    font-weight: bold;
+    transition: color 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.footerLeftContent {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.footerRightContent {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.footerContactContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: left;
+}
+
+.footerContactLogo {
+    text-decoration: none;
+    color: white;
+    text-shadow: 0 0 3px rgb(0, 0, 0);
+    font-weight: bold;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.footerContact {
+    text-decoration: none;
+    color: white;
+    text-shadow: 0 0 3px rgb(0, 0, 0);
+    transition: color 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+    margin-right: 30px;
+}
+
+@media (max-width:1024px) {
+    .footerContactContainer {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width:690px) {
+    .footerContainer {
+        width: 100%;
+        padding: 0px;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .footerLogoContainer {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+
+    .footerLogoContentContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footerLogoContent {
+        margin-right: 5px;
+    }
+
+    .footerLogo {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .footerLogoContainer,
+    .footerLeftContainer,
+    .footerRightContainer,
+    .footerContactContainer {
+        grid-column: 1;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footerContact {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width:340px) {
+
+    .footerLogoContentContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .footerLogo {
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
+    }
 }
