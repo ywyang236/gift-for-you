@@ -2,12 +2,140 @@
 .main {
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
-    background: linear-gradient(180deg, #36B2D8 0%, #FCEFBE 100%);
+    background: F0F0F0;
 }
 
 .container {
     max-width: 1200px;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.leftContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: white;
+    padding: 30px;
+    font-size: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+
+}
+
+.itemContainer {
+    width: 95%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    position: relative;
+}
+
+.itemRemove {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.itemImageContainer {
+    background-image: url('/images/design1.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+}
+
+.itemLeftContainer {
+    width: 70%;
+}
+
+.itemTitleContainer,
+.itemAccessoriesContainer,
+.itemCustomizationContainer,
+.itemPriceContainer,
+.itemQuantityContainer {
+    line-height: 40px;
+}
+
+.itemRightContainer {
+    position: absolute;
+    top: 45%;
+    right: 0px;
+}
+
+.itemSubtotalContainer {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.rightContainer {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: #A1C8DE;
+    padding: 40px;
+    font-size: 16px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.priceTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.itemLine {
+    width: 100%;
+    height: 1px;
+    background-color: #8A8A8A;
+    margin-bottom: 20px;
+}
+
+.priceAmountContainer,
+.priceDiscountContainer,
+.priceShippingFeeContainer,
+.priceAmountContainer {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+
+.checkoutButton {
+    background-color: #1A5665;
+    color: white;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 24px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkoutButton:hover {
+    background-color: #36B2D8;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.checkoutButton:active {
+    background-color: #3686A5;
+    text-shadow: none;
 }
