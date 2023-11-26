@@ -8,12 +8,12 @@
 
 ### 技術關鍵字
 - **React**
-    - useRef, useEffect, useState, useCallback
+    - useRef, useEffect, useState, useCallback, custom hook
 - **Redux**
     - useSelector, useDispatch
 -  **Redux Toolkit**
     - createSlice, createAction
-- **TypeScrip**
+- **TypeScript**
 - **Self-Built WYSIWYG Canvas Editor**
 - **Firebase**
 - **Next.js**
