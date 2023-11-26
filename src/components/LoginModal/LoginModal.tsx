@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import LoginModalCSS from './LoginModal.module.css';
 import {IoClose} from "react-icons/io5";
 import {signInWithPopup, auth, GoogleAuthProvider, signInWithEmailAndPassword} from '@/lib/firebase/firebase';
+import {useDispatch} from 'react-redux';
+import {logIn} from '@/store/slices/userSlice';
 
 interface LoginModalProps {
     onClose: () => void;
@@ -12,6 +14,8 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
+    const dispatch = useDispatch();
+
     const defaultEmail = 'test@example.com';
     const defaultPassword = 'password123';
 
@@ -22,10 +26,11 @@ const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
     const handleRegularSignIn = async () => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
+            dispatch(logIn());
             setMessage('登入成功');
+            onClose();
         } catch (error) {
-            console.error('錯誤訊息:', error);
-            setMessage(`登入失敗: ${(error as Error).message}`);
+            setMessage(`登入失敗，請檢查帳號密碼是否正確`);
         }
     };
 

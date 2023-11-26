@@ -8,14 +8,20 @@ import {IoMenu} from "react-icons/io5";
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import {auth, signOut} from '../../lib/firebase/firebase';
+import {useSelector, useDispatch} from 'react-redux';
+import {logOut} from '../../store/slices/userSlice';
+import {RootState} from '@/store/types/storeTypes';
 
 const Navbar: React.FC = () => {
     const [menuVisible, setMenuVisible] = useState(false);
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
 
     const handleSignOut = async () => {
         try {
             await signOut(auth);
             alert('您已經成功登出');
+            dispatch(logOut());
             window.location.href = '/';
         } catch (error) {
             alert('發生錯誤，請稍後再試');
@@ -69,14 +75,24 @@ const Navbar: React.FC = () => {
                 <IoMenu className={NavbarCSS.menuButton} onClick={toggleMenu} />
                 <div className={`${NavbarCSS.rightContainer} ${menuVisible ? NavbarCSS.activeMenu : ''}`}>
                     <Link href='/start-design' className={NavbarCSS.rightContainerText}>開始設計</Link>
-                    <Link href='/order-information' className={NavbarCSS.rightContainerText}>歷史訂單</Link>
+
                     <Link href='/cart' className={NavbarCSS.rightContainerText}>購物車</Link>
-                    <Link href='/member-information' className={NavbarCSS.rightContainerText}>會員資料</Link>
-                    <span className={NavbarCSS.login} onClick={handleLoginModal}>登入</span>
-                    {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} onShowRegister={setIsRegisterModalVisible} />}
-                    <span className={NavbarCSS.register} onClick={handleRegisterModal}>註冊</span>
-                    {isRegisterModalVisible && <RegisterModal onClose={() => setIsRegisterModalVisible(false)} onShowLogin={setIsLoginModalVisible} />}
-                    <span className={NavbarCSS.login} onClick={handleSignOut}>登出</span>
+                    {isLoggedIn && (
+                        <>
+                            <Link href='/order-information' className={NavbarCSS.rightContainerText}>歷史訂單</Link>
+                            <Link href='/member-information' className={NavbarCSS.rightContainerText}>會員資料</Link>
+                            <span className={NavbarCSS.login} onClick={handleSignOut}>登出</span>
+                        </>
+                    )}
+                    {!isLoggedIn && (
+                        <>
+                            <span className={NavbarCSS.login} onClick={handleLoginModal}>登入</span>
+                            {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} onShowRegister={setIsRegisterModalVisible} />}
+                            <span className={NavbarCSS.register} onClick={handleRegisterModal}>註冊</span>
+                            {isRegisterModalVisible && <RegisterModal onClose={() => setIsRegisterModalVisible(false)} onShowLogin={setIsLoginModalVisible} />}
+                        </>
+                    )}
+
                 </div>
             </div>
         </nav>
