@@ -11,11 +11,20 @@ import {auth, signOut} from '../../lib/firebase/firebase';
 import {useSelector, useDispatch} from 'react-redux';
 import {logOut} from '../../store/slices/userSlice';
 import {RootState} from '@/store/types/storeTypes';
+import useRequireAuth from '@/hooks/useRequireAuth';
 
 const Navbar: React.FC = () => {
     const [menuVisible, setMenuVisible] = useState(false);
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+    const {isLoginModalVisible, setIsLoginModalVisible, requireAuth} = useRequireAuth();
+
+    const handleDesignLinkClick = (e: React.MouseEvent) => {
+        if (!isLoggedIn) {
+            e.preventDefault();
+            handleLoginModal();
+        }
+    };
 
     const handleSignOut = async () => {
         try {
@@ -46,7 +55,6 @@ const Navbar: React.FC = () => {
         return () => window.removeEventListener('click', closeMenu);
     }, [menuVisible, closeMenu]);
 
-    const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
 
     const handleLoginModal = () => {
         setIsLoginModalVisible(true);
@@ -74,7 +82,7 @@ const Navbar: React.FC = () => {
                 </div>
                 <IoMenu className={NavbarCSS.menuButton} onClick={toggleMenu} />
                 <div className={`${NavbarCSS.rightContainer} ${menuVisible ? NavbarCSS.activeMenu : ''}`}>
-                    <Link href='/start-design' className={NavbarCSS.rightContainerText}>開始設計</Link>
+                    <Link href='/start-design' className={NavbarCSS.rightContainerText} onClick={handleDesignLinkClick}>開始設計</Link>
                     {isLoggedIn && (
                         <>
                             <Link href='/cart' className={NavbarCSS.rightContainerText}>購物車</Link>
