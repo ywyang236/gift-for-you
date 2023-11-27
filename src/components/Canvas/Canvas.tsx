@@ -13,9 +13,13 @@ interface CanvasProps {
     isBrushActive: boolean;
     setBrushSize: (newBrushSize: number) => void;
     setBrushColor: (newBrushColor: string) => void;
+    handleExportSVG: () => void;
+    paths: Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>;
+    setPaths: React.Dispatch<React.SetStateAction<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>>;
+
 }
 
-const Canvas: React.FC<CanvasProps> = ({width, height}) => {
+const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, setPaths}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const previewBrushCanvasRef = useRef<HTMLCanvasElement>(null);
     const previewEraserCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -40,6 +44,27 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
             context.lineWidth = brushSize;
         }
     }, [brushSize, brushColor]);
+
+    useEffect(() => {
+        const context = canvasRef.current?.getContext('2d');
+        if (context) {
+            clearCanvas(context, width, height);
+
+            paths.forEach((path) => {
+                context.strokeStyle = path.brushColor;
+                context.lineWidth = path.brushSize;
+                context.beginPath();
+                path.points.forEach((point, index) => {
+                    if (index === 0) {
+                        context.moveTo(point.x, point.y);
+                    } else {
+                        context.lineTo(point.x, point.y);
+                    }
+                });
+                context.stroke();
+            });
+        }
+    }, [paths, width, height]);
 
     useEffect(() => {
         const previewEraserContext = previewEraserCanvasRef.current?.getContext('2d');
@@ -74,13 +99,25 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         }
 
         if (isPainting && !isEraserActive) {
-            const context = canvasRef.current?.getContext('2d');
-            if (!context) return;
+            const newPoint = {x, y};
 
-            context.lineTo(x, y);
-            context.stroke();
-        } else if (isBrushActive) {
-            setMousePosition({x, y});
+            const context = canvasRef.current?.getContext('2d');
+            if (context) {
+                if (mousePosition) {
+                    context.beginPath();
+                    context.moveTo(mousePosition.x, mousePosition.y);
+                    context.lineTo(newPoint.x, newPoint.y);
+                    context.stroke();
+                }
+                setMousePosition(newPoint);
+
+                setPaths(prevPaths => {
+                    const newPaths = [...prevPaths];
+                    const currentPath = newPaths[newPaths.length - 1];
+                    currentPath.points.push(newPoint);
+                    return newPaths;
+                });
+            }
         }
     };
 
@@ -120,8 +157,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height}) => {
         const y = event.nativeEvent.clientY - rect.top;
 
         if (isBrushActive && !isEraserActive) {
-            context.moveTo(x, y);
-            context.beginPath();
+            setPaths(prevPaths => [...prevPaths, {points: [{x, y}], brushSize, brushColor}]);
             setIsPainting(true);
         }
     };

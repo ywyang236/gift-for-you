@@ -21,6 +21,8 @@ const DesignGift = () => {
     const currentBrushColor = useSelector((state: RootState) => state.brush.brushColor);
     const [lastBrushSize, setLastBrushSize] = useState<number>(currentBrushSize);
     const [lastBrushColor, setLastBrushColor] = useState<string>(currentBrushColor);
+    const [paths, setPaths] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
+    const [canvasSize, setCanvasSize] = useState<{width: number; height: number}>({width: 460, height: 420});
 
     const handleToggleBrush = () => {
         if (eraserActive) {
@@ -77,6 +79,33 @@ const DesignGift = () => {
         link.click();
     }
 
+    const pathToSVG = (path: {points: any[]; brushColor: any; brushSize: any;}) => {
+        let svgPath = path.points.reduce((acc, point, index) => {
+            acc += `${index === 0 ? 'M' : 'L'}${point.x},${point.y} `;
+            return acc;
+        }, '');
+        svgPath = `<path d="${svgPath}" stroke="${path.brushColor}" stroke-width="${path.brushSize}" fill="none"/>`;
+        return svgPath;
+    };
+
+    const exportToSVG = () => {
+        const svgPaths = paths.map(pathToSVG).join('');
+        const svgElement = `<svg width="${canvasSize.width}" height="${canvasSize.height}" xmlns="http://www.w3.org/2000/svg">${svgPaths}</svg>`;
+        return svgElement;
+    };
+
+    const handleExportSVG = () => {
+        const svgData = exportToSVG();
+        const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+        const svgUrl = URL.createObjectURL(svgBlob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = svgUrl;
+        downloadLink.download = 'drawing.svg';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    };
+
     return (
         <Layout>
             <div className={DesignCSS.main}>
@@ -94,22 +123,8 @@ const DesignGift = () => {
                             />
                             <IoArrowUndo className={DesignCSS.designButton} />
                             <IoArrowRedo className={DesignCSS.designButton} />
-                            <IoColorPalette className={DesignCSS.designButton} />
-                            <IoClipboard className={DesignCSS.designButton} />
-                            <IoColorFill className={DesignCSS.designButton} />
-                            <IoColorWand className={DesignCSS.designButton} />
-                            <IoCopy className={DesignCSS.designButton} />
-                            <IoCrop className={DesignCSS.designButton} />
-                            <IoCut className={DesignCSS.designButton} />
-                            <IoDuplicate className={DesignCSS.designButton} />
-                            <IoEyedrop className={DesignCSS.designButton} />
-                            <IoEyeOff className={DesignCSS.designButton} />
-                            <IoEye className={DesignCSS.designButton} />
                             <IoImage className={DesignCSS.designButton} />
-                            <IoLayers className={DesignCSS.designButton} />
-                            <IoOptions className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
-                            <span className={DesignCSS.addCartButton}>加入購物車</span>
                             <span
                                 className={DesignCSS.quiteButton}
                                 onClick={clearCanvasContent}
@@ -117,7 +132,12 @@ const DesignGift = () => {
                             <span
                                 className={DesignCSS.quiteButton}
                                 onClick={downloadCanvas}
-                            >下載畫布</span>
+                            >下載PNG</span>
+                            <span
+                                className={DesignCSS.quiteButton}
+                                onClick={handleExportSVG}
+                            >下載SVG</span>
+                            <span className={DesignCSS.addCartButton}>加入購物車</span>
                         </div>
                     </div>
                     <div className={DesignCSS.designDown}>
@@ -131,6 +151,9 @@ const DesignGift = () => {
                                             isBrushActive={brushActive}
                                             setBrushSize={handleBrushSizeChange}
                                             setBrushColor={handleBrushColorChange}
+                                            handleExportSVG={handleExportSVG}
+                                            paths={paths}
+                                            setPaths={setPaths}
                                         />
                                     </div>
                                 </div>
