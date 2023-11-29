@@ -63,7 +63,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, s
     };
 
     const startPainting = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-        if (isEraserActive) return;
+        if (!isBrushActive || isEraserActive) return;
         setIsPainting(true);
         const svgRect = event.currentTarget.getBoundingClientRect();
         const newPoint: Point = {
