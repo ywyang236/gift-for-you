@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 import BackgroundHighlighter from './BackgroundHighlighter';
-
+import BrushPreviewSVG from '../Brush/BrushPreviewSVG';
 interface CanvasProps {
     width: number;
     height: number;
@@ -38,8 +38,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, s
     };
 
     const handleMouseMove = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-        if (!isPainting) return;
-
         const svgRect = event.currentTarget.getBoundingClientRect();
         const newPoint: Point = {
             x: event.clientX - svgRect.left,
@@ -47,12 +45,15 @@ const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, s
         };
 
         setMousePosition(newPoint);
-        setPaths((prevPaths) => {
-            const newPaths = [...prevPaths];
-            const currentPath = newPaths[newPaths.length - 1];
-            currentPath.points.push(newPoint);
-            return newPaths;
-        });
+
+        if (isPainting) {
+            setPaths((prevPaths) => {
+                const newPaths = [...prevPaths];
+                const currentPath = newPaths[newPaths.length - 1];
+                currentPath.points.push(newPoint);
+                return newPaths;
+            });
+        }
     };
 
     const handleMouseLeave = () => {
@@ -103,8 +104,17 @@ const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, s
                             fill="none"
                         />
                     ))}
+                    <BrushPreviewSVG
+                        width={width}
+                        height={height}
+                        brushSize={brushSize}
+                        brushColor={brushColor}
+                        mousePosition={mousePosition}
+                        isBrushActive={isBrushActive}
+                    />
                 </svg>
             </BackgroundHighlighter>
+
         </>
     );
 };
