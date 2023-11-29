@@ -5,6 +5,7 @@ import {RootState} from '../../store/types/storeTypes';
 import CanvasCSS from "./Canvas.module.css";
 import BackgroundHighlighter from './BackgroundHighlighter';
 import BrushPreviewSVG from '../Brush/BrushPreviewSVG';
+import EraserSVG from '../Eraser/EraserSVG';
 interface CanvasProps {
     width: number;
     height: number;
@@ -28,6 +29,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, s
     const brushSize = useSelector((state: RootState) => state.brush.brushSize);
     const brushColor = useSelector((state: RootState) => state.brush.brushColor);
     const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
+    const [eraserMaskPath, setEraserMaskPath] = useState('');
 
     const clearCanvas = (context: CanvasRenderingContext2D, width: number, height: number) => {
         context.clearRect(0, 0, width, height);
@@ -73,6 +75,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, s
 
     const endPainting = () => {
         setIsPainting(false);
+
     };
 
     const pathToSvgPath = (points: Point[]): string => {
@@ -112,9 +115,14 @@ const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, s
                         mousePosition={mousePosition}
                         isBrushActive={isBrushActive}
                     />
+                    <EraserSVG
+                        paths={paths}
+                        setPaths={setPaths}
+                        mousePosition={mousePosition}
+                        isEraserActive={isEraserActive}
+                    />
                 </svg>
             </BackgroundHighlighter>
-
         </>
     );
 };
