@@ -15,6 +15,21 @@ const Cart = () => {
     const shippingFee = 65;
     const [totalAmount, setTotalAmount] = useState(itemPrice + shippingFee);
 
+    const [discountCode, setDiscountCode] = useState('');
+    const [discount, setDiscount] = useState(0);
+
+    useEffect(() => {
+        if (discountCode === 'gift for you') {
+            setDiscount(65);
+        } else {
+            setDiscount(0);
+        }
+    }, [discountCode]);
+
+    const handleDiscountCodeChange = (event: {target: {value: any;};}) => {
+        setDiscountCode(event.target.value);
+    };
+
     const handleQuantityChange = (event: {target: {value: any;};}) => {
         const newQuantity = event.target.value;
         setQuantity(newQuantity);
@@ -22,8 +37,8 @@ const Cart = () => {
 
     useEffect(() => {
         setItemPrice(899 * quantity);
-        setTotalAmount((899 * quantity) + shippingFee);
-    }, [quantity]);
+        setTotalAmount((899 * quantity) + shippingFee - discount);
+    }, [quantity, discount]);
 
     useEffect(() => {
         const fetchImage = async () => {
@@ -102,7 +117,19 @@ const Cart = () => {
                         <div className={CartCSS.itemLine}></div>
                         <div className={CartCSS.priceDiscountContainer}>
                             <span className={CartCSS.priceDiscountTitle}>優惠折扣：</span>
-                            <span className={CartCSS.priceDiscount}>新台幣 0 元</span>
+                            <span className={CartCSS.priceDiscount}>新台幣 {discount} 元</span>
+
+                        </div>
+                        <div className={CartCSS.discountCodeContainer}>
+                            <div><span>折扣碼：</span>
+                                <input
+                                    type="text"
+                                    placeholder="輸入 gift for you 免運費"
+                                    value={discountCode}
+                                    onChange={handleDiscountCodeChange}
+                                    className={CartCSS.discountCodeInput}
+                                />
+                            </div>
                         </div>
                         <div className={CartCSS.itemLine}></div>
                         <div className={CartCSS.priceShippingFeeContainer}>
