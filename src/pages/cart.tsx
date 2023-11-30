@@ -9,6 +9,17 @@ import {getStorage, ref, getDownloadURL} from "firebase/storage";
 
 const Cart = () => {
     const [imageUrl, setImageUrl] = useState('');
+    const [quantity, setQuantity] = useState(1);
+    const [itemPrice, setItemPrice] = useState(899);
+
+    const handleQuantityChange = (event: {target: {value: any;};}) => {
+        const newQuantity = event.target.value;
+        setQuantity(newQuantity);
+    };
+
+    useEffect(() => {
+        setItemPrice(899 * quantity);
+    }, [quantity]);
 
     useEffect(() => {
         const fetchImage = async () => {
@@ -65,11 +76,16 @@ const Cart = () => {
                                 </div>
                                 <div className={CartCSS.itemQuantityContainer}>
                                     <span className={CartCSS.itemQuantityTitle}>訂購數量：</span>
-                                    <input className={CartCSS.itemQuantityInput}></input>
+                                    <input
+                                        type="number"
+                                        className={CartCSS.itemQuantityInput}
+                                        value={quantity}
+                                        onChange={handleQuantityChange}
+                                    ></input>
                                     <span className={CartCSS.itemQuantityUnit}> 組</span>
                                 </div>
                             </div>
-                            <div className={CartCSS.itemSubtotalContainer}>$4495</div>
+                            <div className={CartCSS.itemSubtotalContainer}>$ {itemPrice}</div>
                         </div>
                         <div className={CartCSS.itemLine}></div>
                     </div>
@@ -77,7 +93,7 @@ const Cart = () => {
                         <div className={CartCSS.priceTitle}>訂單合計</div>
                         <div className={CartCSS.priceAmountContainer}>
                             <span className={CartCSS.priceAmountTitle}>商品金額：</span>
-                            <span className={CartCSS.priceAmount}>新台幣 4495 元</span>
+                            <span className={CartCSS.priceAmount}>新台幣 {itemPrice} 元</span>
                         </div>
                         <div className={CartCSS.itemLine}></div>
                         <div className={CartCSS.priceDiscountContainer}>
