@@ -126,8 +126,10 @@ const DesignGift = () => {
     };
 
     const saveDataToFirebase = async () => {
-        const userId = 'some_unique_user_id';
+        const confirmSave = window.confirm("加入購物車後就不能再修改了，您確定要繼續嗎？");
+        if (!confirmSave) return;
 
+        const userId = 'some_unique_user_id';
         const canvas = document.createElement('canvas');
         canvas.width = canvasSize.width;
         canvas.height = canvasSize.height;
