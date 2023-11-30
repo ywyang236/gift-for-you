@@ -11,6 +11,8 @@ import {setBrushSize, setBrushColor} from '../store/slices/brushSlice';
 import {RootState} from '../store/types/storeTypes';
 import {setEraserSize} from '../store/slices/eraserSlice';
 import {activateBrush, activateEraser, deactivateBrush, deactivateEraser} from '../store/sharedActions';
+import {db} from '../lib/firebase/firebase';
+import {collection, addDoc, getDocs} from 'firebase/firestore';
 
 const DesignGift = () => {
     const dispatch = useDispatch();
@@ -23,6 +25,30 @@ const DesignGift = () => {
     const [lastBrushColor, setLastBrushColor] = useState<string>(currentBrushColor);
     const [paths, setPaths] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
     const [canvasSize, setCanvasSize] = useState<{width: number; height: number}>({width: 460, height: 420});
+
+    const saveCanvasToFirebase = async () => {
+        try {
+            await addDoc(collection(db, "canvasData"), {
+                paths: paths,
+                createdAt: new Date()
+            });
+        } catch (error) {
+        }
+    };
+
+    const loadCanvasFromFirebase = async () => {
+        try {
+            const querySnapshot = await getDocs(collection(db, "canvasData"));
+            querySnapshot.forEach((doc) => {
+                setPaths(doc.data().paths);
+            });
+        } catch (error) {
+        }
+    };
+
+    useEffect(() => {
+        loadCanvasFromFirebase();
+    }, []);
 
     const handleToggleBrush = () => {
         if (eraserActive) {
@@ -125,6 +151,10 @@ const DesignGift = () => {
                             <IoArrowRedo className={DesignCSS.designButton} />
                             <IoImage className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
+                            <span
+                                className={DesignCSS.quiteButton}
+                                onClick={saveCanvasToFirebase}
+                            >儲存畫布</span>
                             <span
                                 className={DesignCSS.quiteButton}
                                 onClick={clearCanvasContent}

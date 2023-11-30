@@ -1,11 +1,11 @@
 // components/Canvas/Canvas.tsx
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
-import CanvasCSS from "./Canvas.module.css";
 import BackgroundHighlighter from './BackgroundHighlighter';
 import BrushPreviewSVG from '../Brush/BrushPreviewSVG';
 import EraserSVG from '../Eraser/EraserSVG';
+
 interface CanvasProps {
     width: number;
     height: number;
@@ -95,7 +95,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths}) => {
                 <svg
                     width={width}
                     height={height}
-                    className={CanvasCSS.canvas}
                     onMouseDown={(e) => {
                         if (isBrushActive) startPainting(e);
                         if (isEraserActive) startErasing(e);
