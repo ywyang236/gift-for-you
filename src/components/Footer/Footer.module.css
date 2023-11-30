@@ -68,9 +68,18 @@
     color: #88e3ff;
 }
 
+.footerRightContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
 .footerRightContent {
     margin-bottom: 10px;
     margin-right: 10px;
+    text-decoration: none;
+    color: white;
     transition: color 0.3s;
     cursor: pointer;
 }

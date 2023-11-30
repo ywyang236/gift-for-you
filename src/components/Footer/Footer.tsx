@@ -28,8 +28,8 @@ const Footer: React.FC = () => {
                     <Link href='/cart' className={FooterCSS.footerLeftContent} onClick={requireAuth}>會員資料</Link>
                 </div>
                 <div className={FooterCSS.footerRightContainer}>
-                    <div className={FooterCSS.footerRightContent}>關於禮品訂製所</div>
-                    <div className={FooterCSS.footerRightContent}>關於作者</div>
+                    <Link href='/about-gift-for-you' className={FooterCSS.footerRightContent}>關於禮品訂製所</Link>
+                    <Link href='/about-author' className={FooterCSS.footerRightContent}>關於作者</Link>
                 </div>
                 <div className={FooterCSS.footerContactContainer}>
                     <Link href='https://github.com/ywyang236/gift-for-you' target="_blank" className={FooterCSS.footerContact}>
