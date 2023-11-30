@@ -89,11 +89,7 @@ const DesignGift = () => {
     };
 
     const clearCanvasContent = () => {
-        const canvas = document.querySelector('canvas');
-        const context = canvas?.getContext('2d');
-        if (context) {
-            context.clearRect(0, 0, canvas!.width, canvas!.height);
-        }
+        setPaths([]);
     };
 
     const downloadCanvas = () => {
