@@ -1,13 +1,21 @@
+/* src/app/layout.css */
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-.main {
+.layout-main {
     max-width: 1200px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
+}
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
