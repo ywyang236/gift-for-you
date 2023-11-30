@@ -14,6 +14,7 @@ import {activateBrush, activateEraser, deactivateBrush, deactivateEraser} from '
 import {db} from '../lib/firebase/firebase';
 import {collection, addDoc, getDocs, doc, setDoc} from 'firebase/firestore';
 import {getStorage, ref, uploadBytes} from "firebase/storage";
+import Link from 'next/link';
 
 const DesignGift = () => {
     const dispatch = useDispatch();
@@ -149,6 +150,9 @@ const DesignGift = () => {
             createdAt: new Date(),
             imageUrl: `canvasImages/${imageName}`
         }, {merge: true});
+
+        alert('已成功加入購物車');
+        window.location.href = '/cart';
     };
 
 
