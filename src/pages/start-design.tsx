@@ -26,7 +26,7 @@ const DesignGift = () => {
     const [lastBrushSize, setLastBrushSize] = useState<number>(currentBrushSize);
     const [lastBrushColor, setLastBrushColor] = useState<string>(currentBrushColor);
     const [paths, setPaths] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
-    const [canvasSize, setCanvasSize] = useState<{width: number; height: number}>({width: 460, height: 420});
+    const [canvasSize, setCanvasSize] = useState<{width: number; height: number}>({width: 550, height: 490});
 
     const saveCanvasToFirebase = async () => {
         try {
@@ -233,8 +233,8 @@ const DesignGift = () => {
                                 <div className={DesignCSS.designCanvas}>
                                     <div>
                                         <Canvas
-                                            width={460}
-                                            height={420}
+                                            width={550}
+                                            height={490}
                                             isBrushActive={brushActive}
                                             setBrushSize={handleBrushSizeChange}
                                             setBrushColor={handleBrushColorChange}

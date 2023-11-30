@@ -26,6 +26,8 @@ const BrushPreviewSVG: React.FC<BrushPreviewSVGProps> = ({
                 position: 'absolute',
                 top: 0,
                 left: 0,
+                // margin- left: 52.5px;
+                // margin - top: 12.5px;
                 pointerEvents: 'none',
             }}
         >
@@ -37,7 +39,7 @@ const BrushPreviewSVG: React.FC<BrushPreviewSVGProps> = ({
                     fill={brushColor}
                 />
             )}
-        </svg>
+        </svg >
     );
 };
 

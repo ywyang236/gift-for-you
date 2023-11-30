@@ -122,12 +122,13 @@
     height: 590px;
     position: static;
     z-index: 1;
+    transform: scale(0.95);
 }
 
 .designCanvas {
     z-index: 2;
-    margin-left: 153px;
-    margin-top: 45px;
+    margin-left: 52.5px;
+    margin-top: 12.5px;
 }
 
 .designToolsContainer {

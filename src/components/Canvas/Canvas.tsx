@@ -31,6 +31,13 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths}) => {
     const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
     const [isErasing, setIsErasing] = useState(false);
 
+    const adjustForScale = (clientX: number, clientY: number, svgRect: DOMRect, scale: number) => {
+        return {
+            x: (clientX - svgRect.left) / scale,
+            y: (clientY - svgRect.top) / scale,
+        };
+    };
+
     const startErasing = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
         if (!isEraserActive) return;
         setIsErasing(true);
@@ -42,10 +49,8 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths}) => {
 
     const handleMouseMove = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
         const svgRect = event.currentTarget.getBoundingClientRect();
-        const newPoint: Point = {
-            x: event.clientX - svgRect.left,
-            y: event.clientY - svgRect.top,
-        };
+        const scale = 0.95;
+        const newPoint = adjustForScale(event.clientX, event.clientY, svgRect, scale);
 
         setMousePosition(newPoint);
 
