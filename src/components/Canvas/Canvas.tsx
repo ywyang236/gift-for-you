@@ -22,21 +22,22 @@ interface Point {
     y: number;
 }
 
-const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, setPaths}) => {
+const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths}) => {
     const [isPainting, setIsPainting] = useState(false);
     const [mousePosition, setMousePosition] = useState<{x: number; y: number} | undefined>(undefined);
     const isBrushActive = useSelector((state: RootState) => state.brush.isBrushActive);
     const brushSize = useSelector((state: RootState) => state.brush.brushSize);
     const brushColor = useSelector((state: RootState) => state.brush.brushColor);
     const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
-    const [eraserMaskPath, setEraserMaskPath] = useState('');
+    const [isErasing, setIsErasing] = useState(false);
 
-    const clearCanvas = (context: CanvasRenderingContext2D, width: number, height: number) => {
-        context.clearRect(0, 0, width, height);
+    const startErasing = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+        if (!isEraserActive) return;
+        setIsErasing(true);
     };
 
-    const pointsToSvgPath = (points: Point[]): string => {
-        return points.map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x},${point.y}`).join(' ');
+    const endErasing = () => {
+        setIsErasing(false);
     };
 
     const handleMouseMove = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -86,14 +87,24 @@ const Canvas: React.FC<CanvasProps> = ({width, height, handleExportSVG, paths, s
 
     return (
         <>
-            <BackgroundHighlighter width={width} height={height} active={isPainting}>
+            <BackgroundHighlighter
+                width={width}
+                height={height}
+                active={isPainting || isErasing}
+            >
                 <svg
                     width={width}
                     height={height}
                     className={CanvasCSS.canvas}
-                    onMouseDown={startPainting}
+                    onMouseDown={(e) => {
+                        if (isBrushActive) startPainting(e);
+                        if (isEraserActive) startErasing(e);
+                    }}
                     onMouseMove={handleMouseMove}
-                    onMouseUp={endPainting}
+                    onMouseUp={() => {
+                        endPainting();
+                        endErasing();
+                    }}
                     onMouseLeave={handleMouseLeave}
                 >
                     {paths.map((path, index) => (
