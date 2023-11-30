@@ -92,14 +92,37 @@ const DesignGift = () => {
         setPaths([]);
     };
 
+    const drawPathsOnCanvas = (canvas: any) => {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        paths.forEach(path => {
+            ctx.beginPath();
+            path.points.forEach((point, index) => {
+                if (index === 0) {
+                    ctx.moveTo(point.x, point.y);
+                } else {
+                    ctx.lineTo(point.x, point.y);
+                }
+            });
+            ctx.strokeStyle = path.brushColor;
+            ctx.lineWidth = path.brushSize;
+            ctx.stroke();
+        });
+    };
+
     const downloadCanvas = () => {
-        const canvas = document.querySelector('canvas');
-        const image = canvas?.toDataURL('image/png', 1.0);
+        const canvas = document.createElement('canvas');
+        canvas.width = canvasSize.width;
+        canvas.height = canvasSize.height;
+        drawPathsOnCanvas(canvas);
+
+        const image = canvas.toDataURL('image/png', 1.0);
         const link = document.createElement('a');
         link.download = `Gift-For-You-${new Date().toLocaleDateString()}.png`;
-        link.href = image!;
+        link.href = image;
         link.click();
-    }
+    };
 
     const pathToSVG = (path: {points: any[]; brushColor: any; brushSize: any;}) => {
         let svgPath = path.points.reduce((acc, point, index) => {
@@ -112,7 +135,7 @@ const DesignGift = () => {
 
     const exportToSVG = () => {
         const svgPaths = paths.map(pathToSVG).join('');
-        const svgElement = `<svg width="${canvasSize.width}" height="${canvasSize.height}" xmlns="http://www.w3.org/2000/svg">${svgPaths}</svg>`;
+        const svgElement = `<svg width="${canvasSize.width}" height="${canvasSize.height}" viewBox="0 0 ${canvasSize.width} ${canvasSize.height}" xmlns="http://www.w3.org/2000/svg">${svgPaths}</svg>`;
         return svgElement;
     };
 
