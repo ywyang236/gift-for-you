@@ -12,7 +12,8 @@ import {RootState} from '../store/types/storeTypes';
 import {setEraserSize} from '../store/slices/eraserSlice';
 import {activateBrush, activateEraser, deactivateBrush, deactivateEraser} from '../store/sharedActions';
 import {db} from '../lib/firebase/firebase';
-import {collection, addDoc, getDocs} from 'firebase/firestore';
+import {collection, addDoc, getDocs, doc, setDoc} from 'firebase/firestore';
+import {getStorage, ref, uploadBytes} from "firebase/storage";
 
 const DesignGift = () => {
     const dispatch = useDispatch();
@@ -111,7 +112,7 @@ const DesignGift = () => {
         });
     };
 
-    const downloadCanvas = () => {
+    const downloadCanvas = async () => {
         const canvas = document.createElement('canvas');
         canvas.width = canvasSize.width;
         canvas.height = canvasSize.height;
@@ -123,6 +124,31 @@ const DesignGift = () => {
         link.href = image;
         link.click();
     };
+
+    const saveDataToFirebase = async () => {
+        const userId = 'some_unique_user_id';
+
+        const canvas = document.createElement('canvas');
+        canvas.width = canvasSize.width;
+        canvas.height = canvasSize.height;
+        drawPathsOnCanvas(canvas);
+
+        const image = canvas.toDataURL('image/png', 1.0);
+        const imageName = `Gift-For-You-${new Date().toLocaleDateString()}.png`;
+
+        const storage = getStorage();
+        const storageRef = ref(storage, `canvasImages/${imageName}`);
+        const imgBlob = await (await fetch(image)).blob();
+        await uploadBytes(storageRef, imgBlob);
+
+        const docRef = doc(db, "canvasData", userId);
+        await setDoc(docRef, {
+            paths: paths,
+            createdAt: new Date(),
+            imageUrl: `canvasImages/${imageName}`
+        }, {merge: true});
+    };
+
 
     const pathToSVG = (path: {points: any[]; brushColor: any; brushSize: any;}) => {
         let svgPath = path.points.reduce((acc, point, index) => {
@@ -186,7 +212,13 @@ const DesignGift = () => {
                                 className={DesignCSS.quiteButton}
                                 onClick={handleExportSVG}
                             >下載SVG</span>
-                            <span className={DesignCSS.addCartButton}>加入購物車</span>
+                            <span
+                                className={DesignCSS.quiteButton}
+                                onClick={saveDataToFirebase}
+                            >Firebase</span>
+                            <span
+                                className={DesignCSS.addCartButton}
+                            >加入購物車</span>
                         </div>
                     </div>
                     <div className={DesignCSS.designDown}>
