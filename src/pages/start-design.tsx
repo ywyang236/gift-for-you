@@ -219,11 +219,8 @@ const DesignGift = () => {
                                 onClick={handleExportSVG}
                             >下載SVG</span>
                             <span
-                                className={DesignCSS.quiteButton}
-                                onClick={saveDataToFirebase}
-                            >Firebase</span>
-                            <span
                                 className={DesignCSS.addCartButton}
+                                onClick={saveDataToFirebase}
                             >加入購物車</span>
                         </div>
                     </div>
