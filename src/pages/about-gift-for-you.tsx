@@ -3,7 +3,7 @@ import React from 'react';
 import Layout from '../app/layout';
 import WebsiteCSS from '../styles/website.module.css';
 
-const AboutAuthor = () => (
+const AboutWebsite = () => (
     <Layout>
         <div className={WebsiteCSS.main}>
             <div className={WebsiteCSS.container}>
@@ -13,4 +13,4 @@ const AboutAuthor = () => (
     </Layout>
 );
 
-export default AboutAuthor;
+export default AboutWebsite;
