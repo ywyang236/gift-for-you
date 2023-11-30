@@ -59,6 +59,18 @@
     }
 }
 
+.itemImage {
+    max-width: 180px;
+    width: 80%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 7px;
+    margin-left: 20px;
+}
+
 .itemImageContainer {
     max-width: 200px;
     width: 100%;
@@ -70,7 +82,7 @@
     overflow: hidden;
 }
 
-.itemImage {
+.itemImageBackground {
     background-image: url('/images/design1.jpeg');
     background-size: cover;
     background-position: center;
