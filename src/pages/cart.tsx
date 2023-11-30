@@ -12,6 +12,9 @@ const Cart = () => {
     const [quantity, setQuantity] = useState(1);
     const [itemPrice, setItemPrice] = useState(899);
 
+    const shippingFee = 65;
+    const [totalAmount, setTotalAmount] = useState(itemPrice + shippingFee);
+
     const handleQuantityChange = (event: {target: {value: any;};}) => {
         const newQuantity = event.target.value;
         setQuantity(newQuantity);
@@ -19,6 +22,7 @@ const Cart = () => {
 
     useEffect(() => {
         setItemPrice(899 * quantity);
+        setTotalAmount((899 * quantity) + shippingFee);
     }, [quantity]);
 
     useEffect(() => {
@@ -103,12 +107,12 @@ const Cart = () => {
                         <div className={CartCSS.itemLine}></div>
                         <div className={CartCSS.priceShippingFeeContainer}>
                             <span className={CartCSS.priceShippingFeeTitle}>商品運費：</span>
-                            <span className={CartCSS.priceShippingFee}>新台幣 0 元</span>
+                            <span className={CartCSS.priceShippingFee}>新台幣 {shippingFee} 元</span>
                         </div>
                         <div className={CartCSS.itemLine}></div>
                         <div className={CartCSS.priceAmountContainer}>
                             <span className={CartCSS.priceAmountTitle}>訂單合計：</span>
-                            <span className={CartCSS.priceAmount}>新台幣 4560 元</span>
+                            <span className={CartCSS.priceAmount}>新台幣 {totalAmount} 元</span>
                         </div>
                         <div className={CartCSS.checkoutButton}>結帳付款</div>
                     </div>
