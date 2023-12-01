@@ -64,6 +64,10 @@ const Cart = () => {
         fetchImage();
     }, []);
 
+    const handleCheckout = () => {
+        window.location.href = '/payment';
+    }
+
     return (
         <Layout>
             <div className={CartCSS.main}>
@@ -141,7 +145,10 @@ const Cart = () => {
                             <span className={CartCSS.priceAmountTitle}>訂單合計：</span>
                             <span className={CartCSS.priceAmount}>新台幣 {totalAmount} 元</span>
                         </div>
-                        <div className={CartCSS.checkoutButton}>結帳付款</div>
+                        <div
+                            className={CartCSS.checkoutButton}
+                            onClick={handleCheckout}
+                        >結帳付款</div>
                     </div>
                 </div>
             </div>

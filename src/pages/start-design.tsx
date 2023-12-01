@@ -230,8 +230,8 @@ const DesignGift = () => {
                                 <div className={DesignCSS.designCanvas}>
                                     <div>
                                         <Canvas
-                                            width={550}
-                                            height={490}
+                                            width={660}
+                                            height={600}
                                             isBrushActive={brushActive}
                                             setBrushSize={handleBrushSizeChange}
                                             setBrushColor={handleBrushColorChange}

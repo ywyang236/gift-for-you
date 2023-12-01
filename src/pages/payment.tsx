@@ -7,7 +7,7 @@ const Payment = () => (
     <Layout>
         <div className={PaymentCSS.main}>
             <div className={PaymentCSS.container}>
-                <h1>關於作者</h1>
+                <h1>付款頁面</h1>
             </div>
         </div>
     </Layout>
