@@ -4,14 +4,196 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background: F0F0F0;
     flex: 1;
+    background-image: url('/images/gift-town.png');
+    background-size: cover;
+    background-position: left;
 }
 
 .container {
-    max-width: 1200px;
     width: 100%;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(3px);
+    margin: 0px auto;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.cartContainer,
+.orderContainer,
+.recipientContainer,
+.cardContainer {
+    max-width: 1200px;
+    width: 92%;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 40px 40px 40px;
+    position: relative;
+    margin: 10px auto;
+}
+
+@media (max-width: 430px) {
+
+    .cartContainer,
+    .orderContainer,
+    .recipientContainer,
+    .cardContainer {
+        padding: 20px;
+    }
+}
+
+.cartTitle,
+.orderTitle,
+.recipientTitle,
+.cardTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 24px;
+    color: #1D445D;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 400px) {
+
+    .cartTitle,
+    .orderTitle,
+    .recipientTitle,
+    .cardTitle {
+        font-size: 28px;
+    }
+}
+
+.cartTitle::before,
+.cartTitle::after,
+.orderTitle::before,
+.orderTitle::after,
+.recipientTitle::before,
+.recipientTitle::after,
+.cardTitle::before,
+.cardTitle::after {
+    content: '';
+    width: 230px;
+    border-bottom: 3px solid #1D445D;
+    margin: 0 20px;
+}
+
+@media (max-width: 880px) {
+
+    .cartTitle::before,
+    .cartTitle::after,
+    .orderTitle::before,
+    .orderTitle::after,
+    .recipientTitle::before,
+    .recipientTitle::after,
+    .cardTitle::before,
+    .cardTitle::after {
+        width: 140px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .cartTitle::before,
+    .cartTitle::after,
+    .orderTitle::before,
+    .orderTitle::after,
+    .recipientTitle::before,
+    .recipientTitle::after,
+    .cardTitle::before,
+    .cardTitle::after {
+        width: 0px;
+    }
+}
+
+
+.cartContent,
+.orderContent,
+.recipientContent,
+.cardContent {
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+@media (max-width: 1200px) {
+
+    .cartContent,
+    .orderContent,
+    .recipientContent,
+    .cardContent {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 1024px) {
+
+    .cartContent,
+    .orderContent,
+    .recipientContent,
+    .cardContent {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 624px) {
+
+    .cartContent,
+    .orderContent,
+    .recipientContent,
+    .cardContent {
+        max-width: 100%;
+        padding: 0px;
+    }
+}
+
+.orderName,
+.orderEmail,
+.orderPhone,
+.orderNote,
+.recipientName,
+.recipientPhone,
+.recipientAddress,
+.cardName,
+.cardNumber,
+.cardExpiry,
+.cardCVV {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1D445D;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.orderNameInput,
+.orderEmailInput,
+.orderPhoneInput,
+.recipientNameInput,
+.recipientPhoneInput,
+.recipientAddressInput,
+.cardNameInput,
+.cardNumberInput,
+.cardExpiryInput,
+.cardCVVInput {
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #c5c5c5;
+    padding: 0px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #575758;
 }

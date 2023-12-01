@@ -41,7 +41,7 @@ const Home = () => {
                                 </div>
                                 <div className={IndexCSS.rulesCard_Text}>
                                     <div className={IndexCSS.rulesCard_Title}>Step 2</div>
-                                    <div className={IndexCSS.rulesCard_Description} onClick={requireAuth}>開始設計</div>
+                                    <div className={IndexCSS.rulesCard_Description}>開始設計</div>
                                 </div>
                             </div>
                         </div>
