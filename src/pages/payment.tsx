@@ -8,13 +8,19 @@ const Payment = () => (
         <div className={PaymentCSS.main}>
             <div className={PaymentCSS.container}>
                 <div className={PaymentCSS.cartContainer}>
-                    <div className={PaymentCSS.cartTitle}>購買項目</div>
+                    <div className={PaymentCSS.cartTitle}>購買細節</div>
                     <div className={PaymentCSS.cartContent}>
-                        <div className={PaymentCSS.cartContentText}>商品名稱：</div>
-                        <div className={PaymentCSS.cartContentText}>商品配件：</div>
-                        <div className={PaymentCSS.cartContentText}>訂製方式：</div>
-                        <div className={PaymentCSS.cartContentText}>訂購數量：</div>
-                        <div className={PaymentCSS.cartContentText}>訂單金額：</div>
+                        <div className={PaymentCSS.cartContentLeft}>
+                            <div className={PaymentCSS.cartContentBackground}></div>
+                            <div className={PaymentCSS.cartContentCanvas}></div>
+                        </div>
+                        <div className={PaymentCSS.cartContentRight}>
+                            <div className={PaymentCSS.cartContentText}>商品名稱：</div>
+                            <div className={PaymentCSS.cartContentText}>商品配件：</div>
+                            <div className={PaymentCSS.cartContentText}>訂製方式：</div>
+                            <div className={PaymentCSS.cartContentText}>訂購數量：</div>
+                            <div className={PaymentCSS.cartContentText}>訂單金額：</div>
+                        </div>
                     </div>
                 </div>
                 <div className={PaymentCSS.orderContainer}>

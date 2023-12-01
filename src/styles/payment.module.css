@@ -119,6 +119,12 @@
     }
 }
 
+.cartContent {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 30px;
+}
 
 .cartContent,
 .orderContent,
@@ -160,6 +166,7 @@
     }
 }
 
+.cartContentText,
 .orderName,
 .orderEmail,
 .orderPhone,
@@ -175,6 +182,35 @@
     font-weight: 500;
     color: #1D445D;
     margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.cartContentLeft {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.cartContentBackground {
+    background-image: url('/images/design1.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+.cartContentRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 20px;
     flex-shrink: 0;
 }
 
