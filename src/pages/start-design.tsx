@@ -3,7 +3,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
-import {IoArrowUndo, IoArrowRedo, IoBrush, IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoImage, IoLayers, IoOptions, IoText} from 'react-icons/io5';
+import {IoArrowUndo, IoArrowRedo, IoBrush, IoInformationCircleSharp, IoTrash, IoCloudUpload, IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoImage, IoLayers, IoOptions, IoText} from 'react-icons/io5';
 import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle} from "react-icons/io5";
 import {BsEraserFill, BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonFill, BsFillPentagonFill, BsFillStarFill} from "react-icons/bs";
 import Canvas from '../components/Canvas/Canvas';
@@ -15,6 +15,7 @@ import {db} from '../lib/firebase/firebase';
 import {collection, addDoc, getDocs, doc, setDoc} from 'firebase/firestore';
 import {getStorage, ref, uploadBytes} from "firebase/storage";
 import Link from 'next/link';
+import {PiFilePngFill, PiFileSvgFill} from "react-icons/pi";
 
 const DesignGift = () => {
     const dispatch = useDispatch();
@@ -202,22 +203,11 @@ const DesignGift = () => {
                             <IoArrowRedo className={DesignCSS.designButton} />
                             <IoImage className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
-                            <span
-                                className={DesignCSS.quiteButton}
-                                onClick={saveCanvasToFirebase}
-                            >儲存畫布</span>
-                            <span
-                                className={DesignCSS.quiteButton}
-                                onClick={clearCanvasContent}
-                            >清除畫布</span>
-                            <span
-                                className={DesignCSS.quiteButton}
-                                onClick={downloadCanvas}
-                            >下載PNG</span>
-                            <span
-                                className={DesignCSS.quiteButton}
-                                onClick={handleExportSVG}
-                            >下載SVG</span>
+                            <IoInformationCircleSharp className={DesignCSS.designButton} />
+                            <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />
+                            <IoCloudUpload className={DesignCSS.designButton} onClick={saveCanvasToFirebase} />
+                            <PiFilePngFill className={DesignCSS.designButton} onClick={downloadCanvas} />
+                            <PiFileSvgFill className={DesignCSS.designButton} onClick={handleExportSVG} />
                             <span
                                 className={DesignCSS.addCartButton}
                                 onClick={saveDataToFirebase}
@@ -230,8 +220,8 @@ const DesignGift = () => {
                                 <div className={DesignCSS.designCanvas}>
                                     <div>
                                         <Canvas
-                                            width={610}
-                                            height={560}
+                                            width={460}
+                                            height={430}
                                             isBrushActive={brushActive}
                                             setBrushSize={handleBrushSizeChange}
                                             setBrushColor={handleBrushColorChange}
