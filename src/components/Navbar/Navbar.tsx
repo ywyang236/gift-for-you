@@ -3,6 +3,7 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import {useRouter} from 'next/router';
 import NavbarCSS from './Navbar.module.css';
 import {IoMenu} from "react-icons/io5";
 import LoginModal from '../LoginModal/LoginModal';
@@ -13,17 +14,17 @@ import {logOut} from '../../store/slices/userSlice';
 import {RootState} from '@/store/types/storeTypes';
 import useRequireAuth from '@/hooks/useRequireAuth';
 
+
 const Navbar: React.FC = () => {
     const [menuVisible, setMenuVisible] = useState(false);
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
     const {isLoginModalVisible, setIsLoginModalVisible, requireAuth} = useRequireAuth();
+    const router = useRouter();
 
     const handleDesignLinkClick = (e: React.MouseEvent) => {
-        if (!isLoggedIn) {
-            e.preventDefault();
-            handleLoginModal();
-        }
+        e.preventDefault();
+        router.push('/#designItems');
     };
 
     const handleSignOut = async () => {
@@ -82,7 +83,7 @@ const Navbar: React.FC = () => {
                 </div>
                 <IoMenu className={NavbarCSS.menuButton} onClick={toggleMenu} />
                 <div className={`${NavbarCSS.rightContainer} ${menuVisible ? NavbarCSS.activeMenu : ''}`}>
-                    <Link href='/start-design' className={NavbarCSS.rightContainerText} onClick={handleDesignLinkClick}>開始設計</Link>
+                    <span className={NavbarCSS.rightContainerText} onClick={handleDesignLinkClick}>挑選禮品</span>
                     {isLoggedIn && (
                         <>
                             <Link href='/cart' className={NavbarCSS.rightContainerText}>購物車</Link>
