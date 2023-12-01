@@ -124,17 +124,17 @@
     background-size: cover;
     background-position: center;
     overflow: hidden;
-    width: 850px;
+    width: 780px;
     height: 740px;
     position: static;
     z-index: 1;
-    transform: scale(0.95);
+    /* transform: scale(0.95); */
 }
 
 .designCanvas {
     z-index: 2;
-    margin-left: 95px;
-    margin-top: 15px;
+    margin-left: 85px;
+    margin-top: 30px;
 }
 
 .designToolsContainer {

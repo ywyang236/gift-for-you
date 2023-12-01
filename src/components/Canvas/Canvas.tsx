@@ -49,7 +49,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths}) => {
 
     const handleMouseMove = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
         const svgRect = event.currentTarget.getBoundingClientRect();
-        const scale = 0.95;
+        const scale = 1;
         const newPoint = adjustForScale(event.clientX, event.clientY, svgRect, scale);
 
         setMousePosition(newPoint);
