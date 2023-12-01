@@ -124,8 +124,8 @@
     background-size: cover;
     background-position: center;
     overflow: hidden;
-    width: 100vh;
-    /* height: 100vh; */
+    width: 850px;
+    height: 740px;
     position: static;
     z-index: 1;
     transform: scale(0.95);
