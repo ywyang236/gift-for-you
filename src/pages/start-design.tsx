@@ -12,10 +12,11 @@ import {RootState} from '../store/types/storeTypes';
 import {setEraserSize} from '../store/slices/eraserSlice';
 import {activateBrush, activateEraser, deactivateBrush, deactivateEraser} from '../store/sharedActions';
 import {db} from '../lib/firebase/firebase';
-import {collection, addDoc, getDocs, doc, setDoc} from 'firebase/firestore';
-import {getStorage, ref, uploadBytes} from "firebase/storage";
+import {collection, addDoc, getDocs, doc, setDoc, getDoc} from 'firebase/firestore';
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import Link from 'next/link';
 import {PiFilePngFill, PiFileSvgFill} from "react-icons/pi";
+import {useRouter} from 'next/router';
 
 const DesignGift = () => {
     const dispatch = useDispatch();
@@ -28,6 +29,42 @@ const DesignGift = () => {
     const [lastBrushColor, setLastBrushColor] = useState<string>(currentBrushColor);
     const [paths, setPaths] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
     const [canvasSize, setCanvasSize] = useState<{width: number; height: number}>({width: 550, height: 490});
+    const router = useRouter();
+    const productId = router.query.product;
+    const [backgroundImage, setBackgroundImage] = useState('');
+
+    useEffect(() => {
+        const fetchProductInfo = async () => {
+            if (productId) {
+                const querySnapshot = await getDocs(collection(db, "products"));
+                let productFound = false;
+
+                querySnapshot.forEach((doc) => {
+                    if (doc.data().id === productId) {
+                        productFound = true;
+                        const productData = doc.data();
+                        const imageRef = ref(getStorage(), productData.image);
+
+                        getDownloadURL(imageRef)
+                            .then((url) => {
+                                setBackgroundImage(url);
+                            })
+                            .catch((error) => {
+                                console.error("Error fetching image:", error);
+                            });
+                    }
+                });
+
+                if (!productFound) {
+                    console.log(`No product found for ID: ${productId}`);
+                }
+            }
+        };
+
+        fetchProductInfo();
+    }, [productId]);
+
+
 
     const saveCanvasToFirebase = async () => {
         try {
@@ -216,7 +253,7 @@ const DesignGift = () => {
                     </div>
                     <div className={DesignCSS.designDown}>
                         <div className={DesignCSS.designCanvasContainer}>
-                            <div className={DesignCSS.designItem}>
+                            <div className={DesignCSS.designItem} style={{backgroundImage: `url(${backgroundImage})`}}>
                                 <div className={DesignCSS.designCanvas}>
                                     <div>
                                         <Canvas
