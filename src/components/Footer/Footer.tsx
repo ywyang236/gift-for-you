@@ -1,4 +1,5 @@
 // components/Footer.tsx
+"use client";
 import React from 'react';
 import Link from 'next/link';
 import FooterCSS from './Footer.module.css';
@@ -7,10 +8,24 @@ import {FaBlogger} from "react-icons/fa6";
 import useRequireAuth from '@/hooks/useRequireAuth';
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
+import {useRouter} from 'next/router';
 
 const Footer: React.FC = () => {
     const {isLoginModalVisible, setIsLoginModalVisible, requireAuth} = useRequireAuth();
     const [isRegisterModalVisible, setIsRegisterModalVisible] = React.useState(false);
+    const router = useRouter();
+
+    const handleGiftSelectionClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (router.pathname !== '/') {
+            const confirmLeave = window.confirm('您即將離開此頁面，確定要前往挑選禮品的頁面嗎？');
+            if (confirmLeave) {
+                router.push('/#designItems');
+            }
+        } else {
+            router.push('/#designItems');
+        }
+    };
 
     return (
         <footer className={FooterCSS.footer}>
@@ -23,7 +38,7 @@ const Footer: React.FC = () => {
                     </div>
                 </div>
                 <div className={FooterCSS.footerLeftContainer}>
-                    <Link href='/start-design' className={FooterCSS.footerLeftContent} onClick={requireAuth}>開始設計</Link>
+                    <span className={FooterCSS.footerLeftContent} onClick={handleGiftSelectionClick}>挑選禮品</span>
                     <Link href='/order-information' className={FooterCSS.footerLeftContent} onClick={requireAuth}>歷史訂單</Link>
                     <Link href='/cart' className={FooterCSS.footerLeftContent} onClick={requireAuth}>會員資料</Link>
                 </div>

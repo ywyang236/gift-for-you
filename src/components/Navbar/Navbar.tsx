@@ -24,7 +24,14 @@ const Navbar: React.FC = () => {
 
     const handleDesignLinkClick = (e: React.MouseEvent) => {
         e.preventDefault();
-        router.push('/#designItems');
+        if (router.pathname !== '/') {
+            const confirmLeave = window.confirm('您即將離開此頁面，確定要前往挑選禮品的頁面嗎？');
+            if (confirmLeave) {
+                router.push('/#designItems');
+            }
+        } else {
+            router.push('/#designItems');
+        }
     };
 
     const handleSignOut = async () => {
