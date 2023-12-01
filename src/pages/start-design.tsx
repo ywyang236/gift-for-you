@@ -32,6 +32,29 @@ const DesignGift = () => {
     const router = useRouter();
     const productId = router.query.product;
     const [backgroundImage, setBackgroundImage] = useState('');
+    const [productName, setProductName] = useState('-');
+
+    useEffect(() => {
+        const fetchProductInfo = async () => {
+            if (productId) {
+                const querySnapshot = await getDocs(collection(db, "products"));
+                let productFound = false;
+
+                querySnapshot.forEach((doc) => {
+                    if (doc.data().id === productId) {
+                        productFound = true;
+                        setProductName(doc.data().name);
+                    }
+                });
+
+                if (!productFound) {
+                    console.log(`No product found for ID: ${productId}`);
+                }
+            }
+        };
+
+        fetchProductInfo();
+    }, [productId]);
 
     useEffect(() => {
         const fetchProductInfo = async () => {
@@ -226,7 +249,7 @@ const DesignGift = () => {
             <div className={DesignCSS.main}>
                 <div className={DesignCSS.container}>
                     <div className={DesignCSS.designNavbar}>
-                        <div className={DesignCSS.designTitle}>幾何造型夜燈</div>
+                        <div className={DesignCSS.designTitle}>{productName}</div>
                         <div className={DesignCSS.designButtonContainer}>
                             <IoBrush
                                 className={`${DesignCSS.designButton} ${brushActive ? DesignCSS.designButtonActive : ''}`}
