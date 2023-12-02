@@ -18,6 +18,14 @@ import Link from 'next/link';
 import {PiFilePngFill, PiFileSvgFill} from "react-icons/pi";
 import {useRouter} from 'next/router';
 
+interface ProductInfo {
+    name: string;
+    accessories: string[];
+    customization: string;
+    price: number;
+    image: string;
+}
+
 const DesignGift = () => {
     const dispatch = useDispatch();
     const brushActive = useSelector((state: RootState) => state.brush.isBrushActive);
@@ -33,8 +41,17 @@ const DesignGift = () => {
     const productId = router.query.product;
     const [backgroundImage, setBackgroundImage] = useState('');
     const [productName, setProductName] = useState('-');
+    const [productInfo, setProductInfo] = useState<ProductInfo | null>(null);
 
     useEffect(() => {
+        if (!router.isReady) return;
+
+        const productId = router.query.product;
+        if (!productId) {
+            console.log('產品 ID 缺失');
+            return;
+        }
+
         const fetchProductInfo = async () => {
             if (productId) {
                 const querySnapshot = await getDocs(collection(db, "products"));
@@ -43,49 +60,37 @@ const DesignGift = () => {
                 querySnapshot.forEach((doc) => {
                     if (doc.data().id === productId) {
                         productFound = true;
-                        setProductName(doc.data().name);
-                    }
-                });
-
-                if (!productFound) {
-                    console.log(`No product found for ID: ${productId}`);
-                }
-            }
-        };
-
-        fetchProductInfo();
-    }, [productId]);
-
-    useEffect(() => {
-        const fetchProductInfo = async () => {
-            if (productId) {
-                const querySnapshot = await getDocs(collection(db, "products"));
-                let productFound = false;
-
-                querySnapshot.forEach((doc) => {
-                    if (doc.data().id === productId) {
-                        productFound = true;
-                        const productData = doc.data();
+                        const productData = doc.data() as ProductInfo;
+                        setProductName(productData.name);
+                        setProductInfo(productData);
                         const imageRef = ref(getStorage(), productData.image);
-
                         getDownloadURL(imageRef)
-                            .then((url) => {
-                                setBackgroundImage(url);
-                            })
-                            .catch((error) => {
-                                console.error("Error fetching image:", error);
-                            });
+                            .then((url) => setBackgroundImage(url))
+                            .catch((error) => console.error("Error fetching image:", error));
                     }
                 });
 
                 if (!productFound) {
-                    console.log(`No product found for ID: ${productId}`);
+                    console.log(`找不到該產品的資訊: ${productId}`);
                 }
             }
         };
 
         fetchProductInfo();
-    }, [productId]);
+    }, [router.isReady, router.query.product]);
+
+    const showProductDetails = () => {
+        if (productInfo) {
+            alert(`
+            商品名稱：${productInfo.name}
+            商品配件：${productInfo.accessories}
+            訂製方式：${productInfo.customization}
+            商品單價：新台幣 ${productInfo.price} 元
+            `);
+        } else {
+            console.log('尚未獲取產品資訊');
+        }
+    };
 
     const loadCanvasFromFirebase = async () => {
         try {
@@ -273,7 +278,7 @@ const DesignGift = () => {
                             <IoArrowRedo className={DesignCSS.designButton} />
                             <IoImage className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
-                            <IoInformationCircleSharp className={DesignCSS.designButton} />
+                            <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
                             <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />
                             <IoCloudUpload className={DesignCSS.designButton} onClick={saveCanvasToFirebase} />
                             <PiFilePngFill className={DesignCSS.designButton} onClick={downloadCanvas} />
