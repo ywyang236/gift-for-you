@@ -6,6 +6,15 @@ import {IoClose} from "react-icons/io5";
 import {db} from '../lib/firebase/firebase';
 import {doc, getDoc} from 'firebase/firestore';
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
+import {collection, query, where, getDocs} from 'firebase/firestore';
+
+interface CartItem {
+    name: string;
+    image: string;
+    accessories: string;
+    customization: string;
+    price: number;
+}
 
 const Cart = () => {
     const [imageUrl, setImageUrl] = useState('');
@@ -17,6 +26,29 @@ const Cart = () => {
 
     const [discountCode, setDiscountCode] = useState('');
     const [discount, setDiscount] = useState(0);
+
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+    useEffect(() => {
+        const fetchCartItems = async () => {
+            try {
+                const userCartRef = doc(db, "user_cart");
+                const docSnap = await getDoc(userCartRef);
+
+                if (docSnap.exists()) {
+                    const cartItem = docSnap.data() as CartItem;
+                    setCartItems([cartItem]);
+                    console.log('讀取的購物車項目:', cartItem);
+                } else {
+                    console.log('沒有找到使用者的購物車內容');
+                }
+            } catch (error) {
+                console.error('讀取購物車數據時出錯:', error);
+            }
+        };
+
+        fetchCartItems();
+    }, []);
 
     useEffect(() => {
         if (discountCode === 'gift') {
@@ -73,43 +105,45 @@ const Cart = () => {
             <div className={CartCSS.main}>
                 <div className={CartCSS.container}>
                     <div className={CartCSS.leftContainer}>
-                        <div className={CartCSS.itemContainer}>
-                            <IoClose className={CartCSS.itemRemove}>商品刪除</IoClose>
-                            <div className={CartCSS.itemImageContainer}>
-                                <div className={CartCSS.itemImageBackground}>
-                                    {imageUrl && <div className={CartCSS.itemImage} style={{backgroundImage: `url(${imageUrl})`}}></div>}
+                        {cartItems.map((item, index) => (
+                            <div key={index} className={CartCSS.itemContainer}>
+                                <IoClose className={CartCSS.itemRemove}>商品刪除</IoClose>
+                                <div className={CartCSS.itemImageContainer}>
+                                    <div className={CartCSS.itemImageBackground}>
+                                        {item.image && <div className={CartCSS.itemImage} style={{backgroundImage: `url(${item.image})`}}></div>}
+                                    </div>
                                 </div>
+                                <div className={CartCSS.itemLeftContainer}>
+                                    <div className={CartCSS.itemTitleContainer}>
+                                        <span className={CartCSS.itemTitle}>商品名稱：</span>
+                                        <span className={CartCSS.itemTitleText}>{item.name}</span>
+                                    </div>
+                                    <div className={CartCSS.itemAccessoriesContainer}>
+                                        <span className={CartCSS.itemAccessoriesTitle}>商品配件：</span>
+                                        <span className={CartCSS.itemAccessoriesText}>{item.accessories}</span>
+                                    </div>
+                                    <div className={CartCSS.itemCustomizationContainer}>
+                                        <span className={CartCSS.itemCustomizationTitle}>訂製方式：</span>
+                                        <span className={CartCSS.itemCustomizationText}>{item.customization}</span>
+                                    </div>
+                                    <div className={CartCSS.itemPriceContainer}>
+                                        <span className={CartCSS.itemPriceTitle}>商品單價：</span>
+                                        <span className={CartCSS.itemPrice}>新台幣 {item.price} 元</span>
+                                    </div>
+                                    <div className={CartCSS.itemQuantityContainer}>
+                                        <span className={CartCSS.itemQuantityTitle}>訂購數量：</span>
+                                        <input
+                                            type="number"
+                                            className={CartCSS.itemQuantityInput}
+                                            value={quantity}
+                                            onChange={handleQuantityChange}
+                                        ></input>
+                                        <span className={CartCSS.itemQuantityUnit}> 組</span>
+                                    </div>
+                                </div>
+                                <div className={CartCSS.itemSubtotalContainer}>$ {itemPrice}</div>
                             </div>
-                            <div className={CartCSS.itemLeftContainer}>
-                                <div className={CartCSS.itemTitleContainer}>
-                                    <span className={CartCSS.itemTitle}>產品名稱：</span>
-                                    <span className={CartCSS.itemTitleText}>幾何造型夜燈</span>
-                                </div>
-                                <div className={CartCSS.itemAccessoriesContainer}>
-                                    <span className={CartCSS.itemAccessoriesTitle}>產品配件：</span>
-                                    <span className={CartCSS.itemAccessoriesText}>客製化燈板、燈座</span>
-                                </div>
-                                <div className={CartCSS.itemCustomizationContainer}>
-                                    <span className={CartCSS.itemCustomizationTitle}>訂製方式：</span>
-                                    <span className={CartCSS.itemCustomizationText}>雷射雕刻</span>
-                                </div>
-                                <div className={CartCSS.itemPriceContainer}>
-                                    <span className={CartCSS.itemPriceTitle}>商品單價：</span>
-                                    <span className={CartCSS.itemPrice}>新台幣 899 元</span>
-                                </div>
-                                <div className={CartCSS.itemQuantityContainer}>
-                                    <span className={CartCSS.itemQuantityTitle}>訂購數量：</span>
-                                    <input
-                                        type="number"
-                                        className={CartCSS.itemQuantityInput}
-                                        value={quantity}
-                                        onChange={handleQuantityChange}
-                                    ></input>
-                                    <span className={CartCSS.itemQuantityUnit}> 組</span>
-                                </div>
-                            </div>
-                            <div className={CartCSS.itemSubtotalContainer}>$ {itemPrice}</div>
-                        </div>
+                        ))}
                         <div className={CartCSS.itemLine}></div>
                     </div>
                     <div className={CartCSS.rightContainer}>

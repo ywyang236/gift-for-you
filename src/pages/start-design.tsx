@@ -1,5 +1,5 @@
 // pages/design-gift.tsx
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
@@ -12,11 +12,13 @@ import {RootState} from '../store/types/storeTypes';
 import {setEraserSize} from '../store/slices/eraserSlice';
 import {activateBrush, activateEraser, deactivateBrush, deactivateEraser} from '../store/sharedActions';
 import {db} from '../lib/firebase/firebase';
-import {collection, addDoc, getDocs, doc, setDoc, getDoc} from 'firebase/firestore';
+import {collection, addDoc, getDocs, doc, setDoc, getDoc, updateDoc, arrayUnion} from 'firebase/firestore';
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import Link from 'next/link';
 import {PiFilePngFill, PiFileSvgFill} from "react-icons/pi";
 import {useRouter} from 'next/router';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+
 
 interface ProductInfo {
     name: string;
@@ -42,6 +44,35 @@ const DesignGift = () => {
     const [backgroundImage, setBackgroundImage] = useState('');
     const [productName, setProductName] = useState('-');
     const [productInfo, setProductInfo] = useState<ProductInfo | null>(null);
+    const [userId, setUserId] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (userId) {
+            const userCollectionRef = collection(db, "users", userId, "data");
+            getDocs(userCollectionRef).then((snapshot) => {
+                if (snapshot.empty) {
+                    const canvasDataRef = doc(userCollectionRef, "canvasData");
+                    setDoc(canvasDataRef, {paths: [], createdAt: new Date()});
+
+                    const userCartRef = doc(userCollectionRef, "user_cart");
+                    setDoc(userCartRef, {items: [], createdAt: new Date()});
+                }
+            });
+        }
+    }, [userId]);
+
+    useEffect(() => {
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserId(user.uid);
+            } else {
+                setUserId(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     useEffect(() => {
         if (!router.isReady) return;
@@ -92,19 +123,29 @@ const DesignGift = () => {
         }
     };
 
-    const loadCanvasFromFirebase = async () => {
-        try {
-            const querySnapshot = await getDocs(collection(db, "canvasData"));
-            querySnapshot.forEach((doc) => {
-                setPaths(doc.data().paths);
-            });
-        } catch (error) {
+    const loadCanvasFromFirebase = useCallback(async () => {
+        if (!userId) {
+            console.log('用戶未登入');
+            return;
         }
-    };
+
+        try {
+            const docRef = doc(db, "canvasData", userId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                setPaths(docSnap.data().paths);
+            } else {
+                console.log('找不到畫布數據');
+            }
+        } catch (error) {
+            console.error('錯誤加載畫布數據:', error);
+        }
+    }, [userId]);
 
     useEffect(() => {
         loadCanvasFromFirebase();
-    }, []);
+    }, [loadCanvasFromFirebase]);
 
     const handleToggleBrush = () => {
         if (eraserActive) {
@@ -181,7 +222,10 @@ const DesignGift = () => {
     };
 
     const saveCanvasToFirebase = async () => {
-        const userId = 'user_canvas';
+        if (!userId) {
+            console.log('用戶未登入');
+            return;
+        }
         const canvas = document.createElement('canvas');
         canvas.width = canvasSize.width;
         canvas.height = canvasSize.height;
@@ -194,12 +238,14 @@ const DesignGift = () => {
         const imgBlob = await (await fetch(image)).blob();
         await uploadBytes(storageRef, imgBlob);
 
-        const docRef = doc(db, "canvasData", userId);
-        await setDoc(docRef, {
-            paths: paths,
-            createdAt: new Date(),
-            imageUrl: `canvasImages/${imageName}`
-        }, {merge: true});
+        if (userId) {
+            const userCanvasDataRef = doc(db, "users", userId, "data", "canvasData");
+            await setDoc(userCanvasDataRef, {
+                paths: paths,
+                createdAt: new Date(),
+                imageUrl: `canvasImages/${imageName}`
+            }, {merge: true});
+        }
     };
 
     const addToCart = async () => {
@@ -243,8 +289,12 @@ const DesignGift = () => {
             canvasImage: image
         };
 
-        const userCartRef = collection(db, "user_cart");
-        await addDoc(userCartRef, cartItem);
+        if (userId) {
+            const userCartRef = doc(db, "users", userId, "data", "user_cart");
+            await updateDoc(userCartRef, {
+                items: arrayUnion(cartItem)
+            });
+        }
 
         alert('已成功加入購物車');
         window.location.href = '/cart';
