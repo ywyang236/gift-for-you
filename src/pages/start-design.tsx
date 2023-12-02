@@ -202,7 +202,7 @@ const DesignGift = () => {
         }, {merge: true});
     };
 
-    const saveDataToFirebase = async () => {
+    const addToCart = async () => {
         const confirmSave = window.confirm("加入購物車後就不能再修改了，您確定要繼續嗎？");
         if (!confirmSave) return;
 
@@ -226,6 +226,25 @@ const DesignGift = () => {
             createdAt: new Date(),
             imageUrl: `canvasImages/${imageName}`
         }, {merge: true});
+
+        if (!productInfo) {
+            console.error("產品資訊尚未加載");
+            return;
+        }
+
+        const cartItem = {
+            productId: productId,
+            name: productInfo.name,
+            accessories: productInfo.accessories,
+            customization: productInfo.customization,
+            price: productInfo.price,
+            image: backgroundImage,
+            canvasPath: `canvasImages/${imageName}`,
+            canvasImage: image
+        };
+
+        const userCartRef = collection(db, "user_cart");
+        await addDoc(userCartRef, cartItem);
 
         alert('已成功加入購物車');
         window.location.href = '/cart';
@@ -285,7 +304,7 @@ const DesignGift = () => {
                             <PiFileSvgFill className={DesignCSS.designButton} onClick={handleExportSVG} />
                             <span
                                 className={DesignCSS.addCartButton}
-                                onClick={saveDataToFirebase}
+                                onClick={addToCart}
                             >加入購物車</span>
                         </div>
                     </div>
