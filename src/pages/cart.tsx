@@ -19,7 +19,7 @@ const Cart = () => {
     const [discount, setDiscount] = useState(0);
 
     useEffect(() => {
-        if (discountCode === 'gift for you') {
+        if (discountCode === 'gift') {
             setDiscount(65);
         } else {
             setDiscount(0);
@@ -125,15 +125,14 @@ const Cart = () => {
 
                         </div>
                         <div className={CartCSS.discountCodeContainer}>
-                            <div><span>折扣碼：</span>
-                                <input
-                                    type="text"
-                                    placeholder="輸入 gift for you 免運費"
-                                    value={discountCode}
-                                    onChange={handleDiscountCodeChange}
-                                    className={CartCSS.discountCodeInput}
-                                />
-                            </div>
+                            <span className={CartCSS.discountCodeTitle}> 折扣碼：</span>
+                            <input
+                                type="text"
+                                placeholder="輸入 gift 免運費"
+                                value={discountCode}
+                                onChange={handleDiscountCodeChange}
+                                className={CartCSS.discountCodeInput}
+                            />
                         </div>
                         <div className={CartCSS.itemLine}></div>
                         <div className={CartCSS.priceShippingFeeContainer}>
