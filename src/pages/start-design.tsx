@@ -225,6 +225,7 @@ const DesignGift = () => {
             console.log('用戶未登入');
             return;
         }
+
         const canvas = document.createElement('canvas');
         canvas.width = canvasSize.width;
         canvas.height = canvasSize.height;
@@ -248,10 +249,14 @@ const DesignGift = () => {
     };
 
     const addToCart = async () => {
+        if (!userId) {
+            console.log('用戶未登入');
+            return;
+        }
+
         const confirmSave = window.confirm("加入購物車後就不能再修改了，您確定要繼續嗎？");
         if (!confirmSave) return;
 
-        const userId = 'user_canvas';
         const canvas = document.createElement('canvas');
         canvas.width = canvasSize.width;
         canvas.height = canvasSize.height;
@@ -265,7 +270,7 @@ const DesignGift = () => {
         const imgBlob = await (await fetch(image)).blob();
         await uploadBytes(storageRef, imgBlob);
 
-        const docRef = doc(db, "canvasData", userId);
+        const docRef = doc(db, "users", userId, "data", "canvasData");
         await setDoc(docRef, {
             paths: paths,
             createdAt: new Date(),
