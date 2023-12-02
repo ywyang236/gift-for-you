@@ -34,22 +34,6 @@ const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
         }
     };
 
-    useEffect(() => {
-        if (userId) {
-            const userCollectionRef = collection(db, "users", userId, "data");
-            getDocs(userCollectionRef).then((snapshot) => {
-                if (snapshot.empty) {
-                    // 集合不存在，創建 canvasData 和 user_cart
-                    const canvasDataRef = doc(userCollectionRef, "canvasData");
-                    setDoc(canvasDataRef, {paths: [], createdAt: new Date()});
-
-                    const userCartRef = doc(userCollectionRef, "user_cart");
-                    setDoc(userCartRef, {items: [], createdAt: new Date()});
-                }
-            });
-        }
-    }, [userId]);
-
     return ReactDOM.createPortal(
         <div className={LoginModalCSS.darkBackground} onClick={onClose}>
             <div className={LoginModalCSS.mainContainer} onClick={event => event.stopPropagation()}>
