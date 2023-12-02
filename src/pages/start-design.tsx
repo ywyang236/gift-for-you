@@ -87,18 +87,6 @@ const DesignGift = () => {
         fetchProductInfo();
     }, [productId]);
 
-
-
-    const saveCanvasToFirebase = async () => {
-        try {
-            await addDoc(collection(db, "canvasData"), {
-                paths: paths,
-                createdAt: new Date()
-            });
-        } catch (error) {
-        }
-    };
-
     const loadCanvasFromFirebase = async () => {
         try {
             const querySnapshot = await getDocs(collection(db, "canvasData"));
@@ -187,18 +175,40 @@ const DesignGift = () => {
         link.click();
     };
 
-    const saveDataToFirebase = async () => {
-        const confirmSave = window.confirm("加入購物車後就不能再修改了，您確定要繼續嗎？");
-        if (!confirmSave) return;
-
-        const userId = 'some_unique_user_id';
+    const saveCanvasToFirebase = async () => {
+        const userId = 'user_canvas';
         const canvas = document.createElement('canvas');
         canvas.width = canvasSize.width;
         canvas.height = canvasSize.height;
         drawPathsOnCanvas(canvas);
 
         const image = canvas.toDataURL('image/png', 1.0);
-        const imageName = `Gift-For-You-${new Date().toLocaleDateString()}.png`;
+        const imageName = `Canvas-${new Date().toLocaleDateString()}.png`;
+        const storage = getStorage();
+        const storageRef = ref(storage, `canvasImages/${imageName}`);
+        const imgBlob = await (await fetch(image)).blob();
+        await uploadBytes(storageRef, imgBlob);
+
+        const docRef = doc(db, "canvasData", userId);
+        await setDoc(docRef, {
+            paths: paths,
+            createdAt: new Date(),
+            imageUrl: `canvasImages/${imageName}`
+        }, {merge: true});
+    };
+
+    const saveDataToFirebase = async () => {
+        const confirmSave = window.confirm("加入購物車後就不能再修改了，您確定要繼續嗎？");
+        if (!confirmSave) return;
+
+        const userId = 'user_canvas';
+        const canvas = document.createElement('canvas');
+        canvas.width = canvasSize.width;
+        canvas.height = canvasSize.height;
+        drawPathsOnCanvas(canvas);
+
+        const image = canvas.toDataURL('image/png', 1.0);
+        const imageName = `Gift-${productId}-${new Date().toLocaleDateString()}.png`;
 
         const storage = getStorage();
         const storageRef = ref(storage, `canvasImages/${imageName}`);

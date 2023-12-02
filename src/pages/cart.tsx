@@ -43,7 +43,7 @@ const Cart = () => {
     useEffect(() => {
         const fetchImage = async () => {
             try {
-                const userId = 'some_unique_user_id';
+                const userId = 'user_canvas';
                 const docRef = doc(db, "canvasData", userId);
                 const docSnap = await getDoc(docRef);
 
