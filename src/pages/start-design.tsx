@@ -129,17 +129,16 @@ const DesignGift = () => {
             return;
         }
 
-        try {
-            const docRef = doc(db, "canvasData", userId);
-            const docSnap = await getDoc(docRef);
+        const userCanvasDataRef = doc(db, "users", userId, "data", "canvasData");
+        const docSnap = await getDoc(userCanvasDataRef);
 
-            if (docSnap.exists()) {
-                setPaths(docSnap.data().paths);
-            } else {
-                console.log('找不到畫布數據');
+        if (docSnap.exists()) {
+            const canvasData = docSnap.data();
+            if (canvasData) {
+                setPaths(canvasData.paths);
             }
-        } catch (error) {
-            console.error('錯誤加載畫布數據:', error);
+        } else {
+            console.log('沒有找到用戶的畫布數據');
         }
     }, [userId]);
 
