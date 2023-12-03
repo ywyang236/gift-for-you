@@ -1,0 +1,112 @@
+/* ../styles/thank.module.css */
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    background-image: url('/images/gift-town-all.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: 0px;
+}
+
+.backgroundContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(3px);
+    margin: 0px auto;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 92%;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 60px 0px 60px;
+    position: relative;
+    margin: 10px auto;
+}
+
+
+.iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #448899;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 50px;
+    padding: 40px;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border: 5px solid #448899;
+    border-radius: 50%;
+    position: relative;
+    animation: scaleUp 0.6s forwards;
+}
+
+.tick {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-45%, -45%);
+    width: 50px;
+    height: 50px;
+}
+
+.thankYou {
+    opacity: 0;
+    animation: revealText 1s forwards 1.2s;
+    /* Starts after circle and tick animations */
+}
+
+/* Animations */
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes revealText {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* SVG styles */
+.checkmark {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: draw 1s forwards 0.6s;
+    /* starts after circle animation */
+}
+
+@keyframes draw {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
