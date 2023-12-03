@@ -272,7 +272,7 @@ const DesignGift = () => {
 
         const docRef = doc(db, "users", userId, "data", "canvasData");
         await setDoc(docRef, {
-            paths: paths,
+            paths: [],
             createdAt: new Date(),
             imageUrl: `canvasImages/${imageName}`
         }, {merge: true});
@@ -302,6 +302,7 @@ const DesignGift = () => {
         }
 
         alert('已成功加入購物車');
+        setPaths([]);
         window.location.href = '/cart';
     };
 
