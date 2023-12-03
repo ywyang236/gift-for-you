@@ -4,7 +4,7 @@ import Layout from '../app/layout';
 import CartCSS from '../styles/cart.module.css';
 import {IoClose} from "react-icons/io5";
 import {db} from '../lib/firebase/firebase';
-import {doc, getDoc} from 'firebase/firestore';
+import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {collection, query, where, getDocs} from 'firebase/firestore';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
@@ -28,6 +28,24 @@ const Cart = () => {
     const [discount, setDiscount] = useState(0);
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [userId, setUserId] = useState<string | null>(null);
+
+    const handleRemoveItem = async (itemIndex: number) => {
+        const itemToRemove = cartItems[itemIndex];
+        const updatedItems = cartItems.filter((_, idx) => idx !== itemIndex);
+
+        try {
+            if (userId) {
+                const userCartRef = doc(db, "users", userId, "data", "user_cart");
+                await updateDoc(userCartRef, {
+                    items: updatedItems
+                });
+                setCartItems(updatedItems);
+                console.log('項目成功刪除');
+            };
+        } catch (error) {
+            console.error('刪除項目時出錯:', error);
+        }
+    }
 
     useEffect(() => {
         const itemsTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -117,7 +135,7 @@ const Cart = () => {
                         {cartItems.map((item, index) => (
                             <>
                                 <div key={index} className={CartCSS.itemContainer}>
-                                    <IoClose className={CartCSS.itemRemove}>商品刪除</IoClose>
+                                    <IoClose className={CartCSS.itemRemove} onClick={() => handleRemoveItem(index)}></IoClose>
                                     <div className={CartCSS.itemImageContainer}>
                                         {item.image && <div className={CartCSS.itemImageBackground} style={{backgroundImage: `url(${item.image})`}}></div>}
                                         {item.canvasImage && <div className={CartCSS.itemImage} style={{backgroundImage: `url(${item.canvasImage})`}}></div>}

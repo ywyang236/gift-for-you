@@ -283,6 +283,7 @@ const DesignGift = () => {
         }
 
         const cartItem = {
+            id: Date.now().toString(),
             productId: productId,
             name: productInfo.name,
             accessories: productInfo.accessories,
