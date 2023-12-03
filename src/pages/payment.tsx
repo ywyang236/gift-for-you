@@ -1,9 +1,61 @@
 // pages/payment.tsx
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from '../app/layout';
 import PaymentCSS from '../styles/payment.module.css';
+import {db} from '../lib/firebase/firebase';
+import {doc, getDoc} from 'firebase/firestore';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+
+interface PaymentInfo {
+    items: Array<{
+        name: string;
+        accessories: string;
+        customization: string;
+        price: number;
+        quantity: number;
+        amount: number;
+        subtotal: number;
+        itemImage: string;
+        userCanvas: string;
+    }>;
+    totalAmount: number;
+    discount: number;
+    shippingFee: number;
+}
 
 const Payment = () => {
+    const [userId, setUserId] = useState<string | null>(null);
+    const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null);
+
+    useEffect(() => {
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserId(user.uid);
+                fetchPaymentInfo(user.uid);
+            } else {
+                setUserId(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    const fetchPaymentInfo = async (uid: string) => {
+        try {
+            const userPaymentRef = doc(db, "users", uid, "data", "user_payment");
+            const docSnap = await getDoc(userPaymentRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data() as PaymentInfo;
+                setPaymentInfo(data);
+            } else {
+                console.log('沒有找到使用者的付款資訊');
+            }
+        } catch (error) {
+            console.error('讀取付款資訊時出錯:', error);
+        }
+    };
 
     return (
         <Layout>
@@ -12,17 +64,31 @@ const Payment = () => {
                     <div className={PaymentCSS.cartContainer}>
                         <div className={PaymentCSS.cartTitle}>購買細節</div>
                         <div className={PaymentCSS.cartContent}>
-                            <div className={PaymentCSS.cartContentLeft}>
-                                <div className={PaymentCSS.cartContentBackground}></div>
-                                <div className={PaymentCSS.cartContentCanvas}></div>
-                            </div>
-                            <div className={PaymentCSS.cartContentRight}>
-                                <div className={PaymentCSS.cartContentText}>商品名稱：</div>
-                                <div className={PaymentCSS.cartContentText}>商品配件：</div>
-                                <div className={PaymentCSS.cartContentText}>訂製方式：</div>
-                                <div className={PaymentCSS.cartContentText}>訂購數量：</div>
-                                <div className={PaymentCSS.cartContentText}>訂單金額：</div>
-                            </div>
+                            {paymentInfo && paymentInfo.items.map((item, index) => (
+                                <div className={PaymentCSS.cartContentItem} key={index}>
+                                    <div className={PaymentCSS.cartContentLeft}>
+                                        {item.itemImage && <div className={PaymentCSS.cartContentBackground} style={{backgroundImage: `url(${item.itemImage})`}}></div>}
+                                        {item.userCanvas && <div className={PaymentCSS.cartContentCanvas} style={{backgroundImage: `url(${item.userCanvas})`}}></div>}
+                                    </div>
+                                    <div className={PaymentCSS.cartContentRight}>
+                                        <div className={PaymentCSS.cartContentText}>商品名稱：{item.name}</div>
+                                        <div className={PaymentCSS.cartContentText}>商品配件：{item.accessories}</div>
+                                        <div className={PaymentCSS.cartContentText}>訂製方式：{item.customization}</div>
+                                        <div className={PaymentCSS.cartContentText}>商品單價：{item.price}</div>
+                                        <div className={PaymentCSS.cartContentText}>訂購數量：{item.quantity}</div>
+                                        <div className={PaymentCSS.cartContentText}>商品金額：{item.subtotal}</div>
+                                    </div>
+                                </div>
+                            ))}
+                            {paymentInfo && (
+                                <>
+                                    <div className={PaymentCSS.cartContentFinal}>
+                                        <div className={PaymentCSS.cartContentFinalContainer}>總付款金額：
+                                            <div className={PaymentCSS.cartContentTotal}>新台幣 {paymentInfo.totalAmount} 元</div>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                     <div className={PaymentCSS.orderContainer}>

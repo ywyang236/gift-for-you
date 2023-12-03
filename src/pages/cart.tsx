@@ -4,7 +4,7 @@ import Layout from '../app/layout';
 import CartCSS from '../styles/cart.module.css';
 import {IoClose} from "react-icons/io5";
 import {db} from '../lib/firebase/firebase';
-import {doc, getDoc, updateDoc} from 'firebase/firestore';
+import {doc, getDoc, setDoc, updateDoc} from 'firebase/firestore';
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {collection, query, where, getDocs} from 'firebase/firestore';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
@@ -114,12 +114,18 @@ const Cart = () => {
     }, [userId]);
 
     useEffect(() => {
+        const itemsTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        let finalShippingFee = shippingFee;
+
         if (discountCode === 'gift') {
             setDiscount(65);
+            finalShippingFee = 0;
         } else {
             setDiscount(0);
         }
-    }, [discountCode]);
+
+        setTotalAmount(itemsTotal + finalShippingFee - discount);
+    }, [cartItems, discount, shippingFee, discountCode]);
 
     const handleDiscountCodeChange = (event: {target: {value: any;};}) => {
         setDiscountCode(event.target.value);
@@ -130,9 +136,41 @@ const Cart = () => {
         handleItemQuantityChange(index, newQuantity < 1 ? 1 : newQuantity);
     };
 
-    const handleCheckout = () => {
-        window.location.href = '/payment';
+    const handleCheckout = async () => {
+        if (!userId) {
+            console.log('用戶未登入');
+            return;
+        }
+
+        try {
+            const finalShippingFee = discountCode === 'gift' ? 0 : shippingFee;
+
+            const paymentInfo = {
+                items: cartItems.map(item => ({
+                    itemImage: item.image,
+                    userCanvas: item.canvasImage,
+                    name: item.name,
+                    accessories: item.accessories,
+                    customization: item.customization,
+                    quantity: item.quantity,
+                    price: item.price,
+                    subtotal: item.price * item.quantity
+                })),
+                totalAmount: totalAmount,
+                discount: discount,
+                shippingFee: finalShippingFee
+            };
+
+            const userPaymentRef = doc(db, "users", userId, "data", "user_payment");
+            await setDoc(userPaymentRef, paymentInfo);
+
+            console.log('付款資訊已儲存');
+            window.location.href = '/payment';
+        } catch (error) {
+            console.error('儲存付款資訊時出錯:', error);
+        }
     }
+
 
     return (
         <Layout>
@@ -141,7 +179,7 @@ const Cart = () => {
                     <div className={CartCSS.container}>
                         <div className={CartCSS.leftContainer}>
                             {cartItems.map((item, index) => (
-                                <>
+                                <React.Fragment key={index}>
                                     <div key={index} className={CartCSS.itemContainer}>
                                         <IoClose className={CartCSS.itemRemove} onClick={() => handleRemoveItem(index)}></IoClose>
                                         <div className={CartCSS.itemImageContainer}>
@@ -179,7 +217,7 @@ const Cart = () => {
                                         <div className={CartCSS.itemSubtotalContainer}>$ {item.price * item.quantity}</div>
                                     </div>
                                     <div className={CartCSS.itemLine}></div>
-                                </>
+                                </React.Fragment>
                             ))}
                         </div>
                         <div className={CartCSS.rightContainer}>

@@ -5,9 +5,10 @@
     align-items: center;
     width: 100%;
     flex: 1;
-    background-image: url('/images/gift-town.png');
+    background-image: url('/images/gift-town-all.png');
     background-size: cover;
-    background-position: left;
+    background-repeat: no-repeat;
+    background-position-x: 0;
 }
 
 .mainBackground {

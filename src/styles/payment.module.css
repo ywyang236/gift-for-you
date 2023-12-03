@@ -5,9 +5,10 @@
     align-items: center;
     width: 100%;
     flex: 1;
-    background-image: url('/images/gift-town.png');
+    background-image: url('/images/gift-town-all.png');
     background-size: cover;
-    background-position: left;
+    background-repeat: no-repeat;
+    background-position-x: -1000px;
 }
 
 .container {
@@ -22,7 +23,22 @@
     padding-bottom: 30px;
 }
 
-.cartContainer,
+.cartContainer {
+    max-width: 1200px;
+    width: 92%;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 40px 0px 40px;
+    position: relative;
+    margin: 10px auto;
+}
+
 .orderContainer,
 .recipientContainer,
 .cardContainer {
@@ -31,7 +47,7 @@
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(5px);
     border-radius: 10px;
-    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -120,13 +136,13 @@
 }
 
 .cartContent {
-    display: flex;
-    align-items: flex-start;
     width: 100%;
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
-.cartContent,
+
 .orderContent,
 .recipientContent,
 .cardContent {
@@ -166,7 +182,7 @@
     }
 }
 
-.cartContentText,
+
 .orderName,
 .orderEmail,
 .orderPhone,
@@ -181,12 +197,21 @@
     font-size: 16px;
     font-weight: 500;
     color: #1D445D;
+    flex-shrink: 0;
+    margin-bottom: 20px;
+}
+
+.cartContentItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-bottom: 20px;
     flex-shrink: 0;
+    height: 150px;
 }
 
 .cartContentLeft {
-    max-width: 200px;
+    max-width: 150px;
     width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
@@ -194,22 +219,34 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    position: relative;
 }
 
 .cartContentBackground {
-    background-image: url('/images/design1.jpeg');
+    /* background-image: url('/images/design1.jpeg'); */
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    position: absolute;
+}
+
+.cartContentCanvas {
+    max-width: 75%;
     width: 100%;
-    height: 100%;
+    height: 70%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 11px;
 }
 
 .cartContentRight {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
     margin-left: 20px;
     flex-shrink: 0;
 }
@@ -247,4 +284,35 @@
 .cardCVVInput:focus {
     outline: none !important;
     border: 2px solid rgb(30, 105, 128);
+}
+
+.cartContentFinal {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.cartContentFinalContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 320px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1D445D;
+    flex-shrink: 0;
+    height: 40px;
+}
+
+.cartContentTotal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: #3686A5;
+    flex-shrink: 0;
+    height: 40px;
 }
