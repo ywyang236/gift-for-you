@@ -14,7 +14,7 @@ const Home = () => {
     const [isRegisterModalVisible, setIsRegisterModalVisible] = React.useState(false);
 
     const products = [
-        {id: '001', firebaseId: 'q5hXfGpWqPiEnbrzbhbC', name: "幾何造型夜燈", accessories: ["客製化燈板", "燈座"], customization: "雷射雕刻", price: 899, image: 'gs://gift-for-you-2023.appspot.com/itemImage/design1.jpeg'},
+        {id: '001', firebaseId: 'q5hXfGpWqPiEnbrzbhbC', name: "幾何造型夜燈", accessories: ["客製化燈板", "燈座"], customization: "雷射雕刻", price: 899, image: 'gs://gift-for-you-2023.appspot.com/itemImage/design_001.png'},
     ];
 
     const fetchProductInfo = async (firebaseId: string) => {
