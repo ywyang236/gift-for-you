@@ -6,8 +6,10 @@ import WebsiteCSS from '../styles/website.module.css';
 const AboutWebsite = () => (
     <Layout>
         <div className={WebsiteCSS.main}>
-            <div className={WebsiteCSS.container}>
-                <h1>關於禮品訂製所</h1>
+            <div className={WebsiteCSS.backgroundContainer}>
+                <div className={WebsiteCSS.container}>
+                    <h1>關於禮品訂製所</h1>
+                </div>
             </div>
         </div>
     </Layout>
