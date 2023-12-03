@@ -6,8 +6,10 @@ import AboutAuthorCSS from '../styles/author.module.css';
 const AboutAuthor = () => (
     <Layout>
         <div className={AboutAuthorCSS.main}>
-            <div className={AboutAuthorCSS.container}>
-                <h1>關於作者</h1>
+            <div className={AboutAuthorCSS.backgroundContainer}>
+                <div className={AboutAuthorCSS.container}>
+                    <h1>關於作者</h1>
+                </div>
             </div>
         </div>
     </Layout>
