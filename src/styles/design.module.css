@@ -120,10 +120,9 @@
 }
 
 .designItem {
-    /* background-image: url('/images/design1.jpeg'); */
     background-size: cover;
-    background-position: center;
-    overflow: hidden;
+    /* background-position: center; */
+    /* overflow: hidden; */
     width: 600px;
     height: 600px;
     position: static;
@@ -134,6 +133,8 @@
     z-index: 2;
     margin-left: 70px;
     margin-top: 40px;
+    width: 460px;
+    height: 430px;
 }
 
 .designToolsContainer {
