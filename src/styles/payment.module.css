@@ -233,3 +233,18 @@
     font-weight: 500;
     color: #575758;
 }
+
+
+.orderNameInput:focus,
+.orderEmailInput:focus,
+.orderPhoneInput:focus,
+.recipientNameInput:focus,
+.recipientPhoneInput:focus,
+.recipientAddressInput:focus,
+.cardNameInput:focus,
+.cardNumberInput:focus,
+.cardExpiryInput:focus,
+.cardCVVInput:focus {
+    outline: none !important;
+    border: 2px solid rgb(30, 105, 128);
+}

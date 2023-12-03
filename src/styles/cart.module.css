@@ -147,16 +147,21 @@
 
 .itemQuantityInput {
     width: 20%;
-    height: 20px;
+    height: 30px;
     padding: 0 10px;
     font-size: 16px;
-    border: 2px solidrgb(221, 221, 221)7;
+    border-radius: 5px;
+    border: 1px solid #c5c5c5;
+    padding: 0px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #575758;
     text-align: center;
 }
 
 .itemQuantityInput:focus {
     outline: none !important;
-    border: 2px solid #36B2D7;
+    border: 2px solid #1e687f;
 }
 
 .itemSubtotalContainer {
@@ -241,6 +246,18 @@
     font-size: 16px;
     font-weight: 500;
     padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #c5c5c5;
+    padding: 0px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #575758;
+    text-align: center;
+}
+
+.discountCodeInput:focus {
+    outline: none !important;
+    border: 2px solid rgb(30, 105, 128);
 }
 
 .checkoutButton {
