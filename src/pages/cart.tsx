@@ -83,7 +83,11 @@ const Cart = () => {
     };
 
     const handleQuantityChange = (event: {target: {value: any;};}) => {
-        const newQuantity = event.target.value;
+        let newQuantity = parseInt(event.target.value);
+        if (newQuantity < 1) {
+            newQuantity = 1;
+        }
+        setQuantity(newQuantity);
         setQuantity(newQuantity);
     };
 
