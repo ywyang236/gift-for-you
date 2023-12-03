@@ -8,8 +8,10 @@ import {doc, getDoc} from 'firebase/firestore';
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {collection, query, where, getDocs} from 'firebase/firestore';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import Image from 'next/image';
 
 interface CartItem {
+    canvasImage: string;
     name: string;
     image: string;
     accessories: string;
@@ -105,9 +107,8 @@ const Cart = () => {
                                 <div key={index} className={CartCSS.itemContainer}>
                                     <IoClose className={CartCSS.itemRemove}>商品刪除</IoClose>
                                     <div className={CartCSS.itemImageContainer}>
-                                        <div className={CartCSS.itemImageBackground}>
-                                            {item.image && <div className={CartCSS.itemImage} style={{backgroundImage: `url(${item.image})`}}></div>}
-                                        </div>
+                                        {item.image && <div className={CartCSS.itemImageBackground} style={{backgroundImage: `url(${item.image})`}}></div>}
+                                        {item.canvasImage && <div className={CartCSS.itemImage} style={{backgroundImage: `url(${item.canvasImage})`}}></div>}
                                     </div>
                                     <div className={CartCSS.itemLeftContainer}>
                                         <div className={CartCSS.itemTitleContainer}>
