@@ -52,7 +52,7 @@ const Cart = () => {
         setTotalAmount(itemsTotal + shippingFee - discount);
     }, [cartItems, discount, shippingFee]);
 
-    const handleItemQuantityChange = (index: number, newQuantity: number) => {
+    const handleItemQuantityChange = async (index: number, newQuantity: number) => {
         const updatedItems = cartItems.map((item, idx) => {
             if (idx === index) {
                 return {...item, quantity: newQuantity < 1 ? 1 : newQuantity};
@@ -60,6 +60,13 @@ const Cart = () => {
             return item;
         });
         setCartItems(updatedItems);
+
+        if (userId) {
+            const userCartRef = doc(db, "users", userId, "data", "user_cart");
+            await updateDoc(userCartRef, {
+                items: updatedItems
+            });
+        }
     };
 
     useEffect(() => {
