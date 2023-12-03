@@ -143,13 +143,33 @@ const Payment = () => {
                 return;
             }
 
-            window.TPDirect.card.getPrime((result: TappayResult) => {
+            window.TPDirect.card.getPrime(async (result: TappayResult) => {
                 if (result.status !== 0) {
                     console.error('取得 prime 錯誤:', result.msg);
                     return;
                 }
                 const prime = result.card.prime;
                 console.log('prime:', prime);
+
+                try {
+                    const response = await fetch('/api/payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            prime,
+                            amount: paymentInfo?.totalAmount,
+                            userId
+                        }),
+                    });
+
+                    const responseData = await response.json();
+                    console.log('付款請求成功:', responseData);
+
+                } catch (error) {
+                    console.error('付款請求失敗:', error);
+                }
             });
         }
     };
