@@ -34,7 +34,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0px 40px 0px 40px;
+    padding: 0px 60px 0px 60px;
     position: relative;
     margin: 10px auto;
 }
@@ -52,7 +52,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0px 40px 40px 40px;
+    padding: 0px 60px 40px 60px;
     position: relative;
     margin: 10px auto;
 }
@@ -149,6 +149,8 @@
     margin: 0 auto;
     max-width: 1200px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 @media (max-width: 1200px) {
@@ -193,12 +195,14 @@
 .cardName,
 .cardNumber,
 .cardExpiry,
-.cardCVV {
+.cardCCV {
     font-size: 16px;
     font-weight: 500;
     color: #1D445D;
     flex-shrink: 0;
     margin-bottom: 20px;
+    /* display: flex; */
+    /* flex-direction: row; */
 }
 
 .cartContentItem {
@@ -256,11 +260,7 @@
 .orderPhoneInput,
 .recipientNameInput,
 .recipientPhoneInput,
-.recipientAddressInput,
-.cardNameInput,
-.cardNumberInput,
-.cardExpiryInput,
-.cardCVVInput {
+.recipientAddressInput {
     width: 400px;
     height: 40px;
     border-radius: 5px;
@@ -281,7 +281,7 @@
 .cardNameInput:focus,
 .cardNumberInput:focus,
 .cardExpiryInput:focus,
-.cardCVVInput:focus {
+.cardCCVInput:focus {
     outline: none !important;
     border: 2px solid rgb(30, 105, 128);
 }
@@ -315,4 +315,49 @@
     color: #3686A5;
     flex-shrink: 0;
     height: 40px;
+}
+
+
+.checkoutButton {
+    background-color: #1A5665;
+    color: white;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 24px;
+    margin-top: 35px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkoutButton:hover {
+    background-color: #36B2D8;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.checkoutButton:active {
+    background-color: #3686A5;
+    text-shadow: none;
+}
+
+
+.cardNumber,
+.cardExpiry,
+.cardCCV {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tpfield {
+    height: 40px;
+    width: 400px;
+    border: 1px solid #c5c5c5;
+    background-color: white;
+    border-radius: 5px;
+    margin: 5px 0;
+    padding: 0px 10px;
 }

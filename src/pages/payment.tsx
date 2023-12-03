@@ -5,6 +5,7 @@ import PaymentCSS from '../styles/payment.module.css';
 import {db} from '../lib/firebase/firebase';
 import {doc, getDoc} from 'firebase/firestore';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import Script from 'next/script';
 
 interface PaymentInfo {
     items: Array<{
@@ -22,6 +23,23 @@ interface PaymentInfo {
     discount: number;
     shippingFee: number;
 }
+
+interface Window {
+    TPDirect: any;
+}
+
+interface TappayStatus {
+    canGetPrime: boolean;
+}
+
+interface TappayResult {
+    status: number;
+    msg: string;
+    card: {
+        prime: string;
+    };
+}
+
 
 const Payment = () => {
     const [userId, setUserId] = useState<string | null>(null);
@@ -57,8 +75,91 @@ const Payment = () => {
         }
     };
 
+    useEffect(() => {
+        const appId = 137136;
+        const appKey = 'app_YlFT6NTU0WxvmwPuCXBCWlWDOFTCWaLSNO5coGRFCLu4I6Dbd4pQlVtNAVqe';
+
+        const setupTPDirect = () => {
+            if (window.TPDirect) {
+                window.TPDirect.setupSDK(appId, appKey, 'sandbox');
+
+                let fields = {
+                    number: {
+                        element: '#card-number',
+                        placeholder: '**** **** **** ****'
+                    },
+                    expirationDate: {
+                        element: document.getElementById('card-expiration-date'),
+                        placeholder: 'MM / YY'
+                    },
+                    ccv: {
+                        element: '#card-ccv',
+                        placeholder: '後三碼'
+                    }
+                };
+                window.TPDirect.card.setup({
+                    fields: fields,
+                    styles: {
+                        'input': {
+                            'color': 'gray'
+                        },
+                        ':focus': {
+                            'color': 'black'
+                        },
+                        '.valid': {
+                            'color': 'green'
+                        },
+                        '.invalid': {
+                            'color': 'red'
+                        },
+                        '@media screen and (max-width: 400px)': {
+                            'input': {
+                                'color': 'orange'
+                            }
+                        }
+                    },
+                    isMaskCreditCardNumber: true,
+                    maskCreditCardNumberRange: {
+                        beginIndex: 6,
+                        endIndex: 11
+                    }
+                });
+
+            } else {
+                setTimeout(setupTPDirect, 500);
+            }
+        };
+
+        setupTPDirect();
+    }, []);
+
+    const handleSubmit = async (event: {preventDefault: () => void;}) => {
+        event.preventDefault();
+
+        if (typeof window !== "undefined" && window.TPDirect) {
+            const tappayStatus: TappayStatus = window.TPDirect.card.getTappayFieldsStatus() as TappayStatus;
+            if (!tappayStatus.canGetPrime) {
+                alert('信用卡資訊填寫錯誤');
+                return;
+            }
+
+            window.TPDirect.card.getPrime((result: TappayResult) => {
+                if (result.status !== 0) {
+                    console.error('取得 prime 錯誤:', result.msg);
+                    return;
+                }
+                const prime = result.card.prime;
+                console.log('prime:', prime);
+            });
+        }
+    };
+
     return (
         <Layout>
+            <Script
+                src="https://js.tappaysdk.com/sdk/tpdirect/v5.17.0"
+                strategy="afterInteractive"
+            />
             <div className={PaymentCSS.main}>
                 <div className={PaymentCSS.container}>
                     <div className={PaymentCSS.cartContainer}>
@@ -83,7 +184,7 @@ const Payment = () => {
                             {paymentInfo && (
                                 <>
                                     <div className={PaymentCSS.cartContentFinal}>
-                                        <div className={PaymentCSS.cartContentFinalContainer}>總付款金額：
+                                        <div className={PaymentCSS.cartContentFinalContainer}>付款金額：
                                             <div className={PaymentCSS.cartContentTotal}>新台幣 {paymentInfo.totalAmount} 元</div>
                                         </div>
                                     </div>
@@ -123,18 +224,16 @@ const Payment = () => {
                     <div className={PaymentCSS.cardContainer}>
                         <div className={PaymentCSS.cardTitle}>信用卡資訊</div>
                         <div className={PaymentCSS.cardContent}>
-                            <div className={PaymentCSS.cardName}>持卡人姓名：
-                                <input className={PaymentCSS.cardNameInput} type="text" />
-                            </div>
                             <div className={PaymentCSS.cardNumber}>信用卡卡號：
-                                <input className={PaymentCSS.cardNumberInput} type="text" />
+                                <div className={PaymentCSS.tpfield} id="card-number"></div>
                             </div>
                             <div className={PaymentCSS.cardExpiry}>有效日期：
-                                <input className={PaymentCSS.cardExpiryInput} type="text" />
+                                <div className={PaymentCSS.tpfield} id="card-expiration-date"></div>
                             </div>
-                            <div className={PaymentCSS.cardCVV}>安全碼：
-                                <input className={PaymentCSS.cardCVVInput} type="text" />
+                            <div className={PaymentCSS.cardCCV}>安全碼：
+                                <div className={PaymentCSS.tpfield} id="card-ccv"></div>
                             </div>
+                            <div className={PaymentCSS.checkoutButton} onClick={handleSubmit}>確認付款</div>
                         </div>
                     </div>
                 </div>

@@ -255,7 +255,7 @@ const Cart = () => {
                             <div
                                 className={CartCSS.checkoutButton}
                                 onClick={handleCheckout}
-                            >結帳付款</div>
+                            >確認訂購</div>
                         </div>
                     </div>
                 </div>
