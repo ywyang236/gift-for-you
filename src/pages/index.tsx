@@ -81,7 +81,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className={IndexCSS.itemsContainer}>
-                    <div id="designItems" className={IndexCSS.itemsTitle}>訂製項目</div>
+                    <div id="customItems" className={IndexCSS.itemsTitle}>訂製項目</div>
                     <div className={IndexCSS.itemsContent}>
                         {products.map(product => (
                             <div key={product.id} className={IndexCSS.itemsCard}>
