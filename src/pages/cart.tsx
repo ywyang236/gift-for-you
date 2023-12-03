@@ -163,7 +163,7 @@ const Cart = () => {
                                             </div>
                                             <div className={CartCSS.itemPriceContainer}>
                                                 <span className={CartCSS.itemPriceTitle}>商品單價：</span>
-                                                <span className={CartCSS.itemPrice}>新台幣 {item.price} 元</span>
+                                                <span className={CartCSS.itemPriceText}>新台幣 {item.price} 元</span>
                                             </div>
                                             <div className={CartCSS.itemQuantityContainer}>
                                                 <span className={CartCSS.itemQuantityTitle}>訂購數量：</span>
@@ -173,7 +173,7 @@ const Cart = () => {
                                                     value={item.quantity}
                                                     onChange={(e) => handleQuantityChange(index, e)}
                                                 ></input>
-                                                <span className={CartCSS.itemQuantityUnit}> 組</span>
+                                                <span className={CartCSS.itemQuantityText}>組</span>
                                             </div>
                                         </div>
                                         <div className={CartCSS.itemSubtotalContainer}>$ {item.price * item.quantity}</div>

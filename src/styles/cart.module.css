@@ -72,6 +72,11 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
+    color: #1D445D;
+}
+
+.itemRemove:hover {
+    color: #992626;
 }
 
 @media (max-width: 2500px) {
@@ -79,7 +84,13 @@
         top: 0px;
         right: 0px;
     }
+
+    .itemRemove:hover {
+        color: #992626;
+    }
 }
+
+
 
 .itemImageContainer {
     position: relative;
@@ -158,6 +169,7 @@
     font-weight: 500;
     color: #575758;
     text-align: center;
+    margin-right: 5px;
 }
 
 .itemQuantityInput:focus {
@@ -171,6 +183,8 @@
     right: 0px;
     font-weight: bold;
     font-size: 20px;
+    font-weight: 500;
+    color: #1D445D;
 }
 
 @media (max-width: 895px) {
@@ -179,6 +193,25 @@
     }
 }
 
+.itemTitle,
+.itemAccessoriesTitle,
+.itemCustomizationTitle,
+.itemPriceTitle,
+.itemQuantityTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1D445D;
+}
+
+.itemTitleText,
+.itemAccessoriesText,
+.itemCustomizationText,
+.itemPriceText,
+.itemQuantityText {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1D445D;
+}
 
 .rightContainer {
     width: 40%;
@@ -203,14 +236,15 @@
 
 .priceTitle {
     font-size: 20px;
-    font-weight: bold;
     margin-bottom: 30px;
+    color: #1D445D;
+    font-weight: 700;
 }
 
 .itemLine {
     width: 100%;
     height: 1px;
-    background-color: #8A8A8A;
+    background-color: #1D445D;
     margin: 20px 0;
 }
 
@@ -237,8 +271,9 @@
 .discountCodeTitle,
 .priceShippingFeeTitle,
 .priceAmountTitle {
-    font-weight: bold;
     flex-shrink: 0;
+    color: #1D445D;
+    font-weight: 700;
 }
 
 .discountCodeInput {
@@ -260,6 +295,15 @@
     outline: none !important;
     border: 2px solid rgb(30, 105, 128);
 }
+
+.priceAmount,
+.priceDiscount,
+.priceShippingFee {
+    flex-shrink: 0;
+    color: #1D445D;
+    font-weight: 500;
+}
+
 
 .checkoutButton {
     background-color: #1A5665;
