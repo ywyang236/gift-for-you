@@ -17,18 +17,32 @@ interface CartItem {
     accessories: string;
     customization: string;
     price: number;
+    quantity: number;
 }
 
 const Cart = () => {
     const [imageUrl, setImageUrl] = useState('');
-    const [quantity, setQuantity] = useState(1);
-    const [itemPrice, setItemPrice] = useState(899);
     const shippingFee = 65;
-    const [totalAmount, setTotalAmount] = useState(itemPrice + shippingFee);
+    const [totalAmount, setTotalAmount] = useState(shippingFee);
     const [discountCode, setDiscountCode] = useState('');
     const [discount, setDiscount] = useState(0);
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [userId, setUserId] = useState<string | null>(null);
+
+    useEffect(() => {
+        const itemsTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        setTotalAmount(itemsTotal + shippingFee - discount);
+    }, [cartItems, discount, shippingFee]);
+
+    const handleItemQuantityChange = (index: number, newQuantity: number) => {
+        const updatedItems = cartItems.map((item, idx) => {
+            if (idx === index) {
+                return {...item, quantity: newQuantity < 1 ? 1 : newQuantity};
+            }
+            return item;
+        });
+        setCartItems(updatedItems);
+    };
 
     useEffect(() => {
         const auth = getAuth();
@@ -57,8 +71,12 @@ const Cart = () => {
                 if (docSnap.exists()) {
                     const data = docSnap.data();
                     if (data.items && Array.isArray(data.items)) {
-                        setCartItems(data.items);
-                        console.log('讀取的購物車項目:', data.items);
+                        const validatedItems = data.items.map(item => ({
+                            ...item,
+                            quantity: item.quantity > 0 ? item.quantity : 1
+                        }));
+                        setCartItems(validatedItems);
+                        console.log('讀取的購物車項目:', validatedItems);
                     }
                 } else {
                     console.log('沒有找到使用者的購物車內容');
@@ -82,20 +100,10 @@ const Cart = () => {
         setDiscountCode(event.target.value);
     };
 
-    const handleQuantityChange = (event: {target: {value: any;};}) => {
-        let newQuantity = parseInt(event.target.value);
-        if (newQuantity < 1) {
-            newQuantity = 1;
-        }
-        setQuantity(newQuantity);
-        setQuantity(newQuantity);
+    const handleQuantityChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+        const newQuantity = parseInt(event.target.value);
+        handleItemQuantityChange(index, newQuantity < 1 ? 1 : newQuantity);
     };
-
-    useEffect(() => {
-        setItemPrice(899 * quantity);
-        setTotalAmount((899 * quantity) + shippingFee - discount);
-    }, [quantity, discount]);
-
 
     const handleCheckout = () => {
         window.location.href = '/payment';
@@ -136,13 +144,13 @@ const Cart = () => {
                                             <input
                                                 type="number"
                                                 className={CartCSS.itemQuantityInput}
-                                                value={quantity}
-                                                onChange={handleQuantityChange}
+                                                value={item.quantity}
+                                                onChange={(e) => handleQuantityChange(index, e)}
                                             ></input>
                                             <span className={CartCSS.itemQuantityUnit}> 組</span>
                                         </div>
                                     </div>
-                                    <div className={CartCSS.itemSubtotalContainer}>$ {itemPrice}</div>
+                                    <div className={CartCSS.itemSubtotalContainer}>$ {item.price * item.quantity}</div>
                                 </div>
                                 <div className={CartCSS.itemLine}></div>
                             </>
@@ -152,7 +160,7 @@ const Cart = () => {
                         <div className={CartCSS.priceTitle}>訂單合計</div>
                         <div className={CartCSS.priceAmountContainer}>
                             <span className={CartCSS.priceAmountTitle}>商品金額：</span>
-                            <span className={CartCSS.priceAmount}>新台幣 {itemPrice} 元</span>
+                            <span className={CartCSS.priceAmount}>新台幣 {totalAmount} 元</span>
                         </div>
                         <div className={CartCSS.itemLine}></div>
                         <div className={CartCSS.priceDiscountContainer}>
