@@ -43,7 +43,8 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
         setIsDragging(false);
     };
 
-    const selectPath = (index: number, event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    const selectPath = (index: number, event: React.MouseEvent<SVGElement, MouseEvent>) => {
+        const svgEvent = event as unknown as React.MouseEvent<SVGSVGElement, MouseEvent>;
         if (isDragActive) {
             setIsDragging(true);
 
