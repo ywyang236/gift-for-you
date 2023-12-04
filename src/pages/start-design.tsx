@@ -49,6 +49,30 @@ const DesignGift = () => {
     const [userId, setUserId] = useState<string | null>(null);
     const [undoStack, setUndoStack] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
     const [redoStack, setRedoStack] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
+    const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+
+    const handleImageUpload = () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = (e) => {
+            const target = e.target as HTMLInputElement;
+            if (target && target.files && target.files.length > 0) {
+                const file = target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const result = e.target!.result;
+                        if (typeof result === 'string') {
+                            setUploadedImage(result);
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        };
+        input.click();
+    };
 
     const handleUndo = () => {
         if (paths.length > 0 && undoStack.length < 10) {
@@ -384,7 +408,7 @@ const DesignGift = () => {
                             />
                             <IoArrowUndo className={DesignCSS.designButton} onClick={handleUndo} />
                             <IoArrowRedo className={DesignCSS.designButton} onClick={handleRedo} />
-                            <IoImage className={DesignCSS.designButton} />
+                            <IoImage className={DesignCSS.designButton} onClick={handleImageUpload} />
                             <IoText className={DesignCSS.designButton} />
                             <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
                             <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />
@@ -411,6 +435,7 @@ const DesignGift = () => {
                                             handleExportSVG={handleExportSVG}
                                             paths={paths}
                                             setPaths={setPaths}
+                                            uploadedImage={uploadedImage}
                                         />
                                     </div>
                                 </div>

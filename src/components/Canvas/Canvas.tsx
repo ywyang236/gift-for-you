@@ -15,6 +15,7 @@ interface CanvasProps {
     handleExportSVG: () => void;
     paths: Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>;
     setPaths: React.Dispatch<React.SetStateAction<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>>;
+    uploadedImage: string | null;
 }
 
 interface Point {
@@ -22,7 +23,7 @@ interface Point {
     y: number;
 }
 
-const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths}) => {
+const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploadedImage}) => {
     const [isPainting, setIsPainting] = useState(false);
     const [mousePosition, setMousePosition] = useState<{x: number; y: number} | undefined>(undefined);
     const isBrushActive = useSelector((state: RootState) => state.brush.isBrushActive);
@@ -136,6 +137,9 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths}) => {
                         mousePosition={mousePosition}
                         isEraserActive={isEraserActive}
                     />
+                    {uploadedImage && (
+                        <image href={uploadedImage} x="0" y="0" width={width} height={height} />
+                    )}
                 </svg>
             </BackgroundHighlighter>
         </>
