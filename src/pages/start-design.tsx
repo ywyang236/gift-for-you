@@ -47,6 +47,19 @@ const DesignGift = () => {
     const [productName, setProductName] = useState('-');
     const [productInfo, setProductInfo] = useState<ProductInfo | null>(null);
     const [userId, setUserId] = useState<string | null>(null);
+    const [undoStack, setUndoStack] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
+
+    const handleUndo = () => {
+        if (paths.length > 0 && undoStack.length < 10) {
+            const newPaths = [...paths];
+            const poppedPath = newPaths.pop();
+            if (poppedPath) {
+                setPaths(newPaths);
+                setUndoStack([...undoStack, poppedPath]);
+            }
+        }
+    };
+
 
     const handleCursorClick = () => {
         dispatch(deactivateBrush());
@@ -357,7 +370,7 @@ const DesignGift = () => {
                                 className={`${DesignCSS.designButton} ${eraserActive ? DesignCSS.designButtonActive : ''}`}
                                 onClick={handleToggleEraser}
                             />
-                            <IoArrowUndo className={DesignCSS.designButton} />
+                            <IoArrowUndo className={DesignCSS.designButton} onClick={handleUndo} />
                             <IoArrowRedo className={DesignCSS.designButton} />
                             <IoImage className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
