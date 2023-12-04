@@ -18,6 +18,8 @@ import Link from 'next/link';
 import {PiFilePngFill, PiFileSvgFill} from "react-icons/pi";
 import {useRouter} from 'next/router';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import {GiArrowCursor} from "react-icons/gi";
+import {RiDragMove2Fill} from "react-icons/ri";
 
 
 interface ProductInfo {
@@ -45,6 +47,11 @@ const DesignGift = () => {
     const [productName, setProductName] = useState('-');
     const [productInfo, setProductInfo] = useState<ProductInfo | null>(null);
     const [userId, setUserId] = useState<string | null>(null);
+
+    const handleCursorClick = () => {
+        dispatch(deactivateBrush());
+        dispatch(deactivateEraser());
+    };
 
     useEffect(() => {
         if (userId) {
@@ -341,6 +348,7 @@ const DesignGift = () => {
                     <div className={DesignCSS.designNavbar}>
                         <div className={DesignCSS.designTitle}>{productName}</div>
                         <div className={DesignCSS.designButtonContainer}>
+                            <GiArrowCursor className={DesignCSS.designButton} onClick={handleCursorClick} />
                             <IoBrush
                                 className={`${DesignCSS.designButton} ${brushActive ? DesignCSS.designButtonActive : ''}`}
                                 onClick={handleToggleBrush}
