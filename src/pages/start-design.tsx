@@ -48,6 +48,7 @@ const DesignGift = () => {
     const [productInfo, setProductInfo] = useState<ProductInfo | null>(null);
     const [userId, setUserId] = useState<string | null>(null);
     const [undoStack, setUndoStack] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
+    const [redoStack, setRedoStack] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
 
     const handleUndo = () => {
         if (paths.length > 0 && undoStack.length < 10) {
@@ -56,10 +57,21 @@ const DesignGift = () => {
             if (poppedPath) {
                 setPaths(newPaths);
                 setUndoStack([...undoStack, poppedPath]);
+                setRedoStack([...redoStack, poppedPath]);
             }
         }
     };
 
+    const handleRedo = () => {
+        if (redoStack.length > 0) {
+            const newRedoStack = [...redoStack];
+            const poppedPath = newRedoStack.pop();
+            if (poppedPath) {
+                setPaths([...paths, poppedPath]);
+                setRedoStack(newRedoStack);
+            }
+        }
+    };
 
     const handleCursorClick = () => {
         dispatch(deactivateBrush());
@@ -371,7 +383,7 @@ const DesignGift = () => {
                                 onClick={handleToggleEraser}
                             />
                             <IoArrowUndo className={DesignCSS.designButton} onClick={handleUndo} />
-                            <IoArrowRedo className={DesignCSS.designButton} />
+                            <IoArrowRedo className={DesignCSS.designButton} onClick={handleRedo} />
                             <IoImage className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
                             <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
