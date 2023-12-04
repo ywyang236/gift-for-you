@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const newPaymentInfo = {
             orderData,
-            paymentStatus: data.status === 0 ? 'Success' : 'Failed',
+            paymentStatus: data.status === 0 ? '付款成功' : '付款失敗',
             paymentDetails: data,
         };
 

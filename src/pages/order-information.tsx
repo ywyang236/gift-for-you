@@ -5,6 +5,7 @@ import OrderCSS from '../styles/order.module.css';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import {db} from '../lib/firebase/firebase';
 import {doc, getDoc} from 'firebase/firestore';
+import {IoClose} from "react-icons/io5";
 
 interface Order {
     createdAt: string;
@@ -95,6 +96,22 @@ const OrderInformation = () => {
         setShowContainer(!showContainer);
     };
 
+    const closeModal = () => {
+        setShowContainer(false);
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (e: {key: string;}) => {
+            if (e.key === 'Escape') {
+                setShowContainer(false);
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
     return (
         <Layout>
             <div className={OrderCSS.main}>
@@ -103,37 +120,40 @@ const OrderInformation = () => {
                         <div key={index} className={OrderCSS.orderContainer} onClick={() => toggleContainer(index)}>
                             <div className={OrderCSS.orderNumber}>訂單編號：{order.orderId}</div>
                             <div className={OrderCSS.orderDate}>訂購日期：{order.createdAt}</div>
-                            <div className={OrderCSS.orderAmount}>付款金額：{order.amount}</div>
+                            <div className={OrderCSS.orderAmount}>付款金額：新台幣 {order.amount} 元</div>
                             <div className={OrderCSS.orderStatus}>付款狀態：{order.status}</div>
                         </div>
                     ))}
                     {showContainer && selectedOrderIndex !== null && (
-                        <div className={`${OrderCSS.ordarContainer} ${OrderCSS['slide-enter-active']}`}>
-                            <div className={OrderCSS.orderInformation}>
-                                <div className={OrderCSS.orderName}>訂購人：{orders[selectedOrderIndex].name}</div>
-                                <div className={OrderCSS.orderEmail}>電子信箱：{orders[selectedOrderIndex].email}</div>
-                                <div className={OrderCSS.orderPhone}>訂購人手機號碼：{orders[selectedOrderIndex].phone}</div>
-                                <div className={OrderCSS.orderReceiver}>收件人：{orders[selectedOrderIndex].receiverName}</div>
-                                <div className={OrderCSS.orderReceiverAddress}>收件地址：{orders[selectedOrderIndex].receiverAddress}</div>
-                                <div className={OrderCSS.orderReceiverPhone}>收件者手機號碼：{orders[selectedOrderIndex].receiverPhone}</div>
-                            </div>
-                            <div className={OrderCSS.orderItemInformation}>
-                                {orders[selectedOrderIndex].items.map((item, idx) => (
-                                    <div key={idx} className={OrderCSS.orderItemContainer}>
-                                        <div className={OrderCSS.cartContentLeft}>
-                                            <div className={OrderCSS.cartContentBackground} style={{backgroundImage: `url(${item.itemImage})`}}></div>
-                                            <div className={OrderCSS.cartContentCanvas} style={{backgroundImage: `url(${item.userCanvas})`}}></div>
+                        <div className={OrderCSS.modalOverlay} onClick={closeModal}>
+                            <div className={`${OrderCSS.ordarContainer}`} onClick={e => e.stopPropagation()}>
+                                <IoClose onClick={closeModal} className={OrderCSS.closeButton} />
+                                <div className={OrderCSS.orderInformation}>
+                                    <div className={OrderCSS.orderName}>訂購人：{orders[selectedOrderIndex].name}</div>
+                                    <div className={OrderCSS.orderEmail}>電子信箱：{orders[selectedOrderIndex].email}</div>
+                                    <div className={OrderCSS.orderPhone}>訂購人手機號碼：{orders[selectedOrderIndex].phone}</div>
+                                    <div className={OrderCSS.orderReceiver}>收件人：{orders[selectedOrderIndex].receiverName}</div>
+                                    <div className={OrderCSS.orderReceiverAddress}>收件地址：{orders[selectedOrderIndex].receiverAddress}</div>
+                                    <div className={OrderCSS.orderReceiverPhone}>收件人手機號碼：{orders[selectedOrderIndex].receiverPhone}</div>
+                                </div>
+                                <div className={OrderCSS.orderItemInformation}>
+                                    {orders[selectedOrderIndex].items.map((item, idx) => (
+                                        <div key={idx} className={OrderCSS.orderItemContainer}>
+                                            <div className={OrderCSS.cartContentLeft}>
+                                                <div className={OrderCSS.cartContentBackground} style={{backgroundImage: `url(${item.itemImage})`}}></div>
+                                                <div className={OrderCSS.cartContentCanvas} style={{backgroundImage: `url(${item.userCanvas})`}}></div>
+                                            </div>
+                                            <div className={OrderCSS.cartContentRight}>
+                                                <div className={OrderCSS.cartContentText}>商品名稱：{item.itemName}</div>
+                                                <div className={OrderCSS.cartContentText}>商品配件：{item.itemAccessories}</div>
+                                                <div className={OrderCSS.cartContentText}>訂製方式：{item.itemCustomization}</div>
+                                                <div className={OrderCSS.cartContentText}>商品單價：新台幣 {item.itemPrice} 元</div>
+                                                <div className={OrderCSS.cartContentText}>訂購數量：{item.itemQuantity} 組</div>
+                                                <div className={OrderCSS.cartContentText}>商品金額：新台幣 {item.itemSubtotal} 元</div>
+                                            </div>
                                         </div>
-                                        <div className={OrderCSS.cartContentRight}>
-                                            <div className={OrderCSS.cartContentText}>商品名稱：{item.itemName}</div>
-                                            <div className={OrderCSS.cartContentText}>商品配件：{item.itemAccessories}</div>
-                                            <div className={OrderCSS.cartContentText}>訂製方式：{item.itemCustomization}</div>
-                                            <div className={OrderCSS.cartContentText}>商品單價：{item.itemPrice}</div>
-                                            <div className={OrderCSS.cartContentText}>訂購數量：{item.itemQuantity}</div>
-                                            <div className={OrderCSS.cartContentText}>商品金額：{item.itemSubtotal}</div>
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     )}

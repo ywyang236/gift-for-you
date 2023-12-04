@@ -26,8 +26,8 @@
 .ordarContainer {
     max-width: 1200px;
     width: 92%;
-    background-color: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
     display: flex;
@@ -37,6 +37,7 @@
     position: relative;
     margin: 10px auto;
     padding: 30px;
+    position: relative;
 }
 
 .orderContainer {
@@ -151,4 +152,39 @@
     font-size: 16px;
     font-weight: 500;
     color: #575758;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    z-index: 1000;
+}
+
+.ordarContainer {
+    overflow-y: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    top: 10px;
+    margin-bottom: 30px;
+}
+
+.closeButton {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: #1D445D;
+    top: 20px;
+    right: 20px;
+}
+
+.closeButton:hover {
+    color: #992626;
 }
