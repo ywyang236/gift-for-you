@@ -44,6 +44,12 @@ interface TappayResult {
 const Payment = () => {
     const [userId, setUserId] = useState<string | null>(null);
     const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null);
+    const [orderName, setOrderName] = useState('');
+    const [orderEmail, setOrderEmail] = useState('');
+    const [orderPhone, setOrderPhone] = useState('');
+    const [reciverName, setReciverName] = useState('');
+    const [reciverAddress, setReciverAddress] = useState('');
+    const [reciverPhone, setReciverPhone] = useState('');
 
     useEffect(() => {
         const auth = getAuth();
@@ -143,6 +149,18 @@ const Payment = () => {
                 return;
             }
 
+            const orderData = {
+                name: orderName,
+                email: orderEmail,
+                phone: orderPhone,
+                crearAt: new Date().toLocaleString(),
+                orderId: Math.floor(Math.random() * 1000000000),
+                items: paymentInfo?.items,
+                reciverName: reciverName,
+                reciverAddress: reciverAddress,
+                reciverPhone: reciverPhone,
+            };
+
             window.TPDirect.card.getPrime(async (result: TappayResult) => {
                 if (result.status !== 0) {
                     console.error('取得 prime 錯誤:', result.msg);
@@ -160,7 +178,8 @@ const Payment = () => {
                         body: JSON.stringify({
                             prime,
                             amount: paymentInfo?.totalAmount,
-                            userId
+                            userId,
+                            orderData,
                         }),
                     });
 
@@ -216,13 +235,28 @@ const Payment = () => {
                         <div className={PaymentCSS.orderTitle}>訂購人資訊</div>
                         <div className={PaymentCSS.orderContent}>
                             <div className={PaymentCSS.orderName}>訂購人：
-                                <input className={PaymentCSS.orderNameInput} type="text" />
+                                <input
+                                    className={PaymentCSS.orderNameInput}
+                                    type="text"
+                                    value={orderName}
+                                    onChange={(e) => setOrderName(e.target.value)}
+                                />
                             </div>
                             <div className={PaymentCSS.orderEmail}>電子信箱：
-                                <input className={PaymentCSS.orderEmailInput} type="text" />
+                                <input
+                                    className={PaymentCSS.orderEmailInput}
+                                    type="text"
+                                    value={orderEmail}
+                                    onChange={(e) => setOrderEmail(e.target.value)}
+                                />
                             </div>
                             <div className={PaymentCSS.orderPhone}>手機號碼：
-                                <input className={PaymentCSS.orderPhoneInput} type="text" />
+                                <input
+                                    className={PaymentCSS.orderPhoneInput}
+                                    type="text"
+                                    value={orderPhone}
+                                    onChange={(e) => setOrderPhone(e.target.value)}
+                                />
                             </div>
                             <div className={PaymentCSS.orderNote}>備註：一般訂製約為 5 - 8 個工作天。急件費用另計。</div>
                         </div>
@@ -231,13 +265,28 @@ const Payment = () => {
                         <div className={PaymentCSS.recipientTitle}>收件人資訊</div>
                         <div className={PaymentCSS.recipientContent}>
                             <div className={PaymentCSS.recipientName}>收件人：
-                                <input className={PaymentCSS.recipientNameInput} type="text" />
+                                <input
+                                    className={PaymentCSS.recipientNameInput}
+                                    type="text"
+                                    value={reciverName}
+                                    onChange={(e) => setReciverName(e.target.value)}
+                                />
                             </div>
                             <div className={PaymentCSS.recipientAddress}>收件地址：
-                                <input className={PaymentCSS.recipientAddressInput} type="text" />
+                                <input
+                                    className={PaymentCSS.recipientAddressInput}
+                                    type="text"
+                                    value={reciverAddress}
+                                    onChange={(e) => setReciverAddress(e.target.value)}
+                                />
                             </div>
                             <div className={PaymentCSS.recipientPhone}>手機號碼：
-                                <input className={PaymentCSS.recipientPhoneInput} type="text" />
+                                <input
+                                    className={PaymentCSS.recipientPhoneInput}
+                                    type="text"
+                                    value={reciverPhone}
+                                    onChange={(e) => setReciverPhone(e.target.value)}
+                                />
                             </div>
                         </div>
                     </div>

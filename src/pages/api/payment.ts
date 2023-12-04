@@ -1,10 +1,12 @@
 // src/pages/api/payment.ts
 import type {NextApiRequest, NextApiResponse} from 'next';
+import {db} from '../../lib/firebase/firebase';
+import {doc, setDoc, updateDoc, arrayUnion} from 'firebase/firestore';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
 
-        const {prime, amount, userId} = req.body;
+        const {prime, amount, userId, orderData} = req.body;
 
         const response = await fetch('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime', {
             method: 'POST',
@@ -19,34 +21,41 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 details: 'TapPay Test',
                 amount,
                 cardholder: {
-                    phone_number: '+886923456789',
-                    name: '王小明',
-                    email: '',
+                    name: orderData.name,
+                    phone_number: orderData.phone,
+                    email: orderData.email,
                 },
+                orderId: orderData.orderId,
                 remember: true,
             }),
         });
 
         const data = await response.json();
-        if (data.status === 0) {
+        const paymentRef = doc(db, "users", userId, "data", 'user_checkout');
+
+        const newPaymentInfo = {
+            orderData,
+            paymentStatus: data.status === 0 ? 'Success' : 'Failed',
+            paymentDetails: data,
+        };
+
+        try {
+            await setDoc(paymentRef, {
+                payments: arrayUnion(newPaymentInfo)
+            }, {merge: true});
+
             res.status(200).json({
                 data: {
-                    number: data.card_info.last_four,
-                    bank: data.card_info.issuer,
-                    name: data.card_info.holder,
-                    amount: data.amount,
-                    time: data.transaction_time,
-                    prime: data.prime,
+                    orderId: orderData.orderId,
+                    "payment": {
+                        "status": data.status === 0 ? 0 : 1,
+                        "message": data.status === 0 ? "付款成功" : '付款失敗',
+                        error: data.status === 0 ? null : data
+                    }
                 },
             });
-        } else {
-            res.status(200).json({
-                success: false,
-                message: '支付處理失敗',
-                error: data
-            });
+        } catch (error) {
+            res.status(500).json({error: "內部錯誤"});
         }
-    } else {
-        res.status(405).send('Method Not Allowed');
     }
 }
