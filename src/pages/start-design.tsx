@@ -20,6 +20,7 @@ import {useRouter} from 'next/router';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import {GiArrowCursor} from "react-icons/gi";
 import {RiDragMove2Fill} from "react-icons/ri";
+import {FaSlash} from "react-icons/fa";
 
 
 interface ProductInfo {
@@ -411,6 +412,8 @@ const DesignGift = () => {
                             <IoArrowUndo className={DesignCSS.designButton} onClick={handleUndo} />
                             <IoArrowRedo className={DesignCSS.designButton} onClick={handleRedo} />
                             <IoImage className={DesignCSS.designButton} onClick={handleImageUpload} />
+                            <FaSlash className={DesignCSS.designButton} />
+                            <RiDragMove2Fill className={DesignCSS.designButton} />
                             <IoText className={DesignCSS.designButton} />
                             <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
                             <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />
