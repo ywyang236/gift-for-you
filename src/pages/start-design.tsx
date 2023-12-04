@@ -54,12 +54,12 @@ const DesignGift = () => {
     const handleImageUpload = () => {
         const input = document.createElement('input');
         input.type = 'file';
-        input.accept = 'image/*';
+        input.accept = 'image/svg+xml,image/png';
         input.onchange = (e) => {
             const target = e.target as HTMLInputElement;
             if (target && target.files && target.files.length > 0) {
                 const file = target.files[0];
-                if (file) {
+                if (file.type === "image/svg+xml" || file.type === "image/png") {
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         const result = e.target!.result;
@@ -68,6 +68,8 @@ const DesignGift = () => {
                         }
                     };
                     reader.readAsDataURL(file);
+                } else {
+                    alert('請上傳 SVG 或 PNG 檔案。');
                 }
             }
         };
