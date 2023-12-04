@@ -11,7 +11,7 @@ const ThankYou = () => (
                     <div className={ThankCSS.iconContainer}>
                         <div className={ThankCSS.circle}>
                             <svg className={ThankCSS.tick} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <path className={ThankCSS.checkmark} fill="none" stroke="#448899" stroke-width="8" d="M2,20 L20,40 L50,10">
+                                <path className={ThankCSS.checkmark} fill="none" stroke="#448899" strokeWidth="8" d="M2,20 L20,40 L50,10">
                                 </path>
                             </svg>
                         </div>

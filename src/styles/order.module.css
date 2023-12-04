@@ -4,14 +4,151 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background: F0F0F0;
     flex: 1;
+    background-image: url('/images/gift-town-all.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: 0px;
 }
 
-.container {
-    max-width: 1200px;
+.backgroundContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(3px);
+    margin: 0px auto;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.ordarContainer {
+    max-width: 1200px;
+    width: 92%;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 10px auto;
+    padding: 30px;
+}
+
+.orderContainer {
+    max-width: 1200px;
+    width: 92%;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    position: relative;
+    margin: 10px auto;
+    padding: 20px 30px 10px 30px;
+    cursor: pointer;
+}
+
+.orderNumber,
+.orderDate,
+.orderAmount,
+.orderStatus,
+.orderDetail,
+.orderName,
+.orderEmail,
+.orderPhone,
+.orderReceiver,
+.orderReceiverAddress,
+.orderReceiverPhone {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1D445D;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.orderInformation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.orderItemInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 100%;
+}
+
+.orderItemContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.cartContentLeft {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.cartContentBackground {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.cartContentCanvas {
+    max-width: 75%;
+    width: 100%;
+    height: 70%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 11px;
+}
+
+.cartContentRight {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-left: 20px;
+    flex-shrink: 0;
+}
+
+.orderNameInput,
+.orderEmailInput,
+.orderPhoneInput,
+.recipientNameInput,
+.recipientPhoneInput,
+.recipientAddressInput {
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #c5c5c5;
+    padding: 0px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #575758;
 }

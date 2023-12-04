@@ -47,9 +47,9 @@ const Payment = () => {
     const [orderName, setOrderName] = useState('');
     const [orderEmail, setOrderEmail] = useState('');
     const [orderPhone, setOrderPhone] = useState('');
-    const [reciverName, setReciverName] = useState('');
-    const [reciverAddress, setReciverAddress] = useState('');
-    const [reciverPhone, setReciverPhone] = useState('');
+    const [receiverName, setReceiverName] = useState('');
+    const [receiverAddress, setReceiverAddress] = useState('');
+    const [receiverPhone, setReceiverPhone] = useState('');
 
     useEffect(() => {
         const auth = getAuth();
@@ -153,12 +153,12 @@ const Payment = () => {
                 name: orderName,
                 email: orderEmail,
                 phone: orderPhone,
-                crearAt: new Date().toLocaleString(),
+                createdAt: new Date().toLocaleString(),
                 orderId: Math.floor(Math.random() * 1000000000),
                 items: paymentInfo?.items,
-                reciverName: reciverName,
-                reciverAddress: reciverAddress,
-                reciverPhone: reciverPhone,
+                receiverName: receiverName,
+                receiverAddress: receiverAddress,
+                receiverPhone: receiverPhone,
             };
 
             window.TPDirect.card.getPrime(async (result: TappayResult) => {
@@ -184,7 +184,12 @@ const Payment = () => {
                     });
 
                     const responseData = await response.json();
-                    console.log('付款請求成功:', responseData);
+
+                    if (responseData.data.payment.status === 0) {
+                        window.location.href = '/thankyou';
+                    } else {
+                        alert(responseData.data.payment.message);
+                    }
 
                 } catch (error) {
                     console.error('付款請求失敗:', error);
@@ -268,24 +273,24 @@ const Payment = () => {
                                 <input
                                     className={PaymentCSS.recipientNameInput}
                                     type="text"
-                                    value={reciverName}
-                                    onChange={(e) => setReciverName(e.target.value)}
+                                    value={receiverName}
+                                    onChange={(e) => setReceiverName(e.target.value)}
                                 />
                             </div>
                             <div className={PaymentCSS.recipientAddress}>收件地址：
                                 <input
                                     className={PaymentCSS.recipientAddressInput}
                                     type="text"
-                                    value={reciverAddress}
-                                    onChange={(e) => setReciverAddress(e.target.value)}
+                                    value={receiverAddress}
+                                    onChange={(e) => setReceiverAddress(e.target.value)}
                                 />
                             </div>
                             <div className={PaymentCSS.recipientPhone}>手機號碼：
                                 <input
                                     className={PaymentCSS.recipientPhoneInput}
                                     type="text"
-                                    value={reciverPhone}
-                                    onChange={(e) => setReciverPhone(e.target.value)}
+                                    value={receiverPhone}
+                                    onChange={(e) => setReceiverPhone(e.target.value)}
                                 />
                             </div>
                         </div>
