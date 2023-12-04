@@ -441,7 +441,7 @@ const DesignGift = () => {
                                             paths={paths}
                                             setPaths={setPaths}
                                             uploadedImage={uploadedImage}
-                                        />
+                                            isDraggingEnabled={false} />
                                     </div>
                                 </div>
                             </div>

@@ -16,6 +16,7 @@ interface CanvasProps {
     paths: Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>;
     setPaths: React.Dispatch<React.SetStateAction<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>>;
     uploadedImage: string | null;
+    isDraggingEnabled: boolean;
 }
 
 interface Point {
@@ -31,11 +32,62 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
     const brushColor = useSelector((state: RootState) => state.brush.brushColor);
     const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
     const [isErasing, setIsErasing] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
+    const [selectedPathIndex, setSelectedPathIndex] = useState<number | null>(null);
+    const [dragStart, setDragStart] = useState<Point | null>(null);
+    const [originalPathPoints, setOriginalPathPoints] = useState<Array<Point>>([]);
+    const [isDragActive, setIsDragActive] = useState(false);
+
+    const toggleDragMode = () => {
+        setIsDragActive(!isDragActive);
+        setIsDragging(false);
+    };
+
+    const selectPath = (index: number, event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+        if (isDragActive) {
+            setIsDragging(true);
+
+            setSelectedPathIndex(index);
+            const svgRect = event.currentTarget.getBoundingClientRect();
+            const mousePoint = adjustForScale(event.clientX, event.clientY, svgRect, 1); // 定义 mousePoint
+
+            const originalPath = paths[index];
+            setOriginalPathPoints([...originalPath.points]);
+
+            let closestPoint = originalPath.points.reduce((closest, currentPoint) => {
+                const distToCurrentPoint = Math.hypot(currentPoint.x - mousePoint.x, currentPoint.y - mousePoint.y);
+                const distToClosestPoint = Math.hypot(closest.x - mousePoint.x, closest.y - mousePoint.y);
+                return distToCurrentPoint < distToClosestPoint ? currentPoint : closest;
+            }, originalPath.points[0]);
+
+            setDragStart(closestPoint);
+        }
+    };
+
+    const movePath = (newPoint: Point) => {
+        if (selectedPathIndex !== null && dragStart && originalPathPoints && isDragActive && isDragging) {
+            const dx = newPoint.x - dragStart.x;
+            const dy = newPoint.y - dragStart.y
+
+            setPaths((prevPaths) => {
+                const newPaths = [...prevPaths];
+                const path = newPaths[selectedPathIndex];
+                path.points = originalPathPoints.map(point => ({
+                    x: point.x + dx,
+                    y: point.y + dy
+                }));
+                return newPaths;
+            });
+        }
+    };
 
     const adjustForScale = (clientX: number, clientY: number, svgRect: DOMRect, scale: number) => {
+        const adjustedX = (clientX - svgRect.left) / scale;
+        const adjustedY = (clientY - svgRect.top) / scale;
+
         return {
-            x: (clientX - svgRect.left) / scale,
-            y: (clientY - svgRect.top) / scale,
+            x: adjustedX,
+            y: adjustedY,
         };
     };
 
@@ -63,6 +115,10 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
                 return newPaths;
             });
         }
+
+        if (event.buttons === 1 && isDragging && selectedPathIndex !== null) {
+            movePath(newPoint);
+        }
     };
 
     const handleMouseLeave = () => {
@@ -73,10 +129,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
         if (!isBrushActive || isEraserActive) return;
         setIsPainting(true);
         const svgRect = event.currentTarget.getBoundingClientRect();
-        const newPoint: Point = {
-            x: event.clientX - svgRect.left,
-            y: event.clientY - svgRect.top,
-        };
+        const newPoint = adjustForScale(event.clientX, event.clientY, svgRect, 1);
         setPaths((prevPaths) => [...prevPaths, {points: [newPoint], brushSize, brushColor}]);
     };
 
@@ -93,6 +146,10 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
 
     return (
         <>
+            <button onClick={toggleDragMode}>
+                {isDragActive ? '停止拖移模式' : '啟動拖移模式'}
+            </button>
+
             <BackgroundHighlighter
                 width={width}
                 height={height}
@@ -121,6 +178,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             fill="none"
+                            onMouseDown={(e) => selectPath(index, e)}
                         />
                     ))}
                     <BrushPreviewSVG
