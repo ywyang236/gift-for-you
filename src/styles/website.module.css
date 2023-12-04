@@ -8,9 +8,7 @@
     background-image: url('/images/gift-town-all.png');
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-position-x: calc(60% + 50px); */
-    background-position-x: center;
-
+    background-position-x: -1450px;
 }
 
 .backgroundContainer {

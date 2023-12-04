@@ -170,7 +170,7 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     top: 10px;
     margin-bottom: 30px;
 }

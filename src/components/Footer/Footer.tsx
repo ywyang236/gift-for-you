@@ -39,8 +39,8 @@ const Footer: React.FC = () => {
                 </div>
                 <div className={FooterCSS.footerLeftContainer}>
                     <span className={FooterCSS.footerLeftContent} onClick={handleGiftSelectionClick}>挑選禮品</span>
+                    <Link href='/cart' className={FooterCSS.footerLeftContent} onClick={requireAuth}>購物車</Link>
                     <Link href='/order-information' className={FooterCSS.footerLeftContent} onClick={requireAuth}>歷史訂單</Link>
-                    <Link href='/cart' className={FooterCSS.footerLeftContent} onClick={requireAuth}>會員資料</Link>
                 </div>
                 <div className={FooterCSS.footerRightContainer}>
                     <Link href='/about-gift-for-you' className={FooterCSS.footerRightContent}>關於禮品訂製所</Link>

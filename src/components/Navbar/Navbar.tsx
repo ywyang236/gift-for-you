@@ -95,7 +95,6 @@ const Navbar: React.FC = () => {
                         <>
                             <Link href='/cart' className={NavbarCSS.rightContainerText}>購物車</Link>
                             <Link href='/order-information' className={NavbarCSS.rightContainerText}>歷史訂單</Link>
-                            <Link href='/member-information' className={NavbarCSS.rightContainerText}>會員資料</Link>
                             <span className={NavbarCSS.login} onClick={handleSignOut}>登出</span>
                         </>
                     )}
