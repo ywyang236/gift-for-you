@@ -55,8 +55,15 @@ const DesignGift = () => {
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
     useHotkeys('v', () => handleCursorClick());
+    useHotkeys('b', () => handleToggleBrush());
+    useHotkeys('e', () => handleToggleEraser());
     useHotkeys('meta+z, ctrl+z', () => handleUndo());
     useHotkeys('meta+shift+z, ctrl+shift+z', () => handleRedo());
+    useHotkeys('d', () => handleToggleDrag());
+    useHotkeys('i', () => showProductDetails());
+    useHotkeys('delete', () => clearCanvasContent());
+    useHotkeys('meta+s, ctrl+s', () => saveCanvasToFirebase());
+    useHotkeys('enter', () => addToCart());
 
     const handleImageUpload = () => {
         const input = document.createElement('input');
