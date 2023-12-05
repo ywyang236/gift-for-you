@@ -16,7 +16,7 @@ interface CanvasProps {
     paths: Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>;
     setPaths: React.Dispatch<React.SetStateAction<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>>;
     uploadedImage: string | null;
-    isDraggingEnabled: boolean;
+    isDragActive: boolean;
 }
 
 interface Point {
@@ -38,11 +38,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
     const [originalPathPoints, setOriginalPathPoints] = useState<Array<Point>>([]);
     const [isDragActive, setIsDragActive] = useState(false);
 
-    const toggleDragMode = () => {
-        setIsDragActive(!isDragActive);
-        setIsDragging(false);
-    };
-
     const selectPath = (index: number, event: React.MouseEvent<SVGElement, MouseEvent>) => {
         const svgEvent = event as unknown as React.MouseEvent<SVGSVGElement, MouseEvent>;
         if (isDragActive) {
@@ -50,7 +45,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
 
             setSelectedPathIndex(index);
             const svgRect = event.currentTarget.getBoundingClientRect();
-            const mousePoint = adjustForScale(event.clientX, event.clientY, svgRect, 1); // 定义 mousePoint
+            const mousePoint = adjustForScale(event.clientX, event.clientY, svgRect, 1);
 
             const originalPath = paths[index];
             setOriginalPathPoints([...originalPath.points]);
@@ -147,10 +142,6 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
 
     return (
         <>
-            <button onClick={toggleDragMode}>
-                {isDragActive ? '停止拖移模式' : '啟動拖移模式'}
-            </button>
-
             <BackgroundHighlighter
                 width={width}
                 height={height}

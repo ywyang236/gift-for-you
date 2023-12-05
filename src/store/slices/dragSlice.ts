@@ -1,7 +1,6 @@
 // src/store/slices/dragSlice.ts
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-
 export interface DragState {
     isDragActive: boolean;
     selectedPathIndex: number | null;

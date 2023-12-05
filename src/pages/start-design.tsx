@@ -1,26 +1,26 @@
 // pages/design-gift.tsx
 import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {useRouter} from 'next/router';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
-import {IoArrowUndo, IoArrowRedo, IoBrush, IoInformationCircleSharp, IoTrash, IoCloudUpload, IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoImage, IoLayers, IoOptions, IoText} from 'react-icons/io5';
-import {IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle} from "react-icons/io5";
+import {IoArrowUndo, IoArrowRedo, IoBrush, IoInformationCircleSharp, IoTrash, IoCloudUpload, IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle, IoImage, IoText} from 'react-icons/io5';
+import {IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoLayers, IoOptions} from "react-icons/io5";
 import {BsEraserFill, BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonFill, BsFillPentagonFill, BsFillStarFill} from "react-icons/bs";
-import Canvas from '../components/Canvas/Canvas';
-import {setBrushSize, setBrushColor} from '../store/slices/brushSlice';
-import {RootState} from '../store/types/storeTypes';
-import {setEraserSize} from '../store/slices/eraserSlice';
-import {activateBrush, activateEraser, deactivateBrush, deactivateEraser} from '../store/sharedActions';
-import {db} from '../lib/firebase/firebase';
-import {collection, addDoc, getDocs, doc, setDoc, getDoc, updateDoc, arrayUnion} from 'firebase/firestore';
-import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
-import Link from 'next/link';
-import {PiFilePngFill, PiFileSvgFill} from "react-icons/pi";
-import {useRouter} from 'next/router';
-import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import {GiArrowCursor} from "react-icons/gi";
 import {RiDragMove2Fill} from "react-icons/ri";
 import {FaSlash} from "react-icons/fa";
+import {PiFilePngFill, PiFileSvgFill} from "react-icons/pi";
+import Canvas from '../components/Canvas/Canvas';
+import {RootState} from '../store/types/storeTypes';
+import {activateBrush, activateEraser, deactivateBrush, deactivateEraser} from '../store/sharedActions';
+import {setBrushSize, setBrushColor} from '../store/slices/brushSlice';
+import {setEraserSize} from '../store/slices/eraserSlice';
+import {toggleDragActive} from '../store/slices/dragSlice';
+import {db} from '../lib/firebase/firebase';
+import {collection, addDoc, getDocs, doc, setDoc, getDoc, updateDoc, arrayUnion} from 'firebase/firestore';
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
 
 
 interface ProductInfo {
@@ -38,6 +38,7 @@ const DesignGift = () => {
     const currentBrushSize = useSelector((state: RootState) => state.brush.brushSize);
     const currentEraserSize = useSelector((state: RootState) => state.eraser.eraserSize);
     const currentBrushColor = useSelector((state: RootState) => state.brush.brushColor);
+    const dragActive = useSelector((state: RootState) => state.drag.isDragActive);
     const [lastBrushSize, setLastBrushSize] = useState<number>(currentBrushSize);
     const [lastBrushColor, setLastBrushColor] = useState<string>(currentBrushColor);
     const [paths, setPaths] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
@@ -51,6 +52,10 @@ const DesignGift = () => {
     const [undoStack, setUndoStack] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
     const [redoStack, setRedoStack] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+
+    const handleToggleDrag = () => {
+        dispatch(toggleDragActive());
+    }
 
     const handleImageUpload = () => {
         const input = document.createElement('input');
@@ -413,7 +418,7 @@ const DesignGift = () => {
                             <IoArrowRedo className={DesignCSS.designButton} onClick={handleRedo} />
                             <IoImage className={DesignCSS.designButton} onClick={handleImageUpload} />
                             <FaSlash className={DesignCSS.designButton} />
-                            <RiDragMove2Fill className={DesignCSS.designButton} />
+                            <RiDragMove2Fill className={DesignCSS.designButton} onClick={handleToggleDrag} />
                             <IoText className={DesignCSS.designButton} />
                             <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
                             <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />
@@ -441,7 +446,8 @@ const DesignGift = () => {
                                             paths={paths}
                                             setPaths={setPaths}
                                             uploadedImage={uploadedImage}
-                                            isDraggingEnabled={false} />
+                                            isDragActive={dragActive}
+                                        />
                                     </div>
                                 </div>
                             </div>
