@@ -171,6 +171,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
                         if (isDragging) setIsDragging(false);
                     }}
                     onMouseLeave={handleMouseLeave}
+                    style={{cursor: isDragActive ? 'move' : 'default'}}
                 >
                     {paths.map((path, index) => (
                         <path
