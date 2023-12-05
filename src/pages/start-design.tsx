@@ -309,6 +309,8 @@ const DesignGift = () => {
             return;
         }
 
+        document.body.style.cursor = 'wait';
+
         const canvas = document.createElement('canvas');
         canvas.width = canvasSize.width;
         canvas.height = canvasSize.height;
@@ -319,7 +321,15 @@ const DesignGift = () => {
         const storage = getStorage();
         const storageRef = ref(storage, `canvasImages/${imageName}`);
         const imgBlob = await (await fetch(image)).blob();
-        await uploadBytes(storageRef, imgBlob);
+
+        try {
+            await uploadBytes(storageRef, imgBlob);
+            window.alert('上傳成功！');
+        } catch (error) {
+            window.alert('上傳失敗，請重試！');
+        } finally {
+            document.body.style.cursor = 'default';
+        }
 
         if (userId) {
             const userCanvasDataRef = doc(db, "users", userId, "data", "canvasData");
