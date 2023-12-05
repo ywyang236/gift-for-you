@@ -1,10 +1,11 @@
 // components/Canvas/Canvas.tsx
 import React, {useState, useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../store/types/storeTypes';
 import BackgroundHighlighter from './BackgroundHighlighter';
 import BrushPreviewSVG from '../Brush/BrushPreviewSVG';
 import EraserSVG from '../Eraser/EraserSVG';
+import {setSelectedPathIndex} from '../../store/slices/dragSlice';
 
 interface CanvasProps {
     width: number;
@@ -33,17 +34,19 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
     const isEraserActive = useSelector((state: RootState) => state.eraser.isEraserActive);
     const [isErasing, setIsErasing] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
-    const [selectedPathIndex, setSelectedPathIndex] = useState<number | null>(null);
     const [dragStart, setDragStart] = useState<Point | null>(null);
     const [originalPathPoints, setOriginalPathPoints] = useState<Array<Point>>([]);
-    const [isDragActive, setIsDragActive] = useState(false);
+    const dispatch = useDispatch();
+    const isDragActive = useSelector((state: RootState) => state.drag.isDragActive);
+    const selectedPathIndex = useSelector((state: RootState) => state.drag.selectedPathIndex);
+
 
     const selectPath = (index: number, event: React.MouseEvent<SVGElement, MouseEvent>) => {
         const svgEvent = event as unknown as React.MouseEvent<SVGSVGElement, MouseEvent>;
         if (isDragActive) {
             setIsDragging(true);
 
-            setSelectedPathIndex(index);
+            dispatch(setSelectedPathIndex(index));
             const svgRect = event.currentTarget.getBoundingClientRect();
             const mousePoint = adjustForScale(event.clientX, event.clientY, svgRect, 1);
 
@@ -59,6 +62,13 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
             setDragStart(closestPoint);
         }
     };
+
+    useEffect(() => {
+        if (!isDragActive) {
+            setIsDragging(false);
+            dispatch(setSelectedPathIndex(null));
+        }
+    }, [isDragActive, dispatch]);
 
     const movePath = (newPoint: Point) => {
         if (selectedPathIndex !== null && dragStart && originalPathPoints && isDragActive && isDragging) {
