@@ -450,13 +450,13 @@ const DesignGift = () => {
                             />
                             <IoArrowUndo className={DesignCSS.designButton} onClick={handleUndo} />
                             <IoArrowRedo className={DesignCSS.designButton} onClick={handleRedo} />
-                            <IoImage className={DesignCSS.designButton} onClick={handleImageUpload} />
-                            <FaSlash className={DesignCSS.designButton} />
+                            {/* <IoImage className={DesignCSS.designButton} onClick={handleImageUpload} /> */}
+                            {/* <FaSlash className={DesignCSS.designButton} /> */}
                             <RiDragMove2Fill
                                 className={`${DesignCSS.designButton} ${dragActive ? DesignCSS.designButtonActive : ''}`}
                                 onClick={handleToggleDrag}
                             />
-                            <IoText className={DesignCSS.designButton} />
+                            {/* <IoText className={DesignCSS.designButton} /> */}
                             <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
                             <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />
                             <IoCloudUpload className={DesignCSS.designButton} onClick={saveCanvasToFirebase} />
@@ -648,7 +648,7 @@ const DesignGift = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className={DesignCSS.textChangeConteiner}>
+                            {/* <div className={DesignCSS.textChangeConteiner}>
                                 <div className={DesignCSS.textChangeTitle}>文字外觀</div>
                                 <div className={DesignCSS.textChangeFontBackground}>
                                     <div className={DesignCSS.textChangeFrontButton}>Helvetica</div>
@@ -705,7 +705,7 @@ const DesignGift = () => {
                                         <BsFillStarFill className={DesignCSS.patternButton} />
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
