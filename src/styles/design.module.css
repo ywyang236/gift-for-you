@@ -4,23 +4,42 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background: F0F0F0;
     flex: 1;
+    background-image: url('/images/gift-town-all.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: -1500px;
 }
 
-.container {
-    max-width: 1200px;
+.backgroundContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(3px);
+    margin: 0px auto;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 92%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 10px auto;
+    border-radius: 10px;
 }
 
 .designNavbar {
-    background-color: #8A8A8A;
+    background-color: rgb(138, 138, 138, 0.8);
+    backdrop-filter: blur(5px);
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 103px;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .designTitle {
@@ -105,12 +124,13 @@
     justify-content: space-between;
     align-items: center;
     overflow-x: scroll;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
     height: calc(100vh - 103px);
 }
 
 .designCanvasContainer {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border-radius: 0 0 0 10px;
     width: 900px;
     height: 100%;
     z-index: 2;
@@ -121,8 +141,6 @@
 
 .designItem {
     background-size: cover;
-    /* background-position: center; */
-    /* overflow: hidden; */
     width: 600px;
     height: 600px;
     position: static;
@@ -138,7 +156,9 @@
 }
 
 .designToolsContainer {
-    background-color: #5C5C5C;
+    background-color: rgb(92, 92, 92, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 0 0 10px 0;
     min-width: 300px;
     height: calc(100vh - 103px);
     z-index: 1;
@@ -150,7 +170,8 @@
 }
 
 .brushChangeContainer {
-    background-color: #BBBBBB;
+    background-color: rgb(186, 186, 186, 0.8);
+    backdrop-filter: blur(5px);
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
@@ -252,7 +273,8 @@
 }
 
 .colorChangePicker {
-    background-color: #BBBBBB;
+    background-color: rgb(186, 186, 186, 0.8);
+    backdrop-filter: blur(5px);
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     height: 150px;
@@ -351,7 +373,8 @@
 }
 
 .eraserChangeContainer {
-    background-color: #BBBBBB;
+    background-color: rgb(186, 186, 186, 0.8);
+    backdrop-filter: blur(5px);
     border-radius: 5px;
     display: flex;
     justify-content: space-between;

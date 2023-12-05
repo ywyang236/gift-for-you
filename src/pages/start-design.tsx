@@ -435,220 +435,221 @@ const DesignGift = () => {
     return (
         <Layout>
             <div className={DesignCSS.main}>
-                <div className={DesignCSS.container}>
-                    <div className={DesignCSS.designNavbar}>
-                        <div className={DesignCSS.designTitle}>{productName}</div>
-                        <div className={DesignCSS.designButtonContainer}>
-                            <GiArrowCursor className={DesignCSS.designButton} onClick={handleCursorClick} />
-                            <IoBrush
-                                className={`${DesignCSS.designButton} ${brushActive ? DesignCSS.designButtonActive : ''}`}
-                                onClick={handleToggleBrush}
-                            />
-                            <BsEraserFill
-                                className={`${DesignCSS.designButton} ${eraserActive ? DesignCSS.designButtonActive : ''}`}
-                                onClick={handleToggleEraser}
-                            />
-                            <IoArrowUndo className={DesignCSS.designButton} onClick={handleUndo} />
-                            <IoArrowRedo className={DesignCSS.designButton} onClick={handleRedo} />
-                            {/* <IoImage className={DesignCSS.designButton} onClick={handleImageUpload} /> */}
-                            {/* <FaSlash className={DesignCSS.designButton} /> */}
-                            <RiDragMove2Fill
-                                className={`${DesignCSS.designButton} ${dragActive ? DesignCSS.designButtonActive : ''}`}
-                                onClick={handleToggleDrag}
-                            />
-                            {/* <IoText className={DesignCSS.designButton} /> */}
-                            <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
-                            <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />
-                            <IoCloudUpload className={DesignCSS.designButton} onClick={saveCanvasToFirebase} />
-                            <PiFilePngFill className={DesignCSS.designButton} onClick={downloadCanvas} />
-                            <PiFileSvgFill className={DesignCSS.designButton} onClick={handleExportSVG} />
-                            <span
-                                className={DesignCSS.addCartButton}
-                                onClick={addToCart}
-                            >加入購物車</span>
-                        </div>
-                    </div>
-                    <div className={DesignCSS.designDown}>
-                        <div className={DesignCSS.designCanvasContainer}>
-                            <div className={DesignCSS.designItem} style={{backgroundImage: `url(${backgroundImage})`}}>
-                                <div className={DesignCSS.designCanvas}>
-                                    <div>
-                                        <Canvas
-                                            width={460}
-                                            height={430}
-                                            isBrushActive={brushActive}
-                                            setBrushSize={handleBrushSizeChange}
-                                            setBrushColor={handleBrushColorChange}
-                                            handleExportSVG={handleExportSVG}
-                                            paths={paths}
-                                            setPaths={setPaths}
-                                            uploadedImage={uploadedImage}
-                                            isDragActive={dragActive}
-                                        />
-                                    </div>
-                                </div>
+                <div className={DesignCSS.backgroundContainer}>
+                    <div className={DesignCSS.container}>
+                        <div className={DesignCSS.designNavbar}>
+                            <div className={DesignCSS.designTitle}>{productName}</div>
+                            <div className={DesignCSS.designButtonContainer}>
+                                <GiArrowCursor className={DesignCSS.designButton} onClick={handleCursorClick} />
+                                <IoBrush
+                                    className={`${DesignCSS.designButton} ${brushActive ? DesignCSS.designButtonActive : ''}`}
+                                    onClick={handleToggleBrush}
+                                />
+                                <BsEraserFill
+                                    className={`${DesignCSS.designButton} ${eraserActive ? DesignCSS.designButtonActive : ''}`}
+                                    onClick={handleToggleEraser}
+                                />
+                                <IoArrowUndo className={DesignCSS.designButton} onClick={handleUndo} />
+                                <IoArrowRedo className={DesignCSS.designButton} onClick={handleRedo} />
+                                {/* <IoImage className={DesignCSS.designButton} onClick={handleImageUpload} /> */}
+                                {/* <FaSlash className={DesignCSS.designButton} /> */}
+                                <RiDragMove2Fill
+                                    className={`${DesignCSS.designButton} ${dragActive ? DesignCSS.designButtonActive : ''}`}
+                                    onClick={handleToggleDrag}
+                                />
+                                {/* <IoText className={DesignCSS.designButton} /> */}
+                                <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
+                                <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />
+                                <IoCloudUpload className={DesignCSS.designButton} onClick={saveCanvasToFirebase} />
+                                <PiFilePngFill className={DesignCSS.designButton} onClick={downloadCanvas} />
+                                <PiFileSvgFill className={DesignCSS.designButton} onClick={handleExportSVG} />
+                                <span
+                                    className={DesignCSS.addCartButton}
+                                    onClick={addToCart}
+                                >加入購物車</span>
                             </div>
                         </div>
-                        <div className={DesignCSS.designToolsContainer}>
-                            <div className={DesignCSS.brushContainer}>
-                                <div className={DesignCSS.brushChangeTitle}>筆刷大小</div>
-                                <div className={DesignCSS.brushChangeContainer}>
-                                    <div
-                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 6) ? DesignCSS.brushChangeBackgroundActive : ''}`}
-                                        onClick={() => handleBrushSizeChange(6)}>
-                                        <div className={DesignCSS.brushChange6px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 8) ? DesignCSS.brushChangeBackgroundActive : ''}`}
-                                        onClick={() => handleBrushSizeChange(8)}>
-                                        <div className={DesignCSS.brushChange8px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 10) ? DesignCSS.brushChangeBackgroundActive : ''}`}
-                                        onClick={() => handleBrushSizeChange(10)}>
-                                        <div className={DesignCSS.brushChange10px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 12) ? DesignCSS.brushChangeBackgroundActive : ''}`}
-                                        onClick={() => handleBrushSizeChange(12)}>
-                                        <div className={DesignCSS.brushChange12px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 14) ? DesignCSS.brushChangeBackgroundActive : ''}`}
-                                        onClick={() => handleBrushSizeChange(14)}>
-                                        <div className={DesignCSS.brushChange14px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 16) ? DesignCSS.brushChangeBackgroundActive : ''}`}
-                                        onClick={() => handleBrushSizeChange(16)}>
-                                        <div className={DesignCSS.brushChange16px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 18) ? DesignCSS.brushChangeBackgroundActive : ''}`}
-                                        onClick={() => handleBrushSizeChange(18)}>
-                                        <div className={DesignCSS.brushChange18px}></div>
+                        <div className={DesignCSS.designDown}>
+                            <div className={DesignCSS.designCanvasContainer}>
+                                <div className={DesignCSS.designItem} style={{backgroundImage: `url(${backgroundImage})`}}>
+                                    <div className={DesignCSS.designCanvas}>
+                                        <div>
+                                            <Canvas
+                                                width={460}
+                                                height={430}
+                                                isBrushActive={brushActive}
+                                                setBrushSize={handleBrushSizeChange}
+                                                setBrushColor={handleBrushColorChange}
+                                                handleExportSVG={handleExportSVG}
+                                                paths={paths}
+                                                setPaths={setPaths}
+                                                uploadedImage={uploadedImage}
+                                                isDragActive={dragActive}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className={DesignCSS.colorConteiner}>
-                                <div className={DesignCSS.colorChangeTitle}>筆刷顏色</div>
-                                <div className={DesignCSS.colorChangePicker}>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#000000' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.Black}
-                                        onClick={() => handleBrushColorChange('#000000')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#FFFFFF' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.White}
-                                        onClick={() => handleBrushColorChange('#FFFFFF')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ff0000' ? DesignCSS.colorChangePickerButtonActive : ''} `}
-                                        id={DesignCSS.Red}
-                                        onClick={() => handleBrushColorChange('#ff0000')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffa500' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.Orange
-                                        } onClick={() => handleBrushColorChange('#ffa500')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffff00' ? DesignCSS.colorChangePickerButtonActive : ''} `}
-                                        id={DesignCSS.Yellow}
-                                        onClick={() => handleBrushColorChange('#ffff00')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#008000' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.Green}
-                                        onClick={() => handleBrushColorChange('#008000')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#0000ff' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.Blue}
-                                        onClick={() => handleBrushColorChange('#0000ff')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#4b0082' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.Purple
-                                        } onClick={() => handleBrushColorChange('#800080')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#a52a2a' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.Brown}
-                                        onClick={() => handleBrushColorChange('#a52a2a')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#808080' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.Gray}
-                                        onClick={() => handleBrushColorChange('#808080')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ff00ff' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.Pink}
-                                        onClick={() => handleBrushColorChange('#ffc0cb')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#add8e6' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.LightBlue}
-                                        onClick={() => handleBrushColorChange('#add8e6')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#90ee90' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.LightGreen}
-                                        onClick={() => handleBrushColorChange('#90ee90')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffffe0' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.LightYellow}
-                                        onClick={() => handleBrushColorChange('#ffffe0')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffb6c1' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.LightPink}
-                                        onClick={() => handleBrushColorChange('#ffb6c1')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#d3d3d3' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.LightGray}
-                                        onClick={() => handleBrushColorChange('#d3d3d3')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#f0f8ff' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.GreenBlue}
-                                        onClick={() => handleBrushColorChange('#14adff')}></div>
-                                    <div
-                                        className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffcc00' ? DesignCSS.colorChangePickerButtonActive : ''}`}
-                                        id={DesignCSS.WarmYellow}
-                                        onClick={() => handleBrushColorChange('#ffcc00')}></div>
+                            <div className={DesignCSS.designToolsContainer}>
+                                <div className={DesignCSS.brushContainer}>
+                                    <div className={DesignCSS.brushChangeTitle}>筆刷大小</div>
+                                    <div className={DesignCSS.brushChangeContainer}>
+                                        <div
+                                            className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 6) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                            onClick={() => handleBrushSizeChange(6)}>
+                                            <div className={DesignCSS.brushChange6px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 8) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                            onClick={() => handleBrushSizeChange(8)}>
+                                            <div className={DesignCSS.brushChange8px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 10) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                            onClick={() => handleBrushSizeChange(10)}>
+                                            <div className={DesignCSS.brushChange10px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 12) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                            onClick={() => handleBrushSizeChange(12)}>
+                                            <div className={DesignCSS.brushChange12px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 14) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                            onClick={() => handleBrushSizeChange(14)}>
+                                            <div className={DesignCSS.brushChange14px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 16) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                            onClick={() => handleBrushSizeChange(16)}>
+                                            <div className={DesignCSS.brushChange16px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 18) ? DesignCSS.brushChangeBackgroundActive : ''}`}
+                                            onClick={() => handleBrushSizeChange(18)}>
+                                            <div className={DesignCSS.brushChange18px}></div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className={DesignCSS.eraserContainer}>
-                                <div className={DesignCSS.eraserChangeTitle}>橡皮擦大小</div>
-                                <div className={DesignCSS.eraserChangeContainer}>
+                                <div className={DesignCSS.colorConteiner}>
+                                    <div className={DesignCSS.colorChangeTitle}>筆刷顏色</div>
+                                    <div className={DesignCSS.colorChangePicker}>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#000000' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.Black}
+                                            onClick={() => handleBrushColorChange('#000000')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#FFFFFF' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.White}
+                                            onClick={() => handleBrushColorChange('#FFFFFF')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ff0000' ? DesignCSS.colorChangePickerButtonActive : ''} `}
+                                            id={DesignCSS.Red}
+                                            onClick={() => handleBrushColorChange('#ff0000')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffa500' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.Orange
+                                            } onClick={() => handleBrushColorChange('#ffa500')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffff00' ? DesignCSS.colorChangePickerButtonActive : ''} `}
+                                            id={DesignCSS.Yellow}
+                                            onClick={() => handleBrushColorChange('#ffff00')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#008000' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.Green}
+                                            onClick={() => handleBrushColorChange('#008000')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#0000ff' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.Blue}
+                                            onClick={() => handleBrushColorChange('#0000ff')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#4b0082' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.Purple
+                                            } onClick={() => handleBrushColorChange('#800080')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#a52a2a' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.Brown}
+                                            onClick={() => handleBrushColorChange('#a52a2a')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#808080' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.Gray}
+                                            onClick={() => handleBrushColorChange('#808080')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ff00ff' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.Pink}
+                                            onClick={() => handleBrushColorChange('#ffc0cb')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#add8e6' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.LightBlue}
+                                            onClick={() => handleBrushColorChange('#add8e6')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#90ee90' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.LightGreen}
+                                            onClick={() => handleBrushColorChange('#90ee90')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffffe0' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.LightYellow}
+                                            onClick={() => handleBrushColorChange('#ffffe0')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffb6c1' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.LightPink}
+                                            onClick={() => handleBrushColorChange('#ffb6c1')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#d3d3d3' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.LightGray}
+                                            onClick={() => handleBrushColorChange('#d3d3d3')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#f0f8ff' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.GreenBlue}
+                                            onClick={() => handleBrushColorChange('#14adff')}></div>
+                                        <div
+                                            className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#ffcc00' ? DesignCSS.colorChangePickerButtonActive : ''}`}
+                                            id={DesignCSS.WarmYellow}
+                                            onClick={() => handleBrushColorChange('#ffcc00')}></div>
+                                    </div>
+                                </div>
+                                <div className={DesignCSS.eraserContainer}>
+                                    <div className={DesignCSS.eraserChangeTitle}>橡皮擦大小</div>
+                                    <div className={DesignCSS.eraserChangeContainer}>
 
-                                    <div
-                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 6) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
-                                        onClick={() => handleEraserSizeChange(6)}>
-                                        <div className={DesignCSS.eraserChange6px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 8) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
-                                        onClick={() => handleEraserSizeChange(8)}>
-                                        <div className={DesignCSS.eraserChange8px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 10) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
-                                        onClick={() => handleEraserSizeChange(10)}>
-                                        <div className={DesignCSS.eraserChange10px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 12) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
-                                        onClick={() => handleEraserSizeChange(12)}>
-                                        <div className={DesignCSS.eraserChange12px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 14) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
-                                        onClick={() => handleEraserSizeChange(14)}>
-                                        <div className={DesignCSS.eraserChange14px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 16) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
-                                        onClick={() => handleEraserSizeChange(16)}>
-                                        <div className={DesignCSS.eraserChange16px}></div>
-                                    </div>
-                                    <div
-                                        className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 18) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
-                                        onClick={() => handleEraserSizeChange(18)}>
-                                        <div className={DesignCSS.eraserChange18px}></div>
+                                        <div
+                                            className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 6) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                            onClick={() => handleEraserSizeChange(6)}>
+                                            <div className={DesignCSS.eraserChange6px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 8) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                            onClick={() => handleEraserSizeChange(8)}>
+                                            <div className={DesignCSS.eraserChange8px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 10) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                            onClick={() => handleEraserSizeChange(10)}>
+                                            <div className={DesignCSS.eraserChange10px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 12) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                            onClick={() => handleEraserSizeChange(12)}>
+                                            <div className={DesignCSS.eraserChange12px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 14) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                            onClick={() => handleEraserSizeChange(14)}>
+                                            <div className={DesignCSS.eraserChange14px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 16) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                            onClick={() => handleEraserSizeChange(16)}>
+                                            <div className={DesignCSS.eraserChange16px}></div>
+                                        </div>
+                                        <div
+                                            className={`${DesignCSS.eraserChangeBackground} ${(eraserActive && currentEraserSize === 18) ? DesignCSS.eraserChangeBackgroundActive : ''}`}
+                                            onClick={() => handleEraserSizeChange(18)}>
+                                            <div className={DesignCSS.eraserChange18px}></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {/* <div className={DesignCSS.textChangeConteiner}>
+                                {/* <div className={DesignCSS.textChangeConteiner}>
                                 <div className={DesignCSS.textChangeTitle}>文字外觀</div>
                                 <div className={DesignCSS.textChangeFontBackground}>
                                     <div className={DesignCSS.textChangeFrontButton}>Helvetica</div>
@@ -706,6 +707,7 @@ const DesignGift = () => {
                                     </div>
                                 </div>
                             </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>
