@@ -547,6 +547,29 @@
     text-decoration: none;
 }
 
+.itemsCard_1_button:hover,
+.itemsCard_2_button:hover,
+.itemsCard_3_button:hover,
+.itemsCard_4_button:hover,
+.itemsCard_5_button:hover,
+.itemsCard_6_button:hover,
+.itemsCard_7_button:hover,
+.itemsCard_8_button:hover,
+.itemsCard_9_button:hover {
+    background-color: #1A5665;
+}
+
+.itemsCard_1_button:active,
+.itemsCard_2_button:active,
+.itemsCard_3_button:active,
+.itemsCard_4_button:active,
+.itemsCard_5_button:active,
+.itemsCard_6_button:active,
+.itemsCard_7_button:active,
+.itemsCard_8_button:active,
+.itemsCard_9_button:active {
+    background-color: #31729a;
+}
 
 .itemsCard_2_Picture {
     background-image: url('/images/item02.png');

@@ -100,23 +100,13 @@
     text-align: center;
 }
 
-.quiteButton {
-    color: white;
-    background-color: #1D445D;
-    text-shadow: 0 0 5px rgb(0, 0, 0);
-    border-radius: 5px;
-    height: 35px;
-    width: 80px;
-    margin: 10px;
-    padding: 5px;
-    flex-shrink: 0;
-    text-align: center;
-}
-
-.addCartButton:hover,
-.quiteButton:hover {
+.addCartButton:hover {
     background-color: #37B2D6;
     cursor: pointer;
+}
+
+.addCartButton:active {
+    background-color: #31729a;
 }
 
 .designDown {
