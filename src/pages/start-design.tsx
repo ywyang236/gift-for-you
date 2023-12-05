@@ -329,9 +329,9 @@ const DesignGift = () => {
 
         try {
             await uploadBytes(storageRef, imgBlob);
-            window.alert('上傳成功！');
+            window.alert('畫布內容保存成功！');
         } catch (error) {
-            window.alert('上傳失敗，請重試！');
+            window.alert('保存失敗，請重試！');
         } finally {
             document.body.style.cursor = 'default';
         }
