@@ -13,10 +13,10 @@ import {FaSlash} from "react-icons/fa";
 import {PiFilePngFill, PiFileSvgFill} from "react-icons/pi";
 import Canvas from '../components/Canvas/Canvas';
 import {RootState} from '../store/types/storeTypes';
-import {activateBrush, activateEraser, deactivateBrush, deactivateEraser} from '../store/sharedActions';
+import {activateBrush, activateEraser, deactivateBrush, deactivateEraser, activateDrag, deactivateDrag} from '../store/sharedActions';
 import {setBrushSize, setBrushColor} from '../store/slices/brushSlice';
 import {setEraserSize} from '../store/slices/eraserSlice';
-import {toggleDragActive} from '../store/slices/dragSlice';
+import {setSelectedPathIndex} from '../store/slices/dragSlice';
 import {db} from '../lib/firebase/firebase';
 import {collection, addDoc, getDocs, doc, setDoc, getDoc, updateDoc, arrayUnion} from 'firebase/firestore';
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
@@ -53,9 +53,7 @@ const DesignGift = () => {
     const [redoStack, setRedoStack] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
-    const handleToggleDrag = () => {
-        dispatch(toggleDragActive());
-    }
+
 
     const handleImageUpload = () => {
         const input = document.createElement('input');
@@ -105,10 +103,7 @@ const DesignGift = () => {
         }
     };
 
-    const handleCursorClick = () => {
-        dispatch(deactivateBrush());
-        dispatch(deactivateEraser());
-    };
+
 
     useEffect(() => {
         if (userId) {
@@ -210,6 +205,21 @@ const DesignGift = () => {
         loadCanvasFromFirebase();
     }, [loadCanvasFromFirebase]);
 
+    const handleCursorClick = () => {
+        dispatch(deactivateBrush());
+        dispatch(deactivateEraser());
+        dispatch(deactivateDrag());
+    };
+
+    const handleToggleDrag = () => {
+        if (dragActive) {
+            dispatch(deactivateDrag());
+        } else {
+            dispatch(activateDrag());
+            dispatch(deactivateEraser());
+            dispatch(deactivateBrush());
+        }
+    };
     const handleToggleBrush = () => {
         if (eraserActive) {
             dispatch(setBrushSize(lastBrushSize));
@@ -414,11 +424,16 @@ const DesignGift = () => {
                                 className={`${DesignCSS.designButton} ${eraserActive ? DesignCSS.designButtonActive : ''}`}
                                 onClick={handleToggleEraser}
                             />
-                            <IoArrowUndo className={DesignCSS.designButton} onClick={handleUndo} />
+                            <IoArrowUndo
+                                className={DesignCSS.designButton}
+                                onClick={handleUndo} />
                             <IoArrowRedo className={DesignCSS.designButton} onClick={handleRedo} />
                             <IoImage className={DesignCSS.designButton} onClick={handleImageUpload} />
                             <FaSlash className={DesignCSS.designButton} />
-                            <RiDragMove2Fill className={DesignCSS.designButton} onClick={handleToggleDrag} />
+                            <RiDragMove2Fill
+                                className={`${DesignCSS.designButton} ${dragActive ? DesignCSS.designButtonActive : ''}`}
+                                onClick={handleToggleDrag}
+                            />
                             <IoText className={DesignCSS.designButton} />
                             <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
                             <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />

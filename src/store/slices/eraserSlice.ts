@@ -1,6 +1,6 @@
 // src/store/slices/eraserSlice.ts
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {activateEraser, deactivateEraser, activateBrush} from '../sharedActions';
+import {activateEraser, deactivateEraser, activateBrush, activateDrag} from '../sharedActions';
 
 export interface EraserState {
     isEraserActive: boolean;
@@ -37,6 +37,9 @@ const eraserSlice = createSlice({
                 state.isEraserActive = false;
             })
             .addCase(activateBrush, (state) => {
+                state.isEraserActive = false;
+            })
+            .addCase(activateDrag, (state) => {
                 state.isEraserActive = false;
             });
     },

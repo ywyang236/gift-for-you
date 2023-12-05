@@ -1,6 +1,6 @@
 // src/store/slices/brushSlice.ts
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {activateBrush, deactivateBrush, activateEraser} from '../sharedActions';
+import {activateBrush, deactivateBrush, activateEraser, activateDrag} from '../sharedActions';
 
 export interface BrushState {
     isBrushActive: boolean;
@@ -47,6 +47,9 @@ const brushSlice = createSlice({
                 state.isBrushActive = false;
             })
             .addCase(activateEraser, (state) => {
+                state.isBrushActive = false;
+            })
+            .addCase(activateDrag, (state) => {
                 state.isBrushActive = false;
             });
     },
