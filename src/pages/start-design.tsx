@@ -1,6 +1,7 @@
 // pages/design-gift.tsx
 import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {useHotkeys} from 'react-hotkeys-hook';
 import {useRouter} from 'next/router';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
@@ -53,7 +54,9 @@ const DesignGift = () => {
     const [redoStack, setRedoStack] = useState<Array<{points: Array<{x: number; y: number}>, brushSize: number, brushColor: string}>>([]);
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
-
+    useHotkeys('v', () => handleCursorClick());
+    useHotkeys('meta+z, ctrl+z', () => handleUndo());
+    useHotkeys('meta+shift+z, ctrl+shift+z', () => handleRedo());
 
     const handleImageUpload = () => {
         const input = document.createElement('input');
@@ -184,7 +187,6 @@ const DesignGift = () => {
 
     const loadCanvasFromFirebase = useCallback(async () => {
         if (!userId) {
-            console.log('用戶未登入');
             return;
         }
 
@@ -268,7 +270,10 @@ const DesignGift = () => {
     };
 
     const clearCanvasContent = () => {
-        setPaths([]);
+        const confirmed = window.confirm('清空畫布後，不能使用上一步復原，請問您是否要清空畫布？');
+        if (confirmed) {
+            setPaths([]);
+        }
     };
 
     const drawPathsOnCanvas = (canvas: any) => {
@@ -443,9 +448,7 @@ const DesignGift = () => {
                                 className={`${DesignCSS.designButton} ${eraserActive ? DesignCSS.designButtonActive : ''}`}
                                 onClick={handleToggleEraser}
                             />
-                            <IoArrowUndo
-                                className={DesignCSS.designButton}
-                                onClick={handleUndo} />
+                            <IoArrowUndo className={DesignCSS.designButton} onClick={handleUndo} />
                             <IoArrowRedo className={DesignCSS.designButton} onClick={handleRedo} />
                             <IoImage className={DesignCSS.designButton} onClick={handleImageUpload} />
                             <FaSlash className={DesignCSS.designButton} />
