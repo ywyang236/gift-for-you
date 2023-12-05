@@ -240,11 +240,17 @@ const DesignGift = () => {
     const handleEraserSizeChange = (newEraserSize: number) => {
         dispatch(deactivateBrush());
         dispatch(setEraserSize(newEraserSize));
+        if (dragActive) {
+            dispatch(deactivateDrag());
+        }
     }
 
     const handleBrushSizeChange = (newBrushSize: number) => {
         dispatch(deactivateEraser());
         dispatch(setBrushSize(newBrushSize));
+        if (dragActive) {
+            dispatch(deactivateDrag());
+        }
     };
 
     const handleBrushColorChange = (newBrushColor: string) => {
@@ -254,6 +260,9 @@ const DesignGift = () => {
             dispatch(activateBrush());
         } else {
             dispatch(setBrushColor(newBrushColor));
+        }
+        if (dragActive) {
+            dispatch(deactivateDrag());
         }
         dispatch(setBrushColor(newBrushColor));
     };
