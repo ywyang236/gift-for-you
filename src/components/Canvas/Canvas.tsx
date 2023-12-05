@@ -155,7 +155,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
             <BackgroundHighlighter
                 width={width}
                 height={height}
-                active={isPainting || isErasing}
+                active={isPainting || isErasing || isDragging}
             >
                 <svg
                     width={width}
@@ -168,6 +168,7 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
                     onMouseUp={() => {
                         endPainting();
                         endErasing();
+                        if (isDragging) setIsDragging(false);
                     }}
                     onMouseLeave={handleMouseLeave}
                 >
