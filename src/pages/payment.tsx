@@ -52,6 +52,16 @@ const Payment = () => {
     const [receiverPhone, setReceiverPhone] = useState('');
 
     useEffect(() => {
+        const isCheckoutInitiated = localStorage.getItem('isCheckoutInitiated');
+        if (!isCheckoutInitiated) {
+            window.location.href = '/';
+        } else {
+            localStorage.removeItem('isCheckoutInitiated');
+        }
+
+    }, []);
+
+    useEffect(() => {
         const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {

@@ -166,7 +166,8 @@ const Cart = () => {
             const userPaymentRef = doc(db, "users", userId, "data", "user_payment");
             await setDoc(userPaymentRef, paymentInfo);
 
-            console.log('付款資訊已儲存');
+            localStorage.setItem('isCheckoutInitiated', 'true');
+
             window.location.href = '/payment';
         } catch (error) {
             console.error('儲存付款資訊時出錯:', error);
