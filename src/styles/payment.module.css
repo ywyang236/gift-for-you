@@ -348,6 +348,7 @@
 .cartContentText {
     font-size: 16px;
     color: #1D445D;
+    font-weight: 500;
 }
 
 @media (max-width:390px) {
