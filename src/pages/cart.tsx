@@ -28,6 +28,7 @@ const Cart = () => {
     const [discount, setDiscount] = useState(0);
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [userId, setUserId] = useState<string | null>(null);
+    const [finalShippingFee, setFinalShippingFee] = useState(shippingFee);
 
     const handleRemoveItem = async (itemIndex: number) => {
         const itemToRemove = cartItems[itemIndex];
@@ -115,16 +116,17 @@ const Cart = () => {
 
     useEffect(() => {
         const itemsTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        let finalShippingFee = shippingFee;
+        let newFinalShippingFee = cartItems.length === 0 ? 0 : shippingFee;
 
         if (discountCode === 'gift') {
             setDiscount(65);
-            finalShippingFee = 0;
+            newFinalShippingFee = 0;
         } else {
             setDiscount(0);
         }
 
-        setTotalAmount(itemsTotal + finalShippingFee - discount);
+        setFinalShippingFee(newFinalShippingFee);
+        setTotalAmount(itemsTotal + newFinalShippingFee - discount);
     }, [cartItems, discount, shippingFee, discountCode]);
 
     const handleDiscountCodeChange = (event: {target: {value: any;};}) => {
@@ -245,7 +247,7 @@ const Cart = () => {
                             <div className={CartCSS.itemLine}></div>
                             <div className={CartCSS.priceShippingFeeContainer}>
                                 <span className={CartCSS.priceShippingFeeTitle}>商品運費：</span>
-                                <span className={CartCSS.priceShippingFee}>新台幣 {shippingFee} 元</span>
+                                <span className={CartCSS.priceShippingFee}>新台幣 {finalShippingFee} 元</span>
                             </div>
                             <div className={CartCSS.itemLine}></div>
                             <div className={CartCSS.priceAmountContainer}>
@@ -253,8 +255,8 @@ const Cart = () => {
                                 <span className={CartCSS.priceAmount}>新台幣 {totalAmount} 元</span>
                             </div>
                             <div
-                                className={CartCSS.checkoutButton}
-                                onClick={handleCheckout}
+                                className={`${CartCSS.checkoutButton} ${cartItems.length === 0 ? CartCSS.disabledButton : ''}`}
+                                onClick={cartItems.length === 0 ? undefined : handleCheckout}
                             >確認訂購</div>
                         </div>
                     </div>

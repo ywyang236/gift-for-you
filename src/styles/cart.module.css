@@ -356,3 +356,8 @@
     background-color: #3686A5;
     text-shadow: none;
 }
+
+.disabledButton {
+    background-color: #ccc;
+    pointer-events: none;
+}
