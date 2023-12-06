@@ -235,12 +235,7 @@ const Cart = () => {
                             </div>
                             <div className={CartCSS.itemLine}></div>
                             <div className={CartCSS.priceDiscountContainer}>
-                                <span className={CartCSS.priceDiscountTitle}>優惠減免：</span>
-                                <span className={CartCSS.priceDiscount}>新台幣 {discount} 元</span>
-
-                            </div>
-                            <div className={CartCSS.discountCodeContainer}>
-                                <span className={CartCSS.discountCodeTitle}> 折扣碼：</span>
+                                <span className={CartCSS.priceDiscountTitle}> 折扣碼：</span>
                                 <input
                                     type="text"
                                     placeholder="輸入 gift 免運費"
