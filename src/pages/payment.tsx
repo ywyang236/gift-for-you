@@ -154,6 +154,32 @@ const Payment = () => {
 
         if (typeof window !== "undefined" && window.TPDirect) {
             const tappayStatus: TappayStatus = window.TPDirect.card.getTappayFieldsStatus() as TappayStatus;
+
+            if (!orderName) {
+                alert('請輸入訂購人姓名。');
+                return;
+            }
+            if (!orderEmail) {
+                alert('請輸入訂購人電子信箱。');
+                return;
+            }
+            if (!orderPhone) {
+                alert('請輸入訂購人手機號碼。');
+                return;
+            }
+            if (!receiverName) {
+                alert('請輸入收件人姓名。');
+                return;
+            }
+            if (!receiverAddress) {
+                alert('請輸入收件地址。');
+                return;
+            }
+            if (!receiverPhone) {
+                alert('請輸入收件人手機號碼。');
+                return;
+            }
+
             if (!tappayStatus.canGetPrime) {
                 alert('信用卡資訊填寫錯誤');
                 return;
