@@ -169,6 +169,8 @@
 .itemQuantityContainer {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     line-height: 48px;
 }
 
@@ -179,8 +181,6 @@
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #c5c5c5;
-    padding: 0px 10px;
-    font-size: 16px;
     font-weight: 500;
     color: #575758;
     text-align: center;
