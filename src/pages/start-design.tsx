@@ -359,7 +359,7 @@ const DesignGift = () => {
             return;
         }
 
-        const confirmSave = window.confirm("加入購物車後就不能再修改了，您確定要繼續嗎？");
+        const confirmSave = window.confirm("加入購物車後，就不能再修改畫布內容。請問您確定要將內容加入購物車嗎？");
         if (!confirmSave) return;
 
         const canvas = document.createElement('canvas');
