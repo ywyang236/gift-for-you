@@ -235,7 +235,7 @@ const Cart = () => {
                             </div>
                             <div className={CartCSS.itemLine}></div>
                             <div className={CartCSS.priceDiscountContainer}>
-                                <span className={CartCSS.priceDiscountTitle}>優惠折扣：</span>
+                                <span className={CartCSS.priceDiscountTitle}>優惠減免：</span>
                                 <span className={CartCSS.priceDiscount}>新台幣 {discount} 元</span>
 
                             </div>
@@ -247,6 +247,7 @@ const Cart = () => {
                                     value={discountCode}
                                     onChange={handleDiscountCodeChange}
                                     className={CartCSS.discountCodeInput}
+                                    disabled={cartItems.length === 0}
                                 />
                             </div>
                             <div className={CartCSS.itemLine}></div>
