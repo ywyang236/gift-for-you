@@ -75,7 +75,7 @@
     position: relative;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
     .itemContainer {
         grid-template-columns: 1fr;
     }
@@ -87,21 +87,13 @@
     height: 30px;
     cursor: pointer;
     color: #1D445D;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
 }
 
 .itemRemove:hover {
     color: #992626;
-}
-
-@media (max-width: 2500px) {
-    .itemRemove {
-        top: 0px;
-        right: 0px;
-    }
-
-    .itemRemove:hover {
-        color: #992626;
-    }
 }
 
 .itemImageContainer {
@@ -202,7 +194,7 @@
     color: #1D445D;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
     .itemSubtotalContainer {
         position: sticky;
     }
