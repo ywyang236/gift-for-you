@@ -21,6 +21,7 @@ const Navbar: React.FC = () => {
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
     const {isLoginModalVisible, setIsLoginModalVisible, requireAuth} = useRequireAuth();
     const router = useRouter();
+    const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
 
     const handleDesignLinkClick = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -67,8 +68,6 @@ const Navbar: React.FC = () => {
     const handleLoginModal = () => {
         setIsLoginModalVisible(true);
     }
-
-    const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
 
     const handleRegisterModal = () => {
         setIsRegisterModalVisible(true);

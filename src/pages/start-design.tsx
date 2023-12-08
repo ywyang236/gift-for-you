@@ -5,7 +5,7 @@ import {useHotkeys} from 'react-hotkeys-hook';
 import {useRouter} from 'next/router';
 import Layout from '../app/layout';
 import DesignCSS from '../styles/design.module.css';
-import {IoArrowUndo, IoArrowRedo, IoBrush, IoInformationCircleSharp, IoTrash, IoCloudUpload, IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle, IoImage, IoText} from 'react-icons/io5';
+import {IoArrowUndo, IoArrowRedo, IoBrush, IoInformationCircleSharp, IoTrash, IoCloudUpload, IoSave, IoEllipseSharp, IoHeart, IoMoon, IoSquareSharp, IoSquare, IoTriangle, IoImage, IoText} from 'react-icons/io5';
 import {IoClipboard, IoColorFill, IoColorPalette, IoColorWand, IoCopy, IoCrop, IoCut, IoDuplicate, IoEyedrop, IoEyeOff, IoEye, IoLayers, IoOptions} from "react-icons/io5";
 import {BsEraserFill, BsFillDiamondFill, BsFillHeptagonFill, BsFillHexagonFill, BsFillOctagonFill, BsFillPentagonFill, BsFillStarFill} from "react-icons/bs";
 import {GiArrowCursor} from "react-icons/gi";
@@ -467,7 +467,7 @@ const DesignGift = () => {
                                 {/* <IoText className={DesignCSS.designButton} /> */}
                                 <IoInformationCircleSharp className={DesignCSS.designButton} onClick={showProductDetails} />
                                 <IoTrash className={DesignCSS.designButton} onClick={clearCanvasContent} />
-                                <IoCloudUpload className={DesignCSS.designButton} onClick={saveCanvasToFirebase} />
+                                <IoSave className={DesignCSS.designButton} onClick={saveCanvasToFirebase} />
                                 <PiFilePngFill className={DesignCSS.designButton} onClick={downloadCanvas} />
                                 <PiFileSvgFill className={DesignCSS.designButton} onClick={handleExportSVG} />
                                 <span
