@@ -117,7 +117,7 @@ const OrderInformation = () => {
             <div className={OrderCSS.main}>
                 <div className={OrderCSS.backgroundContainer}>
                     {orders.map((order, index) => (
-                        <div key={index} className={OrderCSS.orderContainer} onClick={() => toggleContainer(index)}>
+                        <div key={index} className={OrderCSS.orderContainerInformationOutside} onClick={() => toggleContainer(index)}>
                             <div className={OrderCSS.orderNumber}>訂單編號：{order.orderId}</div>
                             <div className={OrderCSS.orderDate}>訂購日期：{order.createdAt}</div>
                             <div className={OrderCSS.orderAmount}>付款金額：新台幣 {order.amount} 元</div>
@@ -126,7 +126,7 @@ const OrderInformation = () => {
                     ))}
                     {showContainer && selectedOrderIndex !== null && (
                         <div className={OrderCSS.modalOverlay} onClick={closeModal}>
-                            <div className={`${OrderCSS.ordarContainer}`} onClick={e => e.stopPropagation()}>
+                            <div className={`${OrderCSS.orderContainerInformationInside}`} onClick={e => e.stopPropagation()}>
                                 <IoClose onClick={closeModal} className={OrderCSS.closeButton} />
                                 <div className={OrderCSS.orderInformation}>
                                     <div className={OrderCSS.orderName}>訂購人：{orders[selectedOrderIndex].name}</div>
