@@ -113,6 +113,11 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
 
         setMousePosition(newPoint);
 
+        if (isPainting && (newPoint.x < 0 || newPoint.y < 0 || newPoint.x > width || newPoint.y > height)) {
+            endPainting();
+            return;
+        }
+
         if (isPainting) {
             setPaths((prevPaths) => {
                 const newPaths = [...prevPaths];
@@ -128,6 +133,9 @@ const Canvas: React.FC<CanvasProps> = ({width, height, paths, setPaths, uploaded
     };
 
     const handleMouseLeave = () => {
+        if (isPainting) {
+            endPainting();
+        }
         setMousePosition(undefined);
     };
 
