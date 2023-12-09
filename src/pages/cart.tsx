@@ -5,10 +5,7 @@ import CartCSS from '../styles/cart.module.css';
 import {IoClose} from "react-icons/io5";
 import {db} from '../lib/firebase/firebase';
 import {doc, getDoc, setDoc, updateDoc} from 'firebase/firestore';
-import {getStorage, ref, getDownloadURL} from "firebase/storage";
-import {collection, query, where, getDocs} from 'firebase/firestore';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
-import Image from 'next/image';
 
 interface CartItem {
     canvasImage: string;
@@ -21,7 +18,6 @@ interface CartItem {
 }
 
 const Cart = () => {
-    const [imageUrl, setImageUrl] = useState('');
     const shippingFee = 65;
     const [totalAmount, setTotalAmount] = useState(shippingFee);
     const [discountCode, setDiscountCode] = useState('');
@@ -29,6 +25,7 @@ const Cart = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [userId, setUserId] = useState<string | null>(null);
     const [finalShippingFee, setFinalShippingFee] = useState(shippingFee);
+    const [itemsTotalAmount, setItemsTotalAmount] = useState(0);
 
     const handleRemoveItem = async (itemIndex: number) => {
         const itemToRemove = cartItems[itemIndex];
@@ -50,8 +47,21 @@ const Cart = () => {
 
     useEffect(() => {
         const itemsTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        setTotalAmount(itemsTotal + shippingFee - discount);
-    }, [cartItems, discount, shippingFee]);
+        setItemsTotalAmount(itemsTotal);
+
+        let newFinalShippingFee = cartItems.length === 0 ? 0 : shippingFee;
+        let discountAmount = 0;
+
+        if (discountCode === 'gift') {
+            discountAmount = 65;
+            newFinalShippingFee = 0;
+        }
+
+        setDiscount(discountAmount);
+        setFinalShippingFee(newFinalShippingFee);
+        setTotalAmount(discountCode === 'gift' ? itemsTotal : itemsTotal + newFinalShippingFee);
+    }, [cartItems, discountCode, shippingFee]);
+
 
     const handleItemQuantityChange = async (index: number, newQuantity: number) => {
         const updatedItems = cartItems.map((item, idx) => {
@@ -113,21 +123,6 @@ const Cart = () => {
         };
         fetchCartItems();
     }, [userId]);
-
-    useEffect(() => {
-        const itemsTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        let newFinalShippingFee = cartItems.length === 0 ? 0 : shippingFee;
-
-        if (discountCode === 'gift') {
-            setDiscount(65);
-            newFinalShippingFee = 0;
-        } else {
-            setDiscount(0);
-        }
-
-        setFinalShippingFee(newFinalShippingFee);
-        setTotalAmount(itemsTotal + newFinalShippingFee - discount);
-    }, [cartItems, discount, shippingFee, discountCode]);
 
     const handleDiscountCodeChange = (event: {target: {value: any;};}) => {
         setDiscountCode(event.target.value);
@@ -231,7 +226,7 @@ const Cart = () => {
                             <div className={CartCSS.priceTitle}>訂單合計</div>
                             <div className={CartCSS.priceAmountContainer}>
                                 <span className={CartCSS.priceAmountTitle}>商品金額：</span>
-                                <span className={CartCSS.priceAmount}>新台幣 {totalAmount} 元</span>
+                                <span className={CartCSS.priceAmount}>新台幣 {itemsTotalAmount} 元</span>
                             </div>
                             <div className={CartCSS.itemLine}></div>
                             <div className={CartCSS.priceDiscountContainer}>
