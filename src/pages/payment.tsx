@@ -44,12 +44,12 @@ interface TappayResult {
 const Payment = () => {
     const [userId, setUserId] = useState<string | null>(null);
     const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null);
-    const [orderName, setOrderName] = useState('');
-    const [orderEmail, setOrderEmail] = useState('');
-    const [orderPhone, setOrderPhone] = useState('');
-    const [receiverName, setReceiverName] = useState('');
-    const [receiverAddress, setReceiverAddress] = useState('');
-    const [receiverPhone, setReceiverPhone] = useState('');
+    const [orderName, setOrderName] = useState('瑪利歐');
+    const [orderEmail, setOrderEmail] = useState('mario@gmail.com');
+    const [orderPhone, setOrderPhone] = useState('0912345678');
+    const [receiverName, setReceiverName] = useState('路易吉');
+    const [receiverAddress, setReceiverAddress] = useState('台北市中山區中山北路2段');
+    const [receiverPhone, setReceiverPhone] = useState('0912345678');
 
     useEffect(() => {
         const isCheckoutInitiated = localStorage.getItem('isCheckoutInitiated');
