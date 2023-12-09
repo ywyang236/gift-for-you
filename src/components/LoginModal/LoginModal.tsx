@@ -16,7 +16,7 @@ interface LoginModalProps {
 const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
     const dispatch = useDispatch();
 
-    const defaultEmail = 'test@example.com';
+    const defaultEmail = 'guest@gift.com';
     const defaultPassword = 'password123';
 
     const [email, setEmail] = useState(defaultEmail);
