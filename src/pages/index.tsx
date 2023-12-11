@@ -125,7 +125,7 @@ const Home = () => {
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
-                                    <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                                    <div className={IndexCSS.itemsCard_Price}>$ 1299</div>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@ const Home = () => {
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>特殊造型夜燈</div>
-                                    <div className={IndexCSS.itemsCard_Price}>$ 1899</div>
+                                    <div className={IndexCSS.itemsCard_Price}>$ 1599</div>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +147,7 @@ const Home = () => {
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>特殊造型夜燈</div>
-                                    <div className={IndexCSS.itemsCard_Price}>$ 1899</div>
+                                    <div className={IndexCSS.itemsCard_Price}>$ 2499</div>
                                 </div>
                             </div>
                         </div>
@@ -157,8 +157,8 @@ const Home = () => {
                                     <div className={IndexCSS.itemsCard_7_button}>尚未開放</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
-                                    <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
-                                    <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                                    <div className={IndexCSS.itemsCard_Title}>特殊造型夜燈</div>
+                                    <div className={IndexCSS.itemsCard_Price}>$ 2999</div>
                                 </div>
                             </div>
 
@@ -169,8 +169,8 @@ const Home = () => {
                                     <div className={IndexCSS.itemsCard_8_button}>尚未開放</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
-                                    <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
-                                    <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                                    <div className={IndexCSS.itemsCard_Title}>新年賀卡</div>
+                                    <div className={IndexCSS.itemsCard_Price}>$ 399</div>
                                 </div>
                             </div>
                         </div>
@@ -180,8 +180,8 @@ const Home = () => {
                                     <div className={IndexCSS.itemsCard_9_button}>尚未開放</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
-                                    <div className={IndexCSS.itemsCard_Title}>幾何造型夜燈</div>
-                                    <div className={IndexCSS.itemsCard_Price}>$ 899</div>
+                                    <div className={IndexCSS.itemsCard_Title}>雷射雕刻賀卡</div>
+                                    <div className={IndexCSS.itemsCard_Price}>$ 1499</div>
                                 </div>
                             </div>
                         </div>
