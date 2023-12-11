@@ -4,7 +4,7 @@
 
 網站連結：https://gift-for-you-2023.vercel.app/
 
-![Gift For You RWD](public/images/README/gift-for-you-RWD.jpeg)
+![Gift For You RWD](public/images/README/RWD_display.gif)
 
 
 ### 技術堆疊
