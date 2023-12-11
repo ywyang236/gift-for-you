@@ -8,15 +8,24 @@
 
 
 ### 技術堆疊
-<img src="public/images/README/react_ts.svg" width="20" height="20" alt="React" style="vertical-align: middle;" /> **React**：`useEffect`, `useState`, `useCallback`
-<img src="public/images/README/react_ts.svg" width="20" height="20" alt="Custom Hooks" style="vertical-align: middle;" /> **Custom Hooks**：`useAuthState`, `useRequireAuth`
-<img src="public/images/README/redux-action.svg" width="20" height="20" alt="Redux" style="vertical-align: middle;" /> **Redux**：`useSelector`, `useDispatch`
-<img src="public/images/README/redux-action.svg" width="20" height="20" alt="Redux Toolkit" style="vertical-align: middle;" /> **Redux Toolkit**：`createSlice`, `createAction`
-<img src="public/images/README/next_light.svg" width="20" height="20" alt="Next.js" style="vertical-align: middle;" /> **Next.js**：App Router
-<img src="public/images/README/typescript.svg" width="20" height="20" alt="TypeScript" style="vertical-align: middle;" /> **TypeScript**
-<img src="public/images/README/eslint.svg" width="20" height="20" alt="ESLint" style="vertical-align: middle;" /> **ESLint**
-**Self-Built WYSIWYG Canvas Editor**
-<img src="public/images/README/firebase.svg" width="20" height="20" alt="Firebase" style="vertical-align: middle;" /> **Firebase**：Cloud Firestore, Storage, Authentication
+<img src="public/images/README/react_ts.svg" width="20" height="20" alt="React" style="vertical-align: middle;" /> **React**：`useEffect`, `useState`, `useCallback`  
+
+<img src="public/images/README/react_ts.svg" width="20" height="20" alt="Custom Hooks" style="vertical-align: middle;" /> **Custom Hooks**：`useAuthState`, `useRequireAuth`  
+
+<img src="public/images/README/redux-action.svg" width="20" height="20" alt="Redux" style="vertical-align: middle;" /> **Redux**：`useSelector`, `useDispatch`  
+
+<img src="public/images/README/redux-action.svg" width="20" height="20" alt="Redux Toolkit" style="vertical-align: middle;" /> **Redux Toolkit**：`createSlice`, `createAction`  
+
+<img src="public/images/README/next_light.svg" width="20" height="20" alt="Next.js" style="vertical-align: middle;" /> **Next.js**：App Router  
+
+<img src="public/images/README/typescript.svg" width="20" height="20" alt="TypeScript" style="vertical-align: middle;" /> **TypeScript**  
+
+<img src="public/images/README/eslint.svg" width="20" height="20" alt="ESLint" style="vertical-align: middle;" /> **ESLint**  
+
+**Self-Built WYSIWYG Canvas Editor**  
+
+<img src="public/images/README/firebase.svg" width="20" height="20" alt="Firebase" style="vertical-align: middle;" /> **Firebase**：Cloud Firestore, Storage, Authentication  
+
 <img src="public/images/README/vercel_light.svg" width="20" height="20" alt="Vercel" style="vertical-align: middle;" /> **Vercel**
 
 
