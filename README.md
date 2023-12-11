@@ -4,20 +4,25 @@
 
 網站連結：https://gift-for-you-2023.vercel.app/
 
-<!-- 待補：畫布使用時的 gif -->
+![Gift For You RWD](public/images/README/gift-for-you-RWD.jpeg)
 
-### 技術關鍵字
+
+### 技術堆疊
 - **React**
-    - useRef, useEffect, useState, useCallback, custom hook
+    - ```useEffect```, ```useState```, ```useCallback```
+- **Custom Hooks**
+    - ```useAuthState```, ```useRequireAuth```
 - **Redux**
-    - useSelector, useDispatch
+    - ```useSelector```, ```useDispatch```
 -  **Redux Toolkit**
-    - createSlice, createAction
+    - ```createSlice```, ```createAction```
+- **Next.js**
+    -  App Router
 - **TypeScript**
+- **ESLint**
 - **Self-Built WYSIWYG Canvas Editor**
 - **Firebase**
-- **Next.js**
-    -  ESLint
+    -  Cloud Firestore, Storage, Authentication
 - **Vercel**
 
 ### 畫布結構設計

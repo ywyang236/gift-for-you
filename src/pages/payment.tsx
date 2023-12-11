@@ -50,6 +50,7 @@ const Payment = () => {
     const [receiverName, setReceiverName] = useState('路易吉');
     const [receiverAddress, setReceiverAddress] = useState('台北市中山區中山北路2段');
     const [receiverPhone, setReceiverPhone] = useState('0912345678');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const isCheckoutInitiated = localStorage.getItem('isCheckoutInitiated');
@@ -151,6 +152,7 @@ const Payment = () => {
 
     const handleSubmit = async (event: {preventDefault: () => void;}) => {
         event.preventDefault();
+        setIsLoading(true);
 
         if (typeof window !== "undefined" && window.TPDirect) {
             const tappayStatus: TappayStatus = window.TPDirect.card.getTappayFieldsStatus() as TappayStatus;
@@ -232,6 +234,7 @@ const Payment = () => {
                 }
             });
         }
+        setIsLoading(false);
     };
 
     return (

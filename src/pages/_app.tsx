@@ -1,5 +1,5 @@
 // pages/_app.tsx
-import React, {useEffect} from 'react';
+import React from 'react';
 import {AppProps} from 'next/app';
 import {Provider} from 'react-redux';
 import store from '../store/configureStore';
