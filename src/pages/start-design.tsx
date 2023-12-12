@@ -61,7 +61,7 @@ const DesignGift = () => {
     useHotkeys('meta+shift+z, ctrl+shift+z', () => handleRedo());
     useHotkeys('d', () => handleToggleDrag());
     useHotkeys('i', () => showProductDetails());
-    useHotkeys('delete', () => clearCanvasContent());
+    useHotkeys('meta+delete, ctrl+delete', () => clearCanvasContent());
     useHotkeys('s', () => saveCanvasToFirebase());
     useHotkeys('enter', () => addToCart());
 
