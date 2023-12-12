@@ -19,6 +19,7 @@
 - **Self-Built WYSIWYG Canvas Editor**
 - **Firebase**：Cloud Firestore, Storage, Authentication
 - **Vercel**
+<!-- 補圖-->
 
 ### RWD：300 px ~ 2000 px
 ![Gift For You RWD](public/images/README/home-page-RWD.gif)
@@ -27,33 +28,41 @@
 ### 完整流程
 <!-- 待補 GIF 動畫圖-->
 
-### 核心功能：畫布編輯器
-#### (1) 畫筆
+### 畫布編輯器
+#### (１) 畫筆
 <!-- 待補 GIF 動畫圖-->
-#### (2) 橡皮擦
+
+#### (２) 橡皮擦
 <!-- 待補 GIF 動畫圖-->
-#### (3) 上一步、下一步
+
+#### (３) 上一步、下一步
 <!-- 待補 GIF 動畫圖-->
-#### (4) 拖移
+
+#### (４) 拖移
+<!-- 待補 GIF 動畫圖-->
+
+#### (５) 鍵盤快捷鍵
 <!-- 待補 GIF 動畫圖-->
 
 ### 附屬功能
-#### (1) 鍵盤快捷鍵
-#### (2) 第三方支付 Tappay
+#### (１) 購物車
+<!-- 待補 GIF 動畫圖-->
+
+#### (２) 第三方支付 Tappay
+<!-- 待補 GIF 動畫圖-->
+
 ### 組件架構
 <!-- 待補：組件結構  -->
 
-<!-- ### 自定義 Hook -->
+### 自定義 Hook
 
 <!-- 待補：自定義 Hook 介紹  -->
-
 
 ### 畫布結構設計
 
 ![Canvas Structure Diagram](public/images/brush-structure-diagram.gif)
 
-
 ### 狀態管理
   
-<!-- 待補：狀態管理動畫圖-->
+![Redux Toolkit](public/images/README/redux-toolkit.gif)
 
