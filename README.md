@@ -41,8 +41,22 @@
 #### (４) 拖移
 <!-- 待補 GIF 動畫圖-->
 
-#### (５) 鍵盤快捷鍵
-<!-- 待補 GIF 動畫圖-->
+#### (５) 鍵盤快捷鍵 React Hotkeys Hook
+![React Hotkeys Hook](public/images/README/react-hotkeys-hook.jpeg)
+
+| 名稱             | 功能                     | 鍵盤快捷鍵                               |
+|----------------|------------------------|------------------------------------|
+| Cursor         | 切換游標功能             | `v`                                 |
+| Brush          | 切換到畫筆工具           | `b`                                 |
+| Eraser         | 切換到橡皮擦工具         | `e`                                 |
+| Undo           | 撤銷上一個動作           | `meta+z`, `ctrl+z`                 |
+| Redo           | 重做上一個被撤銷的動作   | `meta+shift+z`, `ctrl+shift+z`     |
+| Drag           | 切換拖移工具             | `d`                                 |
+| Product Details | 顯示產品詳情           | `i`                                 |
+| Clear Canvas   | 清空畫布內容             | `meta+delete`, `ctrl+delete`       |
+| Save Canvas    | 保存到 Firebase     | `s`                                 |
+| Add to Cart    | 將畫布加入購物車         | `Enter`                             |
+
 
 ### 附屬功能
 #### (１) 購物車
