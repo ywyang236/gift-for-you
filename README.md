@@ -4,7 +4,7 @@
 
 Website：https://gift-for-you-2023.vercel.app/
 
-![Gift For You Home Page](public/images/README/home-page.jpeg)
+![Gift For You Home Page](public/images/README/homepage.jpeg)
 
 
 ### Technology Stack
