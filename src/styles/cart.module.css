@@ -34,7 +34,7 @@
     min-height: 100vh;
 }
 
-@media (max-width: 660px) {
+@media (max-width: 800px) {
     .container {
         flex-direction: column;
     }
@@ -54,14 +54,14 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 660px) {
+@media (max-width: 800px) {
     .leftContainer {
         width: 100%;
         border-radius: 10px 10px 0px 0px;
     }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 680px) {
     .leftContainer {
         padding: 10px;
     }
@@ -75,7 +75,7 @@
     position: relative;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1250px) {
     .itemContainer {
         grid-template-columns: 1fr;
     }
@@ -121,7 +121,7 @@
     }
 }
 
-@media (max-width: 660px) {
+@media (max-width: 800px) {
     .itemImageContainer {
         max-width: 600px;
         width: 100%;
@@ -194,7 +194,7 @@
     color: #1D445D;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1250px) {
     .itemSubtotalContainer {
         position: sticky;
     }
@@ -213,6 +213,7 @@
     font-size: 16px;
     font-weight: 500;
     color: #1D445D;
+    margin-right: 5px;
 }
 
 @media (max-width: 320px) {
@@ -247,7 +248,7 @@
     box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 660px) {
+@media (max-width: 800px) {
     .rightContainer {
         width: 100%;
         border-radius: 0px 0px 10px 10px;
@@ -255,7 +256,7 @@
     }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 680px) {
     .rightContainer {
         padding: 10px;
     }
@@ -276,7 +277,6 @@
 }
 
 .priceAmountContainer,
-.priceDiscountContainer,
 .priceShippingFeeContainer,
 .priceAmountContainer {
     width: 100%;
@@ -285,13 +285,10 @@
     align-items: center;
 }
 
-.discountCodeContainer {
-    width: 100%;
+.priceDiscountContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+    flex-direction: column;
+    width: 100%;
 }
 
 .priceAmountTitle,
@@ -317,11 +314,17 @@
     font-weight: 500;
     color: #575758;
     text-align: center;
+    margin-top: 5px;
 }
 
 .discountCodeInput:focus {
     outline: none !important;
     border: 2px solid rgb(30, 105, 128);
+}
+
+.discountCodeInput::placeholder {
+    font-size: 14px;
+    color: #707070;
 }
 
 .priceAmount,

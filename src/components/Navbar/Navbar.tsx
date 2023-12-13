@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
     const handleDesignLinkClick = (e: React.MouseEvent) => {
         e.preventDefault();
         if (router.pathname !== '/') {
-            const confirmLeave = window.confirm('您即將離開此頁面，確定要前往挑選禮品的頁面嗎？');
+            const confirmLeave = window.confirm('You are about to leave this page, are you sure you want to go to the gift selection page?');
             if (confirmLeave) {
                 router.push('/#designItems');
             }
@@ -38,11 +38,11 @@ const Navbar: React.FC = () => {
     const handleSignOut = async () => {
         try {
             await signOut(auth);
-            alert('您已經成功登出');
+            alert('You have successfully logged out.');
             dispatch(logOut());
             window.location.href = '/';
         } catch (error) {
-            alert('發生錯誤，請稍後再試');
+            alert('An error occurred, please try again later.');
         }
     };
 
@@ -85,23 +85,23 @@ const Navbar: React.FC = () => {
                         className={NavbarCSS.leftContainerIcon}
 
                     />
-                    <Link href='/' className={NavbarCSS.leftContainer}>禮品訂製所 Gift For You</Link>
+                    <Link href='/' className={NavbarCSS.leftContainer}>Gift For You</Link>
                 </div>
                 <IoMenu className={NavbarCSS.menuButton} onClick={toggleMenu} />
                 <div className={`${NavbarCSS.rightContainer} ${menuVisible ? NavbarCSS.activeMenu : ''}`}>
-                    <span className={NavbarCSS.rightContainerText} onClick={handleDesignLinkClick}>挑選禮品</span>
+                    <span className={NavbarCSS.rightContainerText} onClick={handleDesignLinkClick}>Select Gifts</span>
                     {isLoggedIn && (
                         <>
-                            <Link href='/cart' className={NavbarCSS.rightContainerText}>購物車</Link>
-                            <Link href='/order-information' className={NavbarCSS.rightContainerText}>歷史訂單</Link>
-                            <span className={NavbarCSS.login} onClick={handleSignOut}>登出</span>
+                            <Link href='/cart' className={NavbarCSS.rightContainerText}>Shopping Cart</Link>
+                            <Link href='/order-information' className={NavbarCSS.rightContainerText}>Order History</Link>
+                            <span className={NavbarCSS.login} onClick={handleSignOut}>Log Out</span>
                         </>
                     )}
                     {!isLoggedIn && (
                         <>
-                            <span className={NavbarCSS.login} onClick={handleLoginModal}>登入</span>
+                            <span className={NavbarCSS.login} onClick={handleLoginModal}>Log In</span>
                             {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} onShowRegister={setIsRegisterModalVisible} />}
-                            <span className={NavbarCSS.register} onClick={handleRegisterModal}>註冊</span>
+                            <span className={NavbarCSS.register} onClick={handleRegisterModal}>Register</span>
                             {isRegisterModalVisible && <RegisterModal onClose={() => setIsRegisterModalVisible(false)} onShowLogin={setIsLoginModalVisible} />}
                         </>
                     )}

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // components/LoginModal/LoginModal.tsx
 "use client";
 import React, {useState} from 'react';
@@ -27,10 +28,10 @@ const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             dispatch(logIn());
-            setMessage('登入成功');
+            setMessage('Login successful.');
             onClose();
         } catch (error) {
-            setMessage(`登入失敗，請檢查帳號密碼是否正確`);
+            setMessage(`Login failed, please check if the account and password are correct.`);
         }
     };
 
@@ -39,29 +40,29 @@ const LoginModal: React.FC<LoginModalProps> = ({onClose, onShowRegister}) => {
             <div className={LoginModalCSS.mainContainer} onClick={event => event.stopPropagation()}>
                 <div className={LoginModalCSS.leftContainer}>
                     <div className={LoginModalCSS.logoImage}></div>
-                    <div className={LoginModalCSS.webTitle}>禮品訂製所</div>
+                    <div className={LoginModalCSS.webTitle}></div>
                     <div className={LoginModalCSS.webTitle}>Gift For You</div>
                 </div>
                 <div className={LoginModalCSS.rightContainer}>
                     <IoClose className={LoginModalCSS.closeButton} onClick={onClose} />
-                    <div className={LoginModalCSS.loginTitle}>登入會員帳號</div>
+                    <div className={LoginModalCSS.loginTitle}>Log In Account</div>
                     <div className={LoginModalCSS.emailContainer}>
-                        <label htmlFor="email" className={LoginModalCSS.emailTitle}>會員帳號：</label>
+                        <label htmlFor="email" className={LoginModalCSS.emailTitle}>Email:</label>
                         <input type="email" placeholder="Email" value={email} className={LoginModalCSS.emailInput}
                             onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className={LoginModalCSS.passwordContainer}>
-                        <label htmlFor="password" className={LoginModalCSS.passwordTitle}>會員密碼：</label>
+                        <label htmlFor="password" className={LoginModalCSS.passwordTitle}>Password:</label>
                         <input type="password" placeholder="Password" value={password} className={LoginModalCSS.passwordInput}
                             onChange={(e) => setPassword(e.target.value)} />
                     </div>
-                    <button type="submit" className={LoginModalCSS.loginButton} onClick={handleRegularSignIn}>登入帳戶</button>
+                    <button type="submit" className={LoginModalCSS.loginButton} onClick={handleRegularSignIn}>Login</button>
                     <div className={LoginModalCSS.registerContainer}>
-                        <span className={LoginModalCSS.registerTitle}>還沒有帳戶？</span>
+                        <span className={LoginModalCSS.registerTitle}>Don't have an account?</span>
                         <span className={LoginModalCSS.registerLink} onClick={() => {
                             onClose();
                             onShowRegister(true);
-                        }}>點此註冊</span>
+                        }}>Click here to register</span>
                     </div>
                     {message && <div className={LoginModalCSS.loginMessageContainer}>{message}</div>}
                 </div>

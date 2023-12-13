@@ -15,7 +15,7 @@ const ThankYou = () => (
                                 </path>
                             </svg>
                         </div>
-                        <div className={ThankCSS.thankYou}>付款成功</div>
+                        <div className={ThankCSS.thankYou}>Payment successful.</div>
                     </div>
                 </div>
             </div>

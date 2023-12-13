@@ -60,14 +60,6 @@
 
 }
 
-@media (max-width: 360px) {
-
-    .emailTitle,
-    .passwordTitle {
-        font-size: 0;
-    }
-
-}
 
 
 .logoImage {
@@ -139,7 +131,19 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
+    padding-right: 10px;
 }
+
+@media (max-width: 360px) {
+
+    .emailTitle,
+    .passwordTitle {
+        font-size: 0;
+        padding-right: 0px;
+    }
+
+}
+
 
 .emailInput,
 .passwordInput {
@@ -208,7 +212,7 @@
     font-size: 20px;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
     margin-bottom: 20px;
@@ -229,4 +233,8 @@
     flex-direction: row;
     justify-content: center;
     flex-shrink: 0;
+}
+
+.registerTitle {
+    padding-bottom: 10px;
 }

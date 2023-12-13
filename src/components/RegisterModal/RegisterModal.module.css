@@ -59,15 +59,7 @@
 
 }
 
-@media (max-width: 360px) {
 
-    .nameTitle,
-    .emailTitle,
-    .passwordTitle {
-        font-size: 0;
-    }
-
-}
 
 .logoImage {
     background-image: url('/images/logo.png');
@@ -107,9 +99,15 @@
     margin-bottom: 30px;
 }
 
-@media (max-width: 330px) {
+@media (max-width: 400px) {
     .registerTitle {
-        font-size: 32px;
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 350px) {
+    .registerTitle {
+        font-size: 24px;
     }
 }
 
@@ -139,6 +137,17 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
+    padding-right: 10px;
+}
+
+@media (max-width: 360px) {
+
+    .nameTitle,
+    .emailTitle,
+    .passwordTitle {
+        font-size: 0;
+        padding-right: 0px;
+    }
 
 }
 
@@ -175,6 +184,13 @@
     border: none;
 }
 
+@media (max-width: 360px) {
+    .registerButton {
+        font-size: 20px;
+    }
+
+}
+
 .registerButton:hover {
     background-color: #36B2D8;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
@@ -190,7 +206,7 @@
     font-size: 20px;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
     margin-bottom: 20px;
@@ -211,4 +227,17 @@
     flex-direction: row;
     justify-content: center;
     flex-shrink: 0;
+}
+
+.loginTitle,
+.loginLink {
+    padding-bottom: 10px;
+}
+
+@media (max-width: 360px) {
+
+    .loginTitle,
+    .loginLink {
+        font-size: 18px;
+    }
 }

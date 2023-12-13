@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const newPaymentInfo = {
             orderData,
-            paymentStatus: data.status === 0 ? '付款成功' : '付款失敗',
+            paymentStatus: data.status === 0 ? 'Payment Successful' : 'Payment Failed',
             paymentDetails: data,
         };
 
@@ -49,7 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     orderId: orderData.orderId,
                     "payment": {
                         "status": data.status === 0 ? 0 : 1,
-                        "message": data.status === 0 ? "付款成功" : '付款失敗',
+                        "message": data.status === 0 ? 'Payment Successful' : 'Payment Failed',
                         error: data.status === 0 ? null : data
                     }
                 },

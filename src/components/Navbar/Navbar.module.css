@@ -41,7 +41,6 @@
     align-items: center;
 }
 
-
 .rightContainerText {
     text-decoration: none;
     color: white;
@@ -51,6 +50,9 @@
     cursor: pointer;
     margin-left: 12px;
     padding: 0px 10px;
+    height: 35px;
+    display: flex;
+    align-items: center;
 }
 
 .rightContainerText:hover {
@@ -67,6 +69,9 @@
     margin-left: 12px;
     padding: 5px 10px;
     cursor: pointer;
+    height: 35px;
+    display: flex;
+    align-items: center;
 }
 
 .login:hover {
@@ -84,6 +89,9 @@
     margin-left: 12px;
     padding: 5px 10px;
     cursor: pointer;
+    height: 35px;
+    display: flex;
+    align-items: center;
 }
 
 .register:hover {
@@ -126,7 +134,9 @@
     }
 
     .rightContainerText {
-        height: 30px;
+        height: 35px;
+        display: flex;
+        align-items: center;
     }
 
     .rightContainerText:hover {

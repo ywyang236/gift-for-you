@@ -148,7 +148,6 @@ const DesignGift = () => {
 
         const productId = router.query.product;
         if (!productId) {
-            console.log('產品 ID 缺失');
             return;
         }
 
@@ -169,10 +168,6 @@ const DesignGift = () => {
                             .catch((error) => console.error("Error fetching image:", error));
                     }
                 });
-
-                if (!productFound) {
-                    console.log(`找不到該產品的資訊: ${productId}`);
-                }
             }
         };
 
@@ -182,13 +177,11 @@ const DesignGift = () => {
     const showProductDetails = () => {
         if (productInfo) {
             alert(`
-            商品名稱：${productInfo.name}
-            商品配件：${productInfo.accessories}
-            訂製方式：${productInfo.customization}
-            商品單價：新台幣 ${productInfo.price} 元
+            Product Name: ${productInfo.name}
+            Product Accessories: ${productInfo.accessories}
+            Customization: ${productInfo.customization}
+            Price: NT$ ${productInfo.price}
             `);
-        } else {
-            console.log('尚未獲取產品資訊');
         }
     };
 
@@ -205,9 +198,8 @@ const DesignGift = () => {
             if (canvasData) {
                 setPaths(canvasData.paths);
             }
-        } else {
-            console.log('沒有找到用戶的畫布數據');
         }
+
     }, [userId]);
 
     useEffect(() => {
@@ -277,7 +269,7 @@ const DesignGift = () => {
     };
 
     const clearCanvasContent = () => {
-        const confirmed = window.confirm('清空畫布後，不能使用上一步復原，請問您是否要清空畫布？');
+        const confirmed = window.confirm('Clearing the canvas cannot be undone. Do you want to clear the canvas?');
         if (confirmed) {
             setPaths([]);
         }
@@ -336,9 +328,9 @@ const DesignGift = () => {
 
         try {
             await uploadBytes(storageRef, imgBlob);
-            window.alert('畫布內容保存成功！');
+            window.alert('Canvas content saved successfully!');
         } catch (error) {
-            window.alert('保存失敗，請重試！');
+            window.alert('Failed to save, please try again later.');
         } finally {
             document.body.style.cursor = 'default';
         }
@@ -355,11 +347,10 @@ const DesignGift = () => {
 
     const addToCart = async () => {
         if (!userId) {
-            console.log('用戶未登入');
             return;
         }
 
-        const confirmSave = window.confirm("加入購物車後，就不能再修改畫布內容。請問您確定要將內容加入購物車嗎？");
+        const confirmSave = window.confirm("After adding to the cart, you can't modify the canvas content. Are you sure you want to add it to the cart?");
         if (!confirmSave) return;
 
         const canvas = document.createElement('canvas');
@@ -383,7 +374,6 @@ const DesignGift = () => {
         }, {merge: true});
 
         if (!productInfo) {
-            console.error("產品資訊尚未加載");
             return;
         }
 
@@ -406,7 +396,7 @@ const DesignGift = () => {
             });
         }
 
-        alert('已成功加入購物車');
+        alert('Successfully added to the cart.');
         setPaths([]);
         window.location.href = '/cart';
     };
@@ -473,7 +463,7 @@ const DesignGift = () => {
                                 <span
                                     className={DesignCSS.addCartButton}
                                     onClick={addToCart}
-                                >加入購物車</span>
+                                >Add to Cart</span>
                             </div>
                         </div>
                         <div className={DesignCSS.designDown}>
@@ -499,7 +489,7 @@ const DesignGift = () => {
                             </div>
                             <div className={DesignCSS.designToolsContainer}>
                                 <div className={DesignCSS.brushContainer}>
-                                    <div className={DesignCSS.brushChangeTitle}>筆刷大小</div>
+                                    <div className={DesignCSS.brushChangeTitle}>Brush Size</div>
                                     <div className={DesignCSS.brushChangeContainer}>
                                         <div
                                             className={`${DesignCSS.brushChangeBackground} ${(brushActive && currentBrushSize === 6) ? DesignCSS.brushChangeBackgroundActive : ''}`}
@@ -539,7 +529,7 @@ const DesignGift = () => {
                                     </div>
                                 </div>
                                 <div className={DesignCSS.colorConteiner}>
-                                    <div className={DesignCSS.colorChangeTitle}>筆刷顏色</div>
+                                    <div className={DesignCSS.colorChangeTitle}>Brush Color</div>
                                     <div className={DesignCSS.colorChangePicker}>
                                         <div
                                             className={`${DesignCSS.colorChangePickerButton} ${brushActive && currentBrushColor === '#000000' ? DesignCSS.colorChangePickerButtonActive : ''}`}
@@ -616,7 +606,7 @@ const DesignGift = () => {
                                     </div>
                                 </div>
                                 <div className={DesignCSS.eraserContainer}>
-                                    <div className={DesignCSS.eraserChangeTitle}>橡皮擦大小</div>
+                                    <div className={DesignCSS.eraserChangeTitle}>Eraser Size</div>
                                     <div className={DesignCSS.eraserChangeContainer}>
 
                                         <div

@@ -38,6 +38,7 @@
     margin: 10px auto;
     padding: 30px;
     position: relative;
+    overflow-y: auto;
 }
 
 .orderContainerInformationOutside {
@@ -57,12 +58,12 @@
     cursor: pointer;
 }
 
-.orderContainer:hover {
+.orderContainerInformationOutside:hover {
     background: linear-gradient(217deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
     backdrop-filter: blur(5px);
 }
 
-.orderContainer:active {
+.orderContainerInformationOutside:active {
     background: linear-gradient(217deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8));
     backdrop-filter: blur(5px);
 }
@@ -79,7 +80,7 @@
 .orderReceiverAddress,
 .orderReceiverPhone {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
     color: #1D445D;
     flex-shrink: 0;
     margin-bottom: 10px;
@@ -174,18 +175,11 @@
 
 .cartContentRight {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
     margin-left: 20px;
-    flex-shrink: 0;
     align-items: center;
-}
-
-@media (max-width:1120px) {
-
-    .cartContentRight {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    width: 100%;
 }
 
 @media (max-width:840px) {
@@ -200,7 +194,8 @@
 .cartContentText {
     font-size: 16px;
     color: #1D445D;
-    font-weight: 500;
+    font-weight: 700;
+    width: 100%;
 }
 
 @media (max-width:390px) {

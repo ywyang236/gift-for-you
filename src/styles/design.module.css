@@ -97,7 +97,9 @@
     margin: 10px;
     padding: 5px;
     flex-shrink: 0;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .addCartButton:hover {

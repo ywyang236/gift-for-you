@@ -33,18 +33,18 @@ const Footer: React.FC = () => {
                 <div className={FooterCSS.footerLogoContainer}>
                     <Link href='/' className={FooterCSS.footerLogo}></Link>
                     <div className={FooterCSS.footerLogoContentContainer}>
-                        <Link href='/' className={FooterCSS.footerLogoContent}>禮品訂製所</Link>
+                        <Link href='/' className={FooterCSS.footerLogoContent}></Link>
                         <Link href='/' className={FooterCSS.footerLogoContent}>Gift For You</Link>
                     </div>
                 </div>
                 <div className={FooterCSS.footerLeftContainer}>
-                    <span className={FooterCSS.footerLeftContent} onClick={handleGiftSelectionClick}>挑選禮品</span>
-                    <Link href='/cart' className={FooterCSS.footerLeftContent} onClick={requireAuth}>購物車</Link>
-                    <Link href='/order-information' className={FooterCSS.footerLeftContent} onClick={requireAuth}>歷史訂單</Link>
+                    <span className={FooterCSS.footerLeftContent} onClick={handleGiftSelectionClick}>Select Gifts</span>
+                    <Link href='/cart' className={FooterCSS.footerLeftContent} onClick={requireAuth}>Shopping Cart</Link>
+                    <Link href='/order-information' className={FooterCSS.footerLeftContent} onClick={requireAuth}>Order History</Link>
                 </div>
                 <div className={FooterCSS.footerRightContainer}>
-                    <Link href='/about-gift-for-you' className={FooterCSS.footerRightContent}>關於禮品訂製所</Link>
-                    <Link href='/about-author' className={FooterCSS.footerRightContent}>關於作者</Link>
+                    <Link href='/about-gift-for-you' className={FooterCSS.footerRightContent}>About Website</Link>
+                    <Link href='/about-author' className={FooterCSS.footerRightContent}>About Author</Link>
                 </div>
                 <div className={FooterCSS.footerContactContainer}>
                     <Link href='https://github.com/ywyang236/gift-for-you' target="_blank" className={FooterCSS.footerContact}>

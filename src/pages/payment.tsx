@@ -44,11 +44,11 @@ interface TappayResult {
 const Payment = () => {
     const [userId, setUserId] = useState<string | null>(null);
     const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null);
-    const [orderName, setOrderName] = useState('瑪利歐');
+    const [orderName, setOrderName] = useState('Mario');
     const [orderEmail, setOrderEmail] = useState('mario@gmail.com');
     const [orderPhone, setOrderPhone] = useState('0912345678');
-    const [receiverName, setReceiverName] = useState('路易吉');
-    const [receiverAddress, setReceiverAddress] = useState('台北市中山區中山北路2段');
+    const [receiverName, setReceiverName] = useState('Luigi');
+    const [receiverAddress, setReceiverAddress] = useState('Zhongshan North Road, Section 2, Zhongshan District, Taipei City.');
     const [receiverPhone, setReceiverPhone] = useState('0912345678');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -85,10 +85,10 @@ const Payment = () => {
                 const data = docSnap.data() as PaymentInfo;
                 setPaymentInfo(data);
             } else {
-                console.log('沒有找到使用者的付款資訊');
+                console.log("User's payment information not found.");
             }
         } catch (error) {
-            console.error('讀取付款資訊時出錯:', error);
+            console.error('Error reading payment information:', error);
         }
     };
 
@@ -111,7 +111,7 @@ const Payment = () => {
                     },
                     ccv: {
                         element: '#card-ccv',
-                        placeholder: '後三碼'
+                        placeholder: 'CCV'
                     }
                 };
                 window.TPDirect.card.setup({
@@ -158,32 +158,32 @@ const Payment = () => {
             const tappayStatus: TappayStatus = window.TPDirect.card.getTappayFieldsStatus() as TappayStatus;
 
             if (!orderName) {
-                alert('請輸入訂購人姓名。');
+                alert("Please enter the orderer's name.");
                 return;
             }
             if (!orderEmail) {
-                alert('請輸入訂購人電子信箱。');
+                alert("Please enter the orderer's email address.");
                 return;
             }
             if (!orderPhone) {
-                alert('請輸入訂購人手機號碼。');
+                alert("Please enter the orderer's mobile number.");
                 return;
             }
             if (!receiverName) {
-                alert('請輸入收件人姓名。');
+                alert("Please enter the recipient's name.");
                 return;
             }
             if (!receiverAddress) {
-                alert('請輸入收件地址。');
+                alert("Please enter the delivery address.");
                 return;
             }
             if (!receiverPhone) {
-                alert('請輸入收件人手機號碼。');
+                alert("Please enter the recipient's mobile number.");
                 return;
             }
 
             if (!tappayStatus.canGetPrime) {
-                alert('信用卡資訊填寫錯誤');
+                alert('Credit card information is incorrect.');
                 return;
             }
 
@@ -191,7 +191,7 @@ const Payment = () => {
                 name: orderName,
                 email: orderEmail,
                 phone: orderPhone,
-                createdAt: new Date().toLocaleString(),
+                createdAt: new Date().toLocaleString('en-US', {hour12: true}),
                 orderId: Math.floor(Math.random() * 1000000000),
                 items: paymentInfo?.items,
                 receiverName: receiverName,
@@ -246,7 +246,7 @@ const Payment = () => {
             <div className={PaymentCSS.main}>
                 <div className={PaymentCSS.container}>
                     <div className={PaymentCSS.cartContainer}>
-                        <div className={PaymentCSS.cartTitle}>購買細節</div>
+                        <div className={PaymentCSS.cartTitle}>Purchase Details</div>
                         <div className={PaymentCSS.cartContent}>
                             {paymentInfo && paymentInfo.items.map((item, index) => (
                                 <div className={PaymentCSS.cartContentItem} key={index}>
@@ -255,20 +255,22 @@ const Payment = () => {
                                         {item.userCanvas && <div className={PaymentCSS.cartContentCanvas} style={{backgroundImage: `url(${item.userCanvas})`}}></div>}
                                     </div>
                                     <div className={PaymentCSS.cartContentRight}>
-                                        <div className={PaymentCSS.cartContentText}>商品名稱：{item.name}</div>
-                                        <div className={PaymentCSS.cartContentText}>商品配件：{item.accessories}</div>
-                                        <div className={PaymentCSS.cartContentText}>訂製方式：{item.customization}</div>
-                                        <div className={PaymentCSS.cartContentText}>商品單價：{item.price}</div>
-                                        <div className={PaymentCSS.cartContentText}>訂購數量：{item.quantity}</div>
-                                        <div className={PaymentCSS.cartContentText}>商品金額：{item.subtotal}</div>
+                                        <div className={PaymentCSS.cartContentText}>Product Name: {item.name}</div>
+                                        <div className={PaymentCSS.cartContentText}>Product Accessories: {item.accessories}</div>
+                                        <div className={PaymentCSS.cartContentText}>Customization: {item.customization}</div>
+                                        <div className={PaymentCSS.cartContentText}>Unit Price: NT$ {item.price}</div>
+                                        <div className={PaymentCSS.cartContentText}>
+                                            Order Quantity: {item.quantity} {item.quantity % 2 === 0 ? 'sets' : 'set'}
+                                        </div>
+                                        <div className={PaymentCSS.cartContentText}>Product Amount: NT$ {item.subtotal}</div>
                                     </div>
                                 </div>
                             ))}
                             {paymentInfo && (
                                 <>
                                     <div className={PaymentCSS.cartContentFinal}>
-                                        <div className={PaymentCSS.cartContentFinalContainer}>付款金額：
-                                            <div className={PaymentCSS.cartContentTotal}>新台幣 {paymentInfo.totalAmount} 元</div>
+                                        <div className={PaymentCSS.cartContentFinalContainer}>Payment Amount:
+                                            <div className={PaymentCSS.cartContentTotal}>NT$ {paymentInfo.totalAmount}</div>
                                         </div>
                                     </div>
                                 </>
@@ -276,9 +278,9 @@ const Payment = () => {
                         </div>
                     </div>
                     <div className={PaymentCSS.orderContainer}>
-                        <div className={PaymentCSS.orderTitle}>訂購人資訊</div>
+                        <div className={PaymentCSS.orderTitle}>Orderer Information</div>
                         <div className={PaymentCSS.orderContent}>
-                            <div className={PaymentCSS.orderName}>訂購人：
+                            <div className={PaymentCSS.orderName}>Orderer:
                                 <input
                                     className={PaymentCSS.orderNameInput}
                                     type="text"
@@ -286,7 +288,7 @@ const Payment = () => {
                                     onChange={(e) => setOrderName(e.target.value)}
                                 />
                             </div>
-                            <div className={PaymentCSS.orderEmail}>電子信箱：
+                            <div className={PaymentCSS.orderEmail}>Email:
                                 <input
                                     className={PaymentCSS.orderEmailInput}
                                     type="text"
@@ -294,7 +296,7 @@ const Payment = () => {
                                     onChange={(e) => setOrderEmail(e.target.value)}
                                 />
                             </div>
-                            <div className={PaymentCSS.orderPhone}>手機號碼：
+                            <div className={PaymentCSS.orderPhone}>Mobile:
                                 <input
                                     className={PaymentCSS.orderPhoneInput}
                                     type="text"
@@ -302,13 +304,13 @@ const Payment = () => {
                                     onChange={(e) => setOrderPhone(e.target.value)}
                                 />
                             </div>
-                            <div className={PaymentCSS.orderNote}>備註：一般訂製約為 5 - 8 個工作天。急件費用另計。</div>
+                            <div className={PaymentCSS.orderNote}>Note: Normal customization takes about 5 - 8 working days. Urgent orders are subject to additional charges.</div>
                         </div>
                     </div>
                     <div className={PaymentCSS.recipientContainer}>
-                        <div className={PaymentCSS.recipientTitle}>收件人資訊</div>
+                        <div className={PaymentCSS.recipientTitle}>Recipient Information</div>
                         <div className={PaymentCSS.recipientContent}>
-                            <div className={PaymentCSS.recipientName}>收件人：
+                            <div className={PaymentCSS.recipientName}>Recipient:
                                 <input
                                     className={PaymentCSS.recipientNameInput}
                                     type="text"
@@ -316,7 +318,7 @@ const Payment = () => {
                                     onChange={(e) => setReceiverName(e.target.value)}
                                 />
                             </div>
-                            <div className={PaymentCSS.recipientAddress}>收件地址：
+                            <div className={PaymentCSS.recipientAddress}>Address:
                                 <input
                                     className={PaymentCSS.recipientAddressInput}
                                     type="text"
@@ -324,7 +326,7 @@ const Payment = () => {
                                     onChange={(e) => setReceiverAddress(e.target.value)}
                                 />
                             </div>
-                            <div className={PaymentCSS.recipientPhone}>手機號碼：
+                            <div className={PaymentCSS.recipientPhone}>Mobile:
                                 <input
                                     className={PaymentCSS.recipientPhoneInput}
                                     type="text"
@@ -335,18 +337,18 @@ const Payment = () => {
                         </div>
                     </div>
                     <div className={PaymentCSS.cardContainer}>
-                        <div className={PaymentCSS.cardTitle}>信用卡資訊</div>
+                        <div className={PaymentCSS.cardTitle}>Credit Card Information</div>
                         <div className={PaymentCSS.cardContent}>
-                            <div className={PaymentCSS.cardNumber}>信用卡卡號：
+                            <div className={PaymentCSS.cardNumber}>Credit Card Number:：
                                 <div className={PaymentCSS.tpfield} id="card-number"></div>
                             </div>
-                            <div className={PaymentCSS.cardExpiry}>有效日期：
+                            <div className={PaymentCSS.cardExpiry}>Expiry Date:
                                 <div className={PaymentCSS.tpfield} id="card-expiration-date"></div>
                             </div>
-                            <div className={PaymentCSS.cardCCV}>安全碼：
+                            <div className={PaymentCSS.cardCCV}>Security Code:
                                 <div className={PaymentCSS.tpfield} id="card-ccv"></div>
                             </div>
-                            <div className={PaymentCSS.checkoutButton} onClick={handleSubmit}>確認付款</div>
+                            <div className={PaymentCSS.checkoutButton} onClick={handleSubmit}>Confirm Payment</div>
                         </div>
                     </div>
                 </div>
