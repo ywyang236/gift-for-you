@@ -59,10 +59,13 @@ Website：https://gift-for-you-2023.vercel.app/
 
 
 ### Supplementary Features
-#### (１) Shopping Cart
+
+#### (１) Member System (Login & Logout)
+![Member System](public/images/README/member-system.gif)
+#### (２) Shopping Cart
 <!-- 待補 GIF 動畫圖-->
 
-#### (２) Third-Party Payment (Tappay)
+#### (３) Third-Party Payment (Tappay)
 <!-- 待補 GIF 動畫圖-->
 
 ### Component Strusture
