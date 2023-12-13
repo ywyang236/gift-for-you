@@ -22,7 +22,7 @@ Website：https://gift-for-you-2023.vercel.app/
 <!-- 補圖-->
 
 ### RWD：300 px ~ 2000 px
-![Gift For You RWD](public/images/README/home-page-RWD.gif)
+![Gift For You RWD](public/images/README/homepage-RWD.gif)
 
 
 ### Complete Process
