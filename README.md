@@ -33,13 +33,13 @@ Website：https://gift-for-you-2023.vercel.app/
 ![Brush](public/images/README/brush.gif)
 
 #### (２) Eraser
-<!-- 待補 GIF 動畫圖-->
+![Eraser](public/images/README/eraser.gif)
 
 #### (３) Undo & Redo
-<!-- 待補 GIF 動畫圖-->
+![Undo & Redo](public/images/README/undo-redo.gif)
 
 #### (４) Drag
-<!-- 待補 GIF 動畫圖-->
+![Drag](public/images/README/drag.gif)
 
 #### (５) React Hotkeys Hook
 ![React Hotkeys Hook](public/images/README/hotkeys.jpeg)
