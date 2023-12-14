@@ -30,7 +30,7 @@ Website：https://gift-for-you-2023.vercel.app/
 
 ### Canvas Editor
 #### (１) Brush
-<!-- 待補 GIF 動畫圖-->
+![Brush](public/images/README/brush.gif)
 
 #### (２) Eraser
 <!-- 待補 GIF 動畫圖-->
@@ -42,7 +42,7 @@ Website：https://gift-for-you-2023.vercel.app/
 <!-- 待補 GIF 動畫圖-->
 
 #### (５) React Hotkeys Hook
-![React Hotkeys Hook](public/images/README/react-hotkeys-hook.jpeg)
+![React Hotkeys Hook](public/images/README/hotkeys.jpeg)
 
 | Name             | Function                    | Keyboard Shortcuts                |
 |------------------|-----------------------------|-----------------------------------|
@@ -64,23 +64,31 @@ Website：https://gift-for-you-2023.vercel.app/
 ![Member System](public/images/README/login-and-logout.gif)
 
 #### (２) Shopping Cart
-<!-- 待補 GIF 動畫圖-->
+![Shopping Cart](public/images/README/cart.gif)
 
 #### (３) Third-Party Payment (Tappay)
-<!-- 待補 GIF 動畫圖-->
+![Payment](public/images/README/payment.gif)
+
+#### (３) Order History
+![Order History](public/images/README/order-history.gif)
 
 ### Component Strusture
-<!-- 待補：組件結構  -->
+![Component Strusture](public/images/README/components.jpeg)
 
 ### Custom Hooks
 
-<!-- 待補：自定義 Hook 介紹  -->
+#### (１) useAuthState
+The useAuthState hook is designed for managing user authentication states in a React application. It leverages Firebase's authentication service to listen for changes in the user's authentication status.
+
+#### (２) useRequireAuth
+The useRequireAuth hook is utilized to manage access control in React components, particularly when certain user interactions require the user to be authenticated (logged in).
+
 
 ### Canvas Structure Diagram
 
-![Canvas Structure Diagram](public/images/brush-structure-diagram.gif)
+![Canvas Structure Diagram](public/images/README/brush-and-canvas.gif)
 
 ### Redux Toolkit
   
-![Redux Toolkit](public/images/README/redux-toolkit.gif)
+![Redux Toolkit](public/images/README/toolkit.gif)
 

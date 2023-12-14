@@ -15,7 +15,15 @@ const Home = () => {
     const [isRegisterModalVisible, setIsRegisterModalVisible] = React.useState(false);
 
     const products = [
-        {id: '001', firebaseId: 'q5hXfGpWqPiEnbrzbhbC', name: "Night Lights", accessories: ["Customized Lamp Panel", "Lamp Base"], customization: "Laser Engraving, ", price: 899, image: 'gs://gift-for-you-2023.appspot.com/itemImage/design_001.png'},
+        {
+            id: '001',
+            firebaseId: 'q5hXfGpWqPiEnbrzbhbC',
+            name: "Night Lights",
+            accessories: ["Customized Lamp Panel", "Lamp Base"],
+            customization: "Laser Engraving, ",
+            price: 899,
+            image: 'gs://gift-for-you-2023.appspot.com/itemImage/design_001.png'
+        },
     ];
 
     const fetchProductInfo = async (firebaseId: string) => {
