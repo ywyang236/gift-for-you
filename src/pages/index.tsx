@@ -36,7 +36,7 @@ const Home = () => {
             <div className={IndexCSS.mainTop}>
                 <div className={IndexCSS.containerTop}>
                     <span className={IndexCSS.titleTop}>Gift For You</span>
-                    <span className={IndexCSS.descriptionTop}>Hand-draw your unique keepsake.</span>
+                    <span className={IndexCSS.descriptionTop}>Hand-draw your unique souvenir.</span>
                 </div>
             </div>
             <div className={IndexCSS.rulesSection}>
