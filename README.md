@@ -36,7 +36,7 @@ Website：https://gift-for-you-2023.vercel.app/
 ![Eraser](public/images/README/eraser.gif)
 
 #### (３) Undo & Redo
-![Undo & Redo](public/images/README/undo-redo.gif)
+![Undo & Redo](public/images/README/undo-and-redo.gif)
 
 #### (４) Drag
 ![Drag](public/images/README/drag.gif)
