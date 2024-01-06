@@ -9,8 +9,8 @@ export default function Layout({children}: {children: React.ReactNode}) {
     return (
         <>
             <Head>
-                <title>禮品訂製所 Gift For You</title>
-                <meta name='description' content='親手繪製您獨一無二的紀念品' />
+                <title>Gift For You</title>
+                <meta name='description' content='Hand-draw your unique souvenir.' />
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
                 <link rel='icon' href='/favicon.ico' />
             </Head>
