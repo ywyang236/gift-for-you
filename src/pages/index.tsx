@@ -108,7 +108,7 @@ const Home = () => {
                         <div className={IndexCSS.itemsCard}>
                             <div className={IndexCSS.itemsCard_Background}>
                                 <div className={IndexCSS.itemsCard_2_Picture}>
-                                    <div className={IndexCSS.itemsCard_2_button}>Not Yet</div>
+                                    <div className={IndexCSS.itemsCard_2_button}>Coming Soon</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>Night Lights</div>
@@ -119,7 +119,7 @@ const Home = () => {
                         <div className={IndexCSS.itemsCard}>
                             <div className={IndexCSS.itemsCard_Background}>
                                 <div className={IndexCSS.itemsCard_3_Picture}>
-                                    <div className={IndexCSS.itemsCard_3_button}>Not Yet</div>
+                                    <div className={IndexCSS.itemsCard_3_button}>Coming Soon</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>Night Lights</div>
@@ -130,7 +130,7 @@ const Home = () => {
                         <div className={IndexCSS.itemsCard}>
                             <div className={IndexCSS.itemsCard_Background}>
                                 <div className={IndexCSS.itemsCard_4_Picture}>
-                                    <div className={IndexCSS.itemsCard_4_button}>Not Yet</div>
+                                    <div className={IndexCSS.itemsCard_4_button}>Coming Soon</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>Night Lights</div>
@@ -141,7 +141,7 @@ const Home = () => {
                         <div className={IndexCSS.itemsCard}>
                             <div className={IndexCSS.itemsCard_Background}>
                                 <div className={IndexCSS.itemsCard_5_Picture}>
-                                    <div className={IndexCSS.itemsCard_5_button}>Not Yet</div>
+                                    <div className={IndexCSS.itemsCard_5_button}>Coming Soon</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>Night Lights</div>
@@ -152,7 +152,7 @@ const Home = () => {
                         <div className={IndexCSS.itemsCard}>
                             <div className={IndexCSS.itemsCard_Background}>
                                 <div className={IndexCSS.itemsCard_6_Picture}>
-                                    <div className={IndexCSS.itemsCard_6_button}>Not Yet</div>
+                                    <div className={IndexCSS.itemsCard_6_button}>Coming Soon</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>Night Lights</div>
@@ -163,7 +163,7 @@ const Home = () => {
                         <div className={IndexCSS.itemsCard}>
                             <div className={IndexCSS.itemsCard_Background}>
                                 <div className={IndexCSS.itemsCard_7_Picture}>
-                                    <div className={IndexCSS.itemsCard_7_button}>Not Yet</div>
+                                    <div className={IndexCSS.itemsCard_7_button}>Coming Soon</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>Night Lights</div>
@@ -175,22 +175,22 @@ const Home = () => {
                         <div className={IndexCSS.itemsCard}>
                             <div className={IndexCSS.itemsCard_Background}>
                                 <div className={IndexCSS.itemsCard_8_Picture}>
-                                    <div className={IndexCSS.itemsCard_8_button}>Not Yet</div>
+                                    <div className={IndexCSS.itemsCard_8_button}>Coming Soon</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>Greeting Cards</div>
-                                    <div className={IndexCSS.itemsCard_Price}>$ 39</div>
+                                    <div className={IndexCSS.itemsCard_Price}>$ 399</div>
                                 </div>
                             </div>
                         </div>
                         <div className={IndexCSS.itemsCard}>
                             <div className={IndexCSS.itemsCard_Background}>
                                 <div className={IndexCSS.itemsCard_9_Picture}>
-                                    <div className={IndexCSS.itemsCard_9_button}>Not Yet</div>
+                                    <div className={IndexCSS.itemsCard_9_button}>Coming Soon</div>
                                 </div>
                                 <div className={IndexCSS.itemsText}>
                                     <div className={IndexCSS.itemsCard_Title}>Greeting Cards</div>
-                                    <div className={IndexCSS.itemsCard_Price}>$ 49</div>
+                                    <div className={IndexCSS.itemsCard_Price}>$ 499</div>
                                 </div>
                             </div>
                         </div>
