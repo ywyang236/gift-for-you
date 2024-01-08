@@ -38,3 +38,44 @@
     position: relative;
     margin: 10px auto;
 }
+
+.containerInner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 1100px) {
+    .containerInner {
+        grid-template-columns: 1fr;
+    }
+}
+
+.containerLeft {
+    background-image: url('/images/README/homepage-RWD.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    width: 100%;
+    aspect-ratio: 1.8 / 1;
+}
+
+.title {
+    font-size: 24px;
+    color: #1D445D;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.text {
+    font-size: 16px;
+    color: #1D445D;
+    font-weight: 700;
+    line-height: 1.5;
+    width: 100%;
+    margin-bottom: 20px;
+}
