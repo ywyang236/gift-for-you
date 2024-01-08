@@ -11,9 +11,7 @@ const AboutAuthor = () => (
                 <div className={AboutAuthorCSS.container}>
                     <h1 className={AboutAuthorCSS.title}>About Author</h1>
                     <div className={AboutAuthorCSS.containerInner}>
-                        <div className={AboutAuthorCSS.containerLeft}>
-                            <img className={AboutAuthorCSS.image} src='/images/yuwei-yang.jpeg' alt='author' />
-                        </div>
+                        <div className={AboutAuthorCSS.containerLeft}></div>
                         <div className={AboutAuthorCSS.containerRight} >
                             <p className={AboutAuthorCSS.text}>
                                 My name is Yu-Wei Yang (楊于葳), a Trainee of the fourth cohort at WeHelp Bootcamp, where I embarked on a six-month journey of web development training from July to December 2023. Before joining WeHelp, I had only just grasped the basics of JavaScript and had never worked with Python. As I joined the Bootcamp, I began to massively immerse myself in unfamiliar languages and technologies, tailoring my learning to my own pace and completing the weekly assignments.

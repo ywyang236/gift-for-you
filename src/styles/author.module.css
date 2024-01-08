@@ -52,7 +52,16 @@
     .containerInner {
         grid-template-columns: 1fr;
     }
+}
 
+.containerLeft {
+    background-image: url('/images/yuwei-yang.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    width: 100%;
+    aspect-ratio: 1 / 1;
 }
 
 .title {
@@ -70,11 +79,4 @@
     line-height: 1.5;
     width: 100%;
     margin-bottom: 20px;
-}
-
-.image {
-    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
-    flex-shrink: 0;
-    min-width: 250px;
-    width: 100%;
 }
