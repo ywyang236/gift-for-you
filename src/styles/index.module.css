@@ -96,13 +96,22 @@
     color: white;
     font-weight: 500;
     text-shadow: 0 0 5px rgb(0, 0, 0);
-    padding: 20px;
+    margin-bottom: 30px;
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
     .rulesTitle {
         font-size: 28px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 350px) {
+    .rulesTitle {
+        font-size: 24px;
+        margin-bottom: 20px;
     }
 }
 
@@ -115,7 +124,7 @@
     margin: 0 20px;
 }
 
-@media (max-width: 880px) {
+@media (max-width: 1110px) {
 
     .rulesTitle::before,
     .rulesTitle::after {
@@ -123,7 +132,7 @@
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 860px) {
 
     .rulesTitle::before,
     .rulesTitle::after {
@@ -141,7 +150,7 @@
     width: 100%;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1260px) {
     .rulesContent {
         grid-template-columns: repeat(2, 1fr);
         gap: 40px;
@@ -149,7 +158,7 @@
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1130px) {
     .rulesContent {
         grid-template-columns: repeat(1, 1fr);
         gap: 20px;
@@ -157,7 +166,7 @@
     }
 }
 
-@media (max-width: 624px) {
+@media (max-width: 680px) {
     .rulesContent {
         grid-template-columns: repeat(1, 1fr);
         gap: 20px;
@@ -177,9 +186,10 @@
     justify-content: center;
     align-items: center;
     padding: 30px;
+    flex-shrink: 0;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1260px) {
     .rulesCard_Background {
         width: 100%;
         height: 100%;
@@ -188,7 +198,7 @@
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1130px) {
     .rulesCard_Background {
         gap: 80px;
     }
@@ -243,7 +253,7 @@
     flex-shrink: 0;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1130px) {
     .rulesCard_PictureBackground {
         width: 200px;
         height: 200px;
@@ -259,7 +269,7 @@
     border-radius: 50%;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1130px) {
     .rulesCard_1_Picture {
         width: 180px;
         height: 180px;
@@ -275,7 +285,7 @@
     border-radius: 50%;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1130px) {
     .rulesCard_2_Picture {
         width: 180px;
         height: 180px;
@@ -292,7 +302,7 @@
     border-radius: 50%;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1130px) {
     .rulesCard_3_Picture {
         width: 180px;
         height: 180px;
@@ -308,7 +318,7 @@
     border-radius: 50%;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1130px) {
     .rulesCard_4_Picture {
         width: 180px;
         height: 180px;
@@ -360,13 +370,22 @@
     color: white;
     font-weight: 500;
     text-shadow: 0 0 5px rgb(0, 0, 0);
-    padding: 20px;
     flex-shrink: 0;
+    margin-bottom: 30px;
+    white-space: nowrap;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
     .itemsTitle {
         font-size: 28px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 350px) {
+    .itemsTitle {
+        font-size: 24px;
+        margin-bottom: 20px;
     }
 }
 
@@ -379,7 +398,7 @@
     margin: 0 20px;
 }
 
-@media (max-width: 881px) {
+@media (max-width: 1110px) {
 
     .itemsTitle::before,
     .itemsTitle::after {
@@ -387,7 +406,7 @@
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 860px) {
 
     .itemsTitle::before,
     .itemsTitle::after {
@@ -404,7 +423,7 @@
     width: 100%;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1260px) {
     .itemsContent {
         grid-template-columns: repeat(2, 1fr);
         gap: 40px;
@@ -460,6 +479,7 @@
     .itemsCard_8_button,
     .itemsCard_9_button {
         display: block;
+        white-space: nowrap;
     }
 }
 
@@ -542,21 +562,13 @@
     background-color: #37B2D6;
     color: white;
     text-shadow: 0 0 3px rgb(0, 0, 0);
-    padding: 5px 10px;
+    padding: 10px 20px;
     border-radius: 5px;
     font-size: 20px;
     text-decoration: none;
 }
 
-.itemsCard_1_button:hover,
-.itemsCard_2_button:hover,
-.itemsCard_3_button:hover,
-.itemsCard_4_button:hover,
-.itemsCard_5_button:hover,
-.itemsCard_6_button:hover,
-.itemsCard_7_button:hover,
-.itemsCard_8_button:hover,
-.itemsCard_9_button:hover {
+.itemsCard_1_button:hover {
     background-color: #1A5665;
 }
 
