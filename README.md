@@ -94,7 +94,7 @@ The useRequireAuth hook is utilized to manage access control in React components
 ![Redux Toolkit](public/images/README/toolkit.gif)
 
 ### Jest
-#### (１) Integration Tests
+#### ◼︎ Integration Tests
 ![Integration Tests](public/images/README/jest-integration-tests.png)
 
 
