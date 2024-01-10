@@ -16,6 +16,7 @@ Website：https://gift-for-you-2023.vercel.app/
 - **Next.js**：App Router
 - **TypeScript**
 - **ESLint**
+- **Jest**：Integration Tests
 - **Self-Built WYSIWYG Canvas Editor**
 - **Firebase**：Cloud Firestore, Storage, Authentication
 - **Vercel**
@@ -91,4 +92,9 @@ The useRequireAuth hook is utilized to manage access control in React components
 ### Redux Toolkit
   
 ![Redux Toolkit](public/images/README/toolkit.gif)
+
+### Jest
+#### (１) Integration Tests
+![Integration Tests](public/images/README/jest-integration-tests.png)
+
 
