@@ -9,7 +9,7 @@ const config: Config.InitialOptions = {
     },
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
-        '\\.css$': '<rootDir>/src/emptyModule.js',
+        '\\.css$': '<rootDir>/emptyModule.js',
         '\\.module\\.css$': 'identity-obj-proxy',
     },
 };
