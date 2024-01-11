@@ -4,8 +4,8 @@ import {Provider} from 'react-redux';
 import {render, screen} from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import '@testing-library/jest-dom';
-import Home from '../index';
-import AuthStateProvider from '../../hooks/useAuthState';
+import Home from '../pages/index';
+import AuthStateProvider from '../hooks/useAuthState';
 import {expect} from '@jest/globals';
 
 jest.mock('@/lib/firebase/firebase', () => ({
