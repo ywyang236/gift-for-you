@@ -6,11 +6,12 @@ const config: Config.InitialOptions = {
     testEnvironment: 'jsdom',
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
+        '^.+\\.jsx?$': 'babel-jest',
     },
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
-        '\\.css$': '<rootDir>/emptyModule.js',
         '\\.module\\.css$': 'identity-obj-proxy',
+        '\\.css$': '<rootDir>/src/emptyModule.js',
     },
 };
 
