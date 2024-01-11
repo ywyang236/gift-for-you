@@ -1,4 +1,4 @@
-// src/babel.config.ts
+// babel.config.ts
 module.exports = {
     presets: [
         '@babel/preset-env',
