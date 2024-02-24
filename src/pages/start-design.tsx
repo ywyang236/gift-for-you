@@ -646,64 +646,6 @@ const DesignGift = () => {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <div className={DesignCSS.textChangeConteiner}>
-                                <div className={DesignCSS.textChangeTitle}>文字外觀</div>
-                                <div className={DesignCSS.textChangeFontBackground}>
-                                    <div className={DesignCSS.textChangeFrontButton}>Helvetica</div>
-                                </div>
-                                <div className={DesignCSS.sizeColorBoldContainer}>
-                                    <div className={DesignCSS.textChangeSizeBackground}>
-                                        <div className={DesignCSS.textChangeSizeButton}>16</div>
-                                    </div>
-                                    <div className={DesignCSS.textChangeColorBackground}>
-                                        <div className={DesignCSS.textChangeColorButton}>顏色</div>
-                                    </div>
-                                    <div className={DesignCSS.textChangeBoldBackground}>
-                                        <div className={DesignCSS.textChangeBoldButton}>粗體</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={DesignCSS.patternChangeContainer}>
-                                <div className={DesignCSS.patternChangeTitle}>幾何圖形</div>
-                                <div className={DesignCSS.patternChangeBackground}>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <IoSquareSharp className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <IoSquare className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <IoEllipseSharp className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <IoTriangle className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <BsFillDiamondFill className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <BsFillPentagonFill className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <BsFillHexagonFill className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <BsFillHeptagonFill className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <BsFillOctagonFill className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <IoMoon className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <IoHeart className={DesignCSS.patternButton} />
-                                    </div>
-                                    <div className={DesignCSS.patternButtonBackground}>
-                                        <BsFillStarFill className={DesignCSS.patternButton} />
-                                    </div>
-                                </div>
-                            </div> */}
                             </div>
                         </div>
                     </div>
