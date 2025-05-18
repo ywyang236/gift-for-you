@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import FooterCSS from './Footer.module.css';
 import {IoLogoGithub, IoLogoFacebook} from "react-icons/io5";
-import {FaBlogger} from "react-icons/fa6";
+import { FaLink } from "react-icons/fa";
 import useRequireAuth from '@/hooks/useRequireAuth';
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
     const handleGiftSelectionClick = (e: React.MouseEvent) => {
         e.preventDefault();
         if (router.pathname !== '/') {
-            const confirmLeave = window.confirm('您即將離開此頁面，確定要前往挑選禮品的頁面嗎？');
+            const confirmLeave = window.confirm('You are about to leave this page. Are you sure you want to go to the gift selection page?');
             if (confirmLeave) {
                 router.push('/#designItems');
             }
@@ -51,8 +51,8 @@ const Footer: React.FC = () => {
                         <IoLogoGithub className={FooterCSS.footerContactLogo} />GitHub</Link>
                     <Link href='https://www.facebook.com/ywyang236/' target="_blank" className={FooterCSS.footerContact}>
                         <IoLogoFacebook className={FooterCSS.footerContactLogo} />Facebook</Link>
-                    <Link href='https://ywyang236.blogspot.com/' target="_blank" className={FooterCSS.footerContact}>
-                        <FaBlogger className={FooterCSS.footerContactLogo} />Blogger</Link>
+                    <Link href='https://yuweiyang.io/en' target="_blank" className={FooterCSS.footerContact}>
+                        <FaLink className={FooterCSS.footerContactLogo} />Personal Website</Link>
                 </div>
             </div>
             {isLoginModalVisible && <LoginModal onClose={() => setIsLoginModalVisible(false)} onShowRegister={setIsRegisterModalVisible} />}
