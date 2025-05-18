@@ -61,7 +61,14 @@
     box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.1);
     flex-shrink: 0;
     width: 100%;
+    height: fit-content;
     aspect-ratio: 1 / 1;
+}
+
+.containerRight {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
 }
 
 .title {
